@@ -51,9 +51,11 @@ img{max-width:100%;display:block}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 
 /* FADE */
-.fade{opacity:0;transform:translateY(32px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
 .fade.visible{opacity:1;transform:none}
-.fade.d1{transition-delay:.1s}.fade.d2{transition-delay:.2s}.fade.d3{transition-delay:.3s}.fade.d4{transition-delay:.4s}
+.fade.d1{transition-delay:.08s}.fade.d2{transition-delay:.16s}.fade.d3{transition-delay:.24s}.fade.d4{transition-delay:.32s}
+/* Fallback si pas de JS ou observer lent */
+@media (prefers-reduced-motion: reduce){.fade{opacity:1;transform:none}}
 
 /* NAV */
 header{position:fixed;top:0;left:0;right:0;z-index:50;transition:all .5s}
@@ -862,11 +864,15 @@ function navTo(id) {
   requestAnimationFrame(step);
 }
 
-// Fade on scroll
+// Fade on scroll — rootMargin positif pour que les éléments déjà dans le viewport se déclenchent immédiatement
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
-}, {threshold:0.1, rootMargin:'-60px'});
+}, {threshold:0.05, rootMargin:'60px'});
 document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+// Fallback de sécurité : si JS/observer échoue, rendre visible après 1.5s
+setTimeout(() => {
+  document.querySelectorAll('.fade:not(.visible)').forEach(el => el.classList.add('visible'));
+}, 1500);
 
 // Counters
 function animCounter(el) {
@@ -902,21 +908,28 @@ function toggleFaq(btn) {
 // ============================================================
 const N8N_WEBHOOK = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
 
-function track(type, data = {}) {
-  const payload = {
-    type,
-    timestamp: new Date().toISOString(),
-    page: window.location.href,
-    referrer: document.referrer || '',
-    device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-    ...data
-  };
-  fetch(N8N_WEBHOOK, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-    keepalive: true
-  }).catch(() => {});
+function track(type, data) {
+  try {
+    var payload = Object.assign({
+      type: type,
+      timestamp: new Date().toISOString(),
+      page: window.location.href,
+      referrer: document.referrer || '',
+      device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+    }, data || {});
+    var blob = new Blob([JSON.stringify(payload)], {type:'application/json'});
+    // sendBeacon pour les events critiques (avant unload), fetch pour les autres
+    if (typeof navigator.sendBeacon === 'function' && payload.type === 'session_end') {
+      navigator.sendBeacon(N8N_WEBHOOK, blob);
+    } else {
+      fetch(N8N_WEBHOOK, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function(){});
+    }
+  } catch(err) {}
 }
 
 // --- Page view ---
@@ -926,7 +939,7 @@ track('page_view', {
 });
 
 // --- Session end ---
-window.addEventListener('beforeunload', () => {
+window.addEventListener('pagehide', function() {
   track('session_end', { duration_s: Math.round((Date.now() - _sessionStart) / 1000) });
 });
 const _sessionStart = Date.now();
