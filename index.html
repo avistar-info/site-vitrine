@@ -882,19 +882,140 @@ function toggleFaq(btn) {
 }
 
 // Contact form
+// ============================================================
+// TRACKING & FORM — Avistars.fr → n8n webhook
+// ============================================================
+const N8N_WEBHOOK =  + WEBHOOK + ;
+
+function track(type, data = {}) {
+  const payload = {
+    type,
+    timestamp: new Date().toISOString(),
+    page: window.location.href,
+    referrer: document.referrer || '',
+    device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+    ...data
+  };
+  fetch(N8N_WEBHOOK, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+    keepalive: true
+  }).catch(() => {});
+}
+
+// --- Page view ---
+track('page_view', {
+  screen: window.innerWidth + 'x' + window.innerHeight,
+  lang: navigator.language
+});
+
+// --- Session end ---
+window.addEventListener('beforeunload', () => {
+  track('session_end', { duration_s: Math.round((Date.now() - _sessionStart) / 1000) });
+});
+const _sessionStart = Date.now();
+
+// --- Scroll depth ---
+const _scrollMarks = new Set();
+window.addEventListener('scroll', () => {
+  const pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+  [25, 50, 75, 100].forEach(m => {
+    if (pct >= m && !_scrollMarks.has(m)) {
+      _scrollMarks.add(m);
+      track('scroll_depth', { percent: m });
+    }
+  });
+}, { passive: true });
+
+// --- Section visibility (IntersectionObserver) ---
+const _sectionMap = {
+  'how': 'vue_section_comment_ca_marche',
+  'results': 'vue_section_resultats',
+  'plan-6mois': 'vue_section_tarifs',
+  'faq': 'vue_section_faq'
+};
+const _seenSections = new Set();
+const _sectionObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !_seenSections.has(e.target.id)) {
+      _seenSections.add(e.target.id);
+      track(_sectionMap[e.target.id]);
+    }
+  });
+}, { threshold: 0.3 });
+Object.keys(_sectionMap).forEach(id => {
+  const el = document.getElementById(id);
+  if (el) _sectionObs.observe(el);
+});
+
+// --- CTA clicks ---
+document.addEventListener('click', e => {
+  const el = e.target.closest('a, button');
+  if (!el) return;
+  const href = el.href || '';
+  const text = (el.textContent || '').trim().slice(0, 60);
+
+  if (href.includes('wa.me')) {
+    track('clic_whatsapp', { label: text, location: _getSection(el) });
+  } else if (href.includes('mailto:') || href.includes('contact@avistars')) {
+    track('clic_email');
+  } else if (href.includes('calendly') || href.includes('cal.com')) {
+    track('clic_calendly');
+  } else if (el.closest('#plan-1mois') || text.includes('1 mois')) {
+    track('clic_tarif_1mois');
+  } else if (el.closest('#plan-6mois') || text.includes('6 mois')) {
+    track('clic_tarif_6mois');
+  } else if (text.includes('1 an') || text.includes('An')) {
+    track('clic_tarif_1an');
+  } else if (el.classList.contains('nav-mobile-btn')) {
+    track('ouverture_menu_mobile');
+  } else if (el.classList.contains('faq-btn')) {
+    track('clic_faq', { question: text });
+  } else if (el.classList.contains('btn-gold') || el.classList.contains('sticky-cta-btn')) {
+    track('clic_cta_principal', { label: text, location: _getSection(el) });
+  }
+});
+
+function _getSection(el) {
+  const section = el.closest('section');
+  return section ? (section.id || section.className.split(' ')[0]) : 'unknown';
+}
+
+// --- Form submit (réel) ---
 function submitForm(e) {
   e.preventDefault();
+  const email = document.getElementById('emailInput').value.trim();
+  if (!email) return;
   const btn = document.getElementById('submitBtn');
   btn.textContent = '…'; btn.disabled = true;
-  setTimeout(() => {
+
+  fetch(N8N_WEBHOOK, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      type: 'lead_form',
+      email,
+      timestamp: new Date().toISOString(),
+      page: window.location.href,
+      device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+    }),
+    keepalive: true
+  })
+  .then(() => {
     document.getElementById('contactForm').style.display = 'none';
     document.getElementById('successMsg').style.display = 'block';
+    track('lead_form_succes', { email });
     setTimeout(() => {
       document.getElementById('contactForm').style.display = '';
       document.getElementById('successMsg').style.display = 'none';
       btn.textContent = 'Être contacté →'; btn.disabled = false;
     }, 6000);
-  }, 800);
+  })
+  .catch(() => {
+    btn.textContent = 'Réessayer';
+    btn.disabled = false;
+  });
 }
 </script>
 
