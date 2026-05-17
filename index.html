@@ -924,6 +924,16 @@ function toggleFaq(btn) {
 // ============================================================
 const N8N_WEBHOOK = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
 
+// Lecture des UTM params une seule fois au chargement
+var _utm = (function(){
+  var p = new URLSearchParams(window.location.search);
+  return {
+    source:   p.get('utm_source')   || '',
+    medium:   p.get('utm_medium')   || '',
+    campaign: p.get('utm_campaign') || ''
+  };
+})();
+
 function track(type, data) {
   try {
     var payload = Object.assign({
@@ -931,7 +941,10 @@ function track(type, data) {
       timestamp: new Date().toISOString(),
       page: window.location.href,
       referrer: document.referrer || '',
-      device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+      device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+      utm_source:   _utm.source,
+      utm_medium:   _utm.medium,
+      utm_campaign: _utm.campaign
     }, data || {});
     var blob = new Blob([JSON.stringify(payload)], {type:'application/json'});
     // sendBeacon pour les events critiques (avant unload), fetch pour les autres
