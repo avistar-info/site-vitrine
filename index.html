@@ -58,8 +58,10 @@ img{max-width:100%;display:block}
 @media (prefers-reduced-motion: reduce){.fade{opacity:1;transform:none}}
 
 /* NAV */
-header{position:fixed;top:0;left:0;right:0;z-index:50;transition:all .5s}
+header{position:fixed;top:36px;left:0;right:0;z-index:50;transition:top .35s ease,background .5s,backdrop-filter .5s,border-color .5s}
+header.notif-gone{top:0}
 header.scrolled{background:rgba(10,10,10,.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,.12)}
+@media(max-width:768px){header{top:40px}}
 .nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:72px}
 .nav-logo{font-family:'Playfair Display',Georgia,serif;font-size:1.25rem;font-weight:700;color:#C9A84C;cursor:pointer}
 .nav-center{display:flex;align-items:center;gap:2rem;position:absolute;left:50%;transform:translateX(-50%)}
@@ -81,8 +83,8 @@ header.scrolled{background:rgba(10,10,10,.94);backdrop-filter:blur(16px);border-
 @media(max-width:768px){.hero-bg img{object-position:70% center}}
 .hero-overlay-r{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.78) 30%,rgba(10,10,10,.55) 60%,rgba(10,10,10,.28) 100%);pointer-events:none}
 .hero-overlay-b{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.65) 0%,transparent 45%);pointer-events:none}
-.hero-content{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:7rem 2rem 6rem;width:100%}
-@media(max-width:768px){.hero-content{padding:4.5rem 1.25rem 3.5rem}}
+.hero-content{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:8.5rem 2rem 6rem;width:100%}
+@media(max-width:768px){.hero-content{padding:8rem 1.25rem 3.5rem}}
 .hero-inner{max-width:700px}
 .hero-badge{display:inline-flex;align-items:center;gap:.625rem;padding:.5rem 1rem;border-radius:999px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.35);color:#C9A84C;font-size:.875rem;font-weight:600;margin-bottom:2rem}
 .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:#C9A84C;animation:pulse 2s infinite;flex-shrink:0}
@@ -267,11 +269,18 @@ section{padding:6rem 2rem}
 
 
 /* NOTIFICATION BAR */
-.notif-bar{background:#0d0d0d;border-bottom:1px solid rgba(201,168,76,.2);color:#C9A84C;text-align:center;font-size:.75rem;font-weight:600;padding:.35rem 1rem;letter-spacing:.04em;position:relative;z-index:200}
+.notif-bar{
+  position:fixed;top:0;left:0;right:0;z-index:201;
+  background:#0d0d0d;border-bottom:1px solid rgba(201,168,76,.2);
+  color:#C9A84C;text-align:center;font-size:.75rem;font-weight:600;
+  padding:.35rem 1rem;letter-spacing:.04em;
+  transform:translateY(0);transition:transform .35s ease
+}
+.notif-bar.notif-hidden{transform:translateY(-110%)}
 .notif-bar strong{color:#fff}
 .notif-bar a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(201,168,76,.4);padding-bottom:1px;transition:border-color .2s}
 .notif-bar a:hover{border-bottom-color:#C9A84C}
-@media(max-width:768px){.notif-bar{font-size:.7rem;padding:.3rem .75rem;white-space:normal;line-height:1.4}}
+@media(max-width:768px){.notif-bar{font-size:.68rem;padding:.3rem .75rem;white-space:normal;line-height:1.4}}
 
 /* FOOTER */
 footer{background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);padding:2.5rem 2rem 1.5rem}
@@ -300,12 +309,12 @@ footer{background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);padding:2.5
 .sticky-cta-btn{background:#C9A84C;color:#0A0A0A;font-weight:700;font-size:.875rem;padding:.65rem 1.25rem;border-radius:.75rem;border:none;cursor:pointer;font-family:'Outfit',sans-serif;white-space:nowrap;flex-shrink:0}
 
 /* SOCIAL PROOF TOAST */
-.sp-toast{position:fixed;bottom:5.5rem;left:1.25rem;background:#1a1a1a;border:1px solid rgba(201,168,76,.35);border-radius:.875rem;padding:.875rem 1.1rem;display:flex;align-items:center;gap:.75rem;z-index:8000;box-shadow:0 8px 32px rgba(0,0,0,.5);transform:translateX(-140%);transition:transform .5s cubic-bezier(.22,1,.36,1);max-width:280px}
+.sp-toast{position:fixed;bottom:5.5rem;left:1.25rem;background:rgba(20,20,20,.92);border:1px solid rgba(201,168,76,.25);border-radius:.75rem;padding:.65rem .9rem;display:flex;align-items:center;gap:.6rem;z-index:8000;box-shadow:0 4px 20px rgba(0,0,0,.4);transform:translateX(-140%);transition:transform .45s cubic-bezier(.22,1,.36,1);max-width:240px;backdrop-filter:blur(8px)}
 .sp-toast.show{transform:translateX(0)}
-.sp-toast-icon{font-size:1.5rem;flex-shrink:0}
-.sp-toast-text{font-size:.8rem;line-height:1.4;color:#D1D5DB}
-.sp-toast-text strong{color:#C9A84C;display:block;margin-bottom:1px}
-@media(max-width:480px){.sp-toast{left:.75rem;right:.75rem;max-width:none;bottom:5rem}}
+.sp-toast-icon{font-size:1.2rem;flex-shrink:0}
+.sp-toast-text{font-size:.73rem;line-height:1.35;color:#9CA3AF}
+.sp-toast-text strong{color:#C9A84C;display:block;margin-bottom:1px;font-size:.78rem}
+@media(max-width:480px){.sp-toast{left:.6rem;max-width:220px;bottom:5rem}}
 
 /* FLOATING WHATSAPP */
 .wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9000;display:flex;align-items:center;gap:.6rem;background:#25D366;color:#fff;font-weight:700;font-size:.85rem;padding:.7rem 1.1rem .7rem .9rem;border-radius:999px;box-shadow:0 4px 20px rgba(37,211,102,.45);text-decoration:none;transition:transform .2s,box-shadow .2s;font-family:'Outfit',sans-serif;white-space:nowrap}
@@ -573,15 +582,6 @@ footer{background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);padding:2.5
       <h2 class="section-h2 light-text">Un prix simple. Un ROI garanti.</h2>
       <p class="section-sub gray-light">La <strong style="color:#C9A84C">meilleure solution de réputation en ligne pour restaurants Paris</strong>. Vous payez pour des résultats, pas des promesses — et la garantie est incluse.</p>
     </div>
-    <!-- Urgency band -->
-    <div class="fade" style="text-align:center;margin-bottom:1.5rem">
-      <div id="urgency-band" style="display:inline-flex;align-items:center;gap:.75rem;background:rgba(230,57,70,.08);border:1px solid rgba(230,57,70,.25);border-radius:.75rem;padding:.65rem 1.25rem;font-size:.8rem;color:#fca5a5">
-        <span style="font-size:1rem">🔥</span>
-        <span>Il reste <strong id="spots-left" style="color:#f87171">3 places</strong> disponibles ce mois-ci à Paris</span>
-        <span style="color:rgba(252,165,165,.5)">·</span>
-        <span>Offre setup à <strong style="color:#f87171">250€</strong> (vs 350€ tarif normal)</span>
-      </div>
-    </div>
     <div class="pricing-grid">
       <!-- 1 mois -->
       <div class="plan fade d1">
@@ -589,7 +589,7 @@ footer{background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);padding:2.5
         <div class="plan-name">1 Mois</div>
         <div class="plan-price">249€</div>
         <div class="plan-sub">Résiliable à tout moment</div>
-        <div style="font-size:.78rem;color:#9CA3AF;margin-bottom:.75rem">+ 250€ de setup (unique, non récurrent)</div>
+        <div style="font-size:.78rem;color:#9CA3AF;margin-bottom:.75rem">+ 350€ de setup unique</div>
         <div class="plan-roi">≈ 8€/jour · ROI dès le 2e mois</div>
         <ul class="plan-features">
           <li>1 QR code premium inclus</li>
@@ -622,7 +622,7 @@ footer{background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);padding:2.5
       </div>
       <!-- 1 an -->
       <div class="plan fade d3" style="position:relative">
-        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(to right,#4ECDC4,#22C55E);color:#0A0A0A;padding:.375rem 1.25rem;border-radius:999px;font-weight:700;font-size:.75rem;white-space:nowrap;letter-spacing:.05em">💰 MEILLEURE ÉCONOMIE -20%</div>
+        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(to right,#4ECDC4,#22C55E);color:#0A0A0A;padding:.375rem 1.25rem;border-radius:999px;font-weight:700;font-size:.75rem;white-space:nowrap;letter-spacing:.05em">💰 PLUS ÉCONOMIQUE -20%</div>
         <div class="plan-eyebrow" style="margin-top:.5rem">Meilleure valeur</div>
         <div class="plan-name">1 An</div>
         <div class="plan-price-row"><span class="plan-price">199€</span><span class="plan-price-unit">/mois</span></div>
@@ -825,13 +825,29 @@ footer{background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);padding:2.5
 </a>
 
 <script>
-// Nav scroll
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
-  // Ferme le menu mobile au scroll
-  const menu = document.getElementById('mobileMenu');
-  if (menu && menu.style.display === 'flex') toggleMenu();
-}, {passive:true});
+// Nav + Notif bar scroll
+(function(){
+  var navbar = document.getElementById('navbar');
+  var notifBar = document.querySelector('.notif-bar');
+  var notifH = notifBar ? notifBar.offsetHeight : 36;
+
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY;
+    // Bandeau : disparaît après sa propre hauteur
+    if (y > notifH) {
+      if (notifBar) notifBar.classList.add('notif-hidden');
+      if (navbar)   navbar.classList.add('notif-gone');
+    } else {
+      if (notifBar) notifBar.classList.remove('notif-hidden');
+      if (navbar)   navbar.classList.remove('notif-gone');
+    }
+    // Nav devient opaque après 80px de scroll total
+    if (navbar) navbar.classList.toggle('scrolled', y > 80);
+    // Ferme le menu mobile au scroll
+    var menu = document.getElementById('mobileMenu');
+    if (menu && menu.style.display === 'flex') toggleMenu();
+  }, {passive:true});
+})();
 
 // Mobile menu
 function toggleMenu() {
@@ -1254,11 +1270,15 @@ function submitForm(e) {
     el.querySelector('strong').textContent = t.name;
     el.querySelector('.sp-toast-text').lastChild.textContent = ' ' + t.msg;
     el.classList.add('show');
-    setTimeout(()=>el.classList.remove('show'), 4000);
+    setTimeout(()=>el.classList.remove('show'), 3000);
     i++;
   }
-  // Show first toast after 6s, then every 12s
-  setTimeout(()=>{showToast(); setInterval(showToast, 12000);}, 6000);
+  // Premier toast après 25s (user a eu le temps de lire), puis toutes les 40s
+  // Seulement si l'utilisateur a scrollé un minimum (il est engagé)
+  function maybeShow(){
+    if(window.scrollY > 150) showToast();
+  }
+  setTimeout(()=>{ maybeShow(); setInterval(maybeShow, 40000); }, 25000);
 })();
 
 // Hide sticky CTA when user reaches pricing section
