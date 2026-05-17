@@ -364,7 +364,7 @@ footer{background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);padding:2.5
 <body>
 
 <div class="notif-bar" role="status">
-  ⭐&nbsp; <strong>Setup inclus à 250€</strong> (valeur 350€) pour les plans 6 mois et 1 an &nbsp;·&nbsp; <a href="https://wa.me/33646723697?text=Bonjour%2C%20je%20veux%20d%C3%A9marrer%20avec%20Avistars." target="_blank" rel="noopener">Je passe à l'action →</a>
+  ⭐&nbsp; <strong>Setup inclus à 250€</strong> (valeur 350€) pour les plans 6 mois et 1 an &nbsp;·&nbsp; <a href="#plan-6mois" onclick="navTo('plan-6mois');return false">Je passe à l'action →</a>
 </div>
 
 <!-- NAV -->
@@ -584,7 +584,7 @@ footer{background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);padding:2.5
     </div>
     <div class="pricing-grid">
       <!-- 1 mois -->
-      <div class="plan fade d1">
+      <div class="plan fade d1" id="plan-1mois">
         <div class="plan-eyebrow">Sans engagement</div>
         <div class="plan-name">1 Mois</div>
         <div class="plan-price">249€</div>
@@ -621,7 +621,7 @@ footer{background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);padding:2.5
         <a href="https://buy.stripe.com/bJe14n2iwfxba5jbqG9Zm01" target="_blank" class="plan-btn filled">Choisir ce plan</a>
       </div>
       <!-- 1 an -->
-      <div class="plan fade d3" style="position:relative">
+      <div class="plan fade d3" id="plan-1an" style="position:relative">
         <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(to right,#4ECDC4,#22C55E);color:#0A0A0A;padding:.375rem 1.25rem;border-radius:999px;font-weight:700;font-size:.75rem;white-space:nowrap;letter-spacing:.05em">💰 PLUS ÉCONOMIQUE -20%</div>
         <div class="plan-eyebrow" style="margin-top:.5rem">Meilleure valeur</div>
         <div class="plan-name">1 An</div>
@@ -927,11 +927,17 @@ const N8N_WEBHOOK = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635
 // Lecture des UTM params une seule fois au chargement
 var _utm = (function(){
   var p = new URLSearchParams(window.location.search);
-  return {
+  var utm = {
     source:   p.get('utm_source')   || '',
     medium:   p.get('utm_medium')   || '',
     campaign: p.get('utm_campaign') || ''
   };
+  // Nettoie l'URL sans recharger la page (évite que l'UTM reste visible)
+  if (utm.source && window.history && window.history.replaceState) {
+    var clean = window.location.pathname;
+    window.history.replaceState(null, '', clean);
+  }
+  return utm;
 })();
 
 function track(type, data) {
@@ -1019,11 +1025,11 @@ document.addEventListener('click', e => {
     track('clic_email');
   } else if (href.includes('calendly') || href.includes('cal.com')) {
     track('clic_calendly');
-  } else if (el.closest('#plan-1mois') || text.includes('1 mois')) {
+  } else if (el.closest('#plan-1mois') || href.includes('7sY7sLg9')) {
     track('clic_tarif_1mois');
-  } else if (el.closest('#plan-6mois') || text.includes('6 mois')) {
+  } else if (el.closest('#plan-6mois') || href.includes('bJe14n2i')) {
     track('clic_tarif_6mois');
-  } else if (text.includes('1 an') || text.includes('An')) {
+  } else if (el.closest('#plan-1an') || href.includes('28E5kD8G')) {
     track('clic_tarif_1an');
   } else if (el.classList.contains('nav-mobile-btn')) {
     track('ouverture_menu_mobile');
