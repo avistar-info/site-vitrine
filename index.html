@@ -1820,6 +1820,21 @@ function proceedToStripe() {
     })
   }).catch(() => {}); // silencieux si erreur
 
+  // 2b. Tracking clic paiement → Google Sheet tracking clics site vitrine
+  fetch(N8N_WEBHOOK, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      type: 'clic_paiement',
+      email: email,
+      plan: plan,
+      page: window.location.href,
+      referrer: document.referrer || '',
+      device: /iPhone|iPad|Android|Mobi/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+      timestamp: new Date().toISOString()
+    })
+  }).catch(() => {}); // silencieux si erreur
+
   // 3. Pré-remplir Stripe avec l'email et ouvrir
   const stripeUrl = new URL(_stripeUrl);
   stripeUrl.searchParams.set('prefilled_email', email);
