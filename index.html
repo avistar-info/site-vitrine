@@ -1793,15 +1793,42 @@ function proceedToStripe() {
   }
   document.getElementById('em-email').style.borderColor = '#34A853';
   document.getElementById('em-submit').textContent = '⏳ Redirection...';
-  // Optionnel : envoyer l'email au webhook n8n pour CRM
-  const url = new URL(_stripeUrl);
-  url.searchParams.set('prefilled_email', email);
+
+  // 1. Déterminer le plan depuis l'URL Stripe
+  const planMap = {
+    '14AcN5': '1 Mois — 249€',
+    'dRm3cv': '6 Mois — 219€',
+    'aFabJ1': '12 Mois — 199€',
+    'essai': 'Essai 14j — 29,99€'
+  };
+  let plan = 'Plan inconnu';
+  for (const [key, val] of Object.entries(planMap)) {
+    if (_stripeUrl.includes(key)) { plan = val; break; }
+  }
+
+  // 2. Envoyer email + plan au webhook n8n → Google Sheet Prospects
+  fetch('https://nicolasanquetin.app.n8n.cloud/webhook/avistars-lead-stripe', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      email: email,
+      plan: plan,
+      source: 'stripe_modal',
+      lang: typeof _lang !== 'undefined' ? _lang : 'fr',
+      url: window.location.href,
+      timestamp: new Date().toISOString()
+    })
+  }).catch(() => {}); // silencieux si erreur
+
+  // 3. Pré-remplir Stripe avec l'email et ouvrir
+  const stripeUrl = new URL(_stripeUrl);
+  stripeUrl.searchParams.set('prefilled_email', email);
   setTimeout(() => {
-    window.open(url.toString(), '_blank');
+    window.open(stripeUrl.toString(), '_blank');
     closeEmailModal();
     document.getElementById('em-submit').textContent = 
       typeof _lang !== 'undefined' && _lang === 'en' ? 'Proceed to payment →' : 'Accéder au paiement →';
-  }, 600);
+  }, 400);
 }
 
 // Fermer sur clic overlay
