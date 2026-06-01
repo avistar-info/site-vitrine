@@ -84,7 +84,7 @@ header.scrolled{background:rgba(10,10,10,.94);backdrop-filter:blur(16px);border-
 #hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}@media(max-width:768px){#hero{min-height:0}}
 .hero-bg{position:absolute;inset:0;pointer-events:none}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center center}
-@media(max-width:768px){.hero-bg img{object-fit:contain;object-position:center top;background:#0A0A0A}}
+@media(max-width:768px){.hero-bg img{object-fit:cover;object-position:center center}}
 .hero-overlay-r{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.72) 35%,rgba(10,10,10,.42) 65%,rgba(10,10,10,.18) 100%);pointer-events:none}
 .hero-overlay-b{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.55) 0%,transparent 45%);pointer-events:none}
 @media(max-width:768px){.hero-overlay-r{background:linear-gradient(to right,rgba(10,10,10,.78) 40%,rgba(10,10,10,.45) 75%,transparent 100%)}}
@@ -410,6 +410,12 @@ footer{background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);padding:2.5
 .wa-float span,.wa-float .wa-label{display:none!important}
 .wa-float:hover{transform:scale(1.1)}
 @media(max-width:768px){.wa-float{bottom:6rem;right:1rem;width:48px;height:48px}}
+
+.lang-switcher{display:flex;align-items:center;gap:2px;margin-right:8px;}
+.lang-btn{background:none;border:none;font-size:12px;font-weight:700;color:rgba(255,255,255,.4);cursor:pointer;padding:4px 6px;border-radius:4px;font-family:inherit;letter-spacing:.05em;transition:color .2s;}
+.lang-btn.active{color:#fff;background:rgba(255,255,255,.1);}
+.lang-btn:hover{color:rgba(255,255,255,.8);}
+@media(max-width:768px){.lang-switcher{margin-right:4px;}}
 </style>
 <!-- build:2026-05-29 22:02 --></head>
 <body>
@@ -423,12 +429,12 @@ footer{background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);padding:2.5
   <div class="nav-inner">
     <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">AVISTARS ★</div>
     <nav class="nav-center" aria-label="Navigation principale">
-      <button onclick="navTo('how')">Comment ça marche</button>
-      <button onclick="navTo('results')">Résultats</button>
-      <button onclick="navTo('plan-6mois')">Tarifs</button>
-      <button onclick="navTo('faq')">FAQ</button>
+      <button onclick="navTo('how')" data-i18n="nav_how">Comment ça marche</button>
+      <button onclick="navTo('results')" data-i18n="nav_results">Résultats</button>
+      <button onclick="navTo('plan-6mois')" data-i18n="nav_pricing">Tarifs</button>
+      <button onclick="navTo('faq')" data-i18n="nav_faq">FAQ</button>
     </nav>
-    <button class="nav-cta" onclick="navTo('plan-6mois')">Commencer →</button>
+    <div class="lang-switcher"><button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button><span style="color:rgba(255,255,255,.2);margin:0 2px;">|</span><button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button></div><button class="nav-cta" id="nav-cta-btn" onclick="navTo('plan-6mois')" data-i18n="nav_cta">Commencer →</button>
     <button class="nav-mobile-btn" onclick="toggleMenu()" aria-label="Menu">
       <span id="mb1"></span><span id="mb2"></span><span id="mb3"></span>
     </button>
@@ -759,7 +765,7 @@ footer{background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);padding:2.5
 <!-- TESTIMONIALS -->
 <section class="light">
   <div class="container">
-    <div class="fade"><p class="section-eyebrow">Témoignages</p></div>
+    <div class="fade"><p class="section-eyebrow" data-i18n="nav_results">Témoignages</p></div>
     <div class="fade d1"><h2 class="section-h2 dark">Ils en parlent mieux que nous</h2></div>
     <div class="testi-carousel" id="testiCarousel">
     <div class="testi-grid" style="margin-top:2.5rem">
@@ -1589,6 +1595,124 @@ document.addEventListener('keydown', e => {
 
 <!-- Live chat Tidio — Activez sur tidio.com et remplacez VOTRE_CLE par votre clé publique -->
 <!-- <script src="//code.tidio.co/VOTRE_CLE.js" async></script> -->
+
+<script>
+// ═══ TRANSLATIONS FR / EN ═══
+const T = {
+  fr: {
+    badge: "170+ restaurants parisiens font confiance à Avistars",
+    nav_how: "Comment ça marche",
+    nav_results: "Résultats",
+    nav_pricing: "Tarifs",
+    nav_faq: "FAQ",
+    nav_cta: "Commencer →",
+    hero_h1_1: "Un client satisfait rentre chez lui.",
+    hero_h1_2: "Un client mécontent va sur Google.",
+    hero_p1: "Vos clients insatisfaits vont sur internet. ",
+    hero_p1b: "Pas chez vous.",
+    hero_p2: " Avistars est le seul système de ",
+    hero_p2b: "gestion d'avis Google pour restaurants parisiens",
+    hero_p2c: " qui intercepte les insatisfaits avant qu'ils publient — et guide automatiquement les satisfaits vers votre fiche Google.",
+    hero_result: "Résultat : +300% d'avis 5★ dès le 1er mois",
+    cta_start: "Démarrer aujourd'hui →",
+    cta_how: "Voir comment ça marche ↓",
+    guarantee: "✓ Garantie 30 jours",
+    how_eyebrow: "Comment ça marche",
+    how_title: "Simple comme bonjour.",
+    pricing_eyebrow: "Tarifs",
+    pricing_title: "Moins qu'un café par jour.",
+    faq_title: "Questions fréquentes",
+    footer_cta_title: "Rejoignez les 170+
+restaurants qui gagnent",
+    wa_btn: "WhatsApp",
+  },
+  en: {
+    badge: "170+ Parisian restaurants trust Avistars",
+    nav_how: "How it works",
+    nav_results: "Results",
+    nav_pricing: "Pricing",
+    nav_faq: "FAQ",
+    nav_cta: "Get started →",
+    hero_h1_1: "A happy customer goes home.",
+    hero_h1_2: "An unhappy one goes to Google.",
+    hero_p1: "Unhappy customers go online. ",
+    hero_p1b: "Not to you.",
+    hero_p2: " Avistars is the only ",
+    hero_p2b: "Google review management system for Parisian restaurants",
+    hero_p2c: " that intercepts unhappy customers before they post — and automatically guides happy ones to your Google listing.",
+    hero_result: "Result: +300% 5★ reviews in the first month",
+    cta_start: "Start today →",
+    cta_how: "See how it works ↓",
+    guarantee: "✓ 30-day guarantee",
+    how_eyebrow: "How it works",
+    how_title: "Simple as that.",
+    pricing_eyebrow: "Pricing",
+    pricing_title: "Less than a coffee a day.",
+    faq_title: "Frequently asked questions",
+    footer_cta_title: "Join the 170+
+restaurants that are winning",
+    wa_btn: "WhatsApp",
+  }
+};
+
+let _lang = localStorage.getItem('avistars_lang') || 'fr';
+
+function setLang(lang) {
+  _lang = lang;
+  localStorage.setItem('avistars_lang', lang);
+
+  // Mise à jour des boutons actifs
+  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  const t = T[lang];
+
+  // Tous les éléments data-i18n simples
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  // Hero H1 spécial (structure complexe)
+  const h1 = document.querySelector('.hero-h1');
+  if (h1) {
+    const lines = h1.innerHTML.split(/<br\s*\/?>/i);
+    if (lines.length >= 2) {
+      const goldSpan = h1.querySelector('.gold');
+      if (goldSpan) goldSpan.textContent = t.hero_h1_2;
+      const firstText = h1.childNodes[0];
+      if (firstText && firstText.nodeType === 3) firstText.textContent = t.hero_h1_1+ ' ';
+    }
+  }
+
+  // Hero paragraph
+  const heroP = document.querySelector('.hero-p');
+  if (heroP) {
+    heroP.innerHTML = t.hero_p1 + '<strong>' + t.hero_p1b + '</strong>' + t.hero_p2 + '<strong>' + t.hero_p2b + '</strong>' + t.hero_p2c;
+  }
+
+  // Hero result
+  const heroResult = document.querySelector('.hero-result');
+  if (heroResult) heroResult.textContent = t.hero_result;
+
+  // CTA buttons
+  document.querySelectorAll('[data-i18n-cta="start"]').forEach(el => el.textContent = t.cta_start);
+  document.querySelectorAll('[data-i18n-cta="how"]').forEach(el => el.textContent = t.cta_how);
+
+  // Section eyebrows & titles
+  document.querySelectorAll('[data-i18n-section]').forEach(el => {
+    const key = el.getAttribute('data-i18n-section');
+    if (t[key]) el.textContent = t[key];
+  });
+
+  // Langue du document
+  document.documentElement.lang = lang === 'en' ? 'en' : 'fr';
+}
+
+// Init : appliquer la langue sauvegardée au chargement
+document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'fr') setLang(_lang); });
+</script>
+
 </body>
 </html>
 
