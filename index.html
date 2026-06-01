@@ -1596,121 +1596,263 @@ document.addEventListener('keydown', e => {
 <!-- Live chat Tidio — Activez sur tidio.com et remplacez VOTRE_CLE par votre clé publique -->
 <!-- <script src="//code.tidio.co/VOTRE_CLE.js" async></script> -->
 
+
+
+
 <script>
-// ═══ TRANSLATIONS FR / EN ═══
-const T = {
-  fr: {
-    badge: "170+ restaurants parisiens font confiance à Avistars",
-    nav_how: "Comment ça marche",
-    nav_results: "Résultats",
-    nav_pricing: "Tarifs",
-    nav_faq: "FAQ",
-    nav_cta: "Commencer →",
-    hero_h1_1: "Un client satisfait rentre chez lui.",
-    hero_h1_2: "Un client mécontent va sur Google.",
-    hero_p1: "Vos clients insatisfaits vont sur internet. ",
-    hero_p1b: "Pas chez vous.",
-    hero_p2: " Avistars est le seul système de ",
-    hero_p2b: "gestion d'avis Google pour restaurants parisiens",
-    hero_p2c: " qui intercepte les insatisfaits avant qu'ils publient — et guide automatiquement les satisfaits vers votre fiche Google.",
-    hero_result: "Résultat : +300% d'avis 5★ dès le 1er mois",
-    cta_start: "Démarrer aujourd'hui →",
-    cta_how: "Voir comment ça marche ↓",
-    guarantee: "✓ Garantie 30 jours",
-    how_eyebrow: "Comment ça marche",
-    how_title: "Simple comme bonjour.",
-    pricing_eyebrow: "Tarifs",
-    pricing_title: "Moins qu'un café par jour.",
-    faq_title: "Questions fréquentes",
-    footer_cta_title: "Rejoignez les 170+
-restaurants qui gagnent",
-    wa_btn: "WhatsApp",
-  },
-  en: {
-    badge: "170+ Parisian restaurants trust Avistars",
-    nav_how: "How it works",
-    nav_results: "Results",
-    nav_pricing: "Pricing",
-    nav_faq: "FAQ",
-    nav_cta: "Get started →",
-    hero_h1_1: "A happy customer goes home.",
-    hero_h1_2: "An unhappy one goes to Google.",
-    hero_p1: "Unhappy customers go online. ",
-    hero_p1b: "Not to you.",
-    hero_p2: " Avistars is the only ",
-    hero_p2b: "Google review management system for Parisian restaurants",
-    hero_p2c: " that intercepts unhappy customers before they post — and automatically guides happy ones to your Google listing.",
-    hero_result: "Result: +300% 5★ reviews in the first month",
-    cta_start: "Start today →",
-    cta_how: "See how it works ↓",
-    guarantee: "✓ 30-day guarantee",
-    how_eyebrow: "How it works",
-    how_title: "Simple as that.",
-    pricing_eyebrow: "Pricing",
-    pricing_title: "Less than a coffee a day.",
-    faq_title: "Frequently asked questions",
-    footer_cta_title: "Join the 170+
-restaurants that are winning",
-    wa_btn: "WhatsApp",
-  }
+// ═══ FR / EN COMPLETE TRANSLATIONS ═══
+const FR_EN = {
+  "Setup inclus à 250€": "Setup included at €250",
+  "(valeur 350€) pour les plans 6 mois et 1 an": "(worth €350) on 6-month and 1-year plans",
+  "Je passe à l'action →": "Get started now →",
+  "Comment ça marche": "How it works",
+  "Commencer →": "Get started →",
+  "170+ restaurants parisiens font confiance à Avistars": "170+ Parisian restaurants trust Avistars",
+  "Un client satisfait rentre chez lui.": "A happy customer goes home.",
+  "Un client mécontent va sur Google.": "An unhappy one goes to Google.",
+  "Vos clients insatisfaits vont sur internet.": "Your unhappy customers go online.",
+  "Pas chez vous.": "Not to you.",
+  "Avistars est le seul système de": "Avistars is the only",
+  "gestion d'avis Google pour restaurants parisiens": "Google review management system for Parisian restaurants",
+  "qui intercepte les insatisfaits avant qu'ils publient — et guide automatiquement les satisfaits vers": "that intercepts unhappy customers before they post — and automatically guides happy ones to",
+  "Résultat : +300% d'avis 5★ dès le 1er mois": "Result: +300% 5★ reviews in the first month",
+  "(moyenne sur 170 clients)": "(average across 170 clients)",
+  "Démarrer aujourd'hui": "Start today",
+  "Voir comment ça marche": "See how it works",
+  "✓ Sans engagement": "✓ No commitment",
+  "✓ RGPD compliant": "✓ GDPR compliant",
+  "✓ Résultats en 30j": "✓ Results in 30 days",
+  "✓ Setup en 72h": "✓ Setup in 72h",
+  "✓ Remboursé si 0 résultat": "✓ Refunded if 0 results",
+  "Restaurants Paris": "Paris Restaurants",
+  "Avis collectés": "Reviews collected",
+  "Note moyenne": "Average rating",
+  "Pour voir les résultats": "To see results",
+  "Le problème": "The problem",
+  "Vous vous reconnaissez ?": "Does this sound familiar?",
+  "200 clients, 2 avis par mois": "200 customers, 2 reviews a month",
+  "Vos clients repartent satisfaits mais ne laissent aucun avis. Votre fiche Google est vide pendant qu": "Your customers leave happy but don't write reviews. Your Google profile stays empty while",
+  "La 1★ arrive, trop tard": "The 1★ comes, too late",
+  "Un client mécontent ne vous le dit pas. Il le dit à Google. Directement. Publiquement. Et c'est là p": "An unhappy customer doesn't tell you. They tell Google. Directly. Publicly. And by then",
+  "Vous gérez après, pas avant": "You react after, not before",
+  "Vous répondez aux critiques sur Google. Mais répondre après, c'est trop tard. Le client est parti. L": "You respond to reviews on Google. But responding after is too late. The customer is gone.",
+  "La bonne nouvelle ? Il existe une solution. →": "The good news? There's a solution. →",
+  "La solution Avistars": "The Avistars solution",
+  "Comment ça marche en 4 étapes": "How it works in 4 steps",
+  "Notre système d'": "Our",
+  "automatisation des avis Google restaurant": "automated Google review system for restaurants",
+  "filtre intelligemment. On n'efface rien. Les satisfaits vont sur Google — les autres viennent vous p": "filters intelligently. We delete nothing. Happy customers go to Google — others come to you",
+  "Le client scanne": "The customer scans",
+  "QR code sur chevalet ou addition. 45 secondes.": "QR code on table card or bill. 45 seconds.",
+  "Filtrage intelligent": "Smart filtering",
+  "Client satisfait ?": "Happy customer?",
+  "→ Direction Google Maps directement.": "→ Straight to Google Maps.",
+  "Client insatisfait ?": "Unhappy customer?",
+  "→ Formulaire privé envoyé uniquement à vous. Jamais publié.": "→ Private message sent only to you. Never published.",
+  "Vous intervenez en privé": "You step in privately",
+  "Vous recevez chaque retour négatif par email en temps réel. Vous recontactez, vous résolvez.": "You receive every negative feedback by email in real time. You reach out, you resolve it.",
+  "Jamais de crise publique.": "Never a public crisis.",
+  "Votre réputation explose": "Your reputation takes off",
+  "8 à 12 avis 5★ par semaine": "8 to 12 five-star reviews per week",
+  "en moyenne. Votre note monte. De nouveaux clients arrivent. Le cycle s'accélère.": "on average. Your rating rises. New customers arrive. The cycle accelerates.",
+  "Ce que vous recevez chaque semaine": "What you receive each week",
+  "Récapitulatif: nombre de scans, avis positifs, retours privés": "Summary: scan count, positive reviews, private feedback",
+  "Chaque retour négatif en temps réel par email": "Every negative feedback in real time by email",
+  "Évolution de votre note Google semaine par semaine": "Your Google rating evolution week by week",
+  "Suggestions d'amélioration issues des retours clients": "Improvement suggestions from customer feedback",
+  "\"On s'occupe de tout, vous cuisinez.\"": "\"We handle everything, you cook.\"",
+  "✓ 45 secondes": "✓ 45 seconds",
+  "Résultats mesurables": "Measurable results",
+  "Les chiffres qui parlent": "The numbers speak",
+  "d'avis en plus": "more reviews",
+  "Moyenne sur 30 jours": "30-day average",
+  "avis 5★/semaine": "5★ reviews/week",
+  "En régime de croisière": "At cruising speed",
+  "pour le ROI": "for ROI",
+  "Payback moyen constaté": "Average payback observed",
+  "Pourquoi Avistars ?": "Why Avistars?",
+  "Pendant que vos concurrents": "While your competitors",
+  "vous anticipez.": "you stay ahead.",
+  "✗ Sans Avistars": "✗ Without Avistars",
+  "2 avis Google par mois en moyenne": "2 Google reviews per month on average",
+  "Les clients insatisfaits vont directement sur Google": "Unhappy customers go straight to Google",
+  "Vous l'apprenez trop tard": "You find out too late",
+  "Note stagnante ou en baisse": "Rating stagnant or declining",
+  "Clients perdus sans comprendre pourquoi": "Customers lost without knowing why",
+  "✓ Avec Avistars": "✓ With Avistars",
+  "8-12 avis 5★": "8-12 five-star reviews",
+  "par semaine en croisière": "per week at cruising speed",
+  "Insatisfaits captés": "Unhappy customers captured",
+  "— jamais sur Google": "— never on Google",
+  "Alerté en temps réel": "Alerted in real time",
+  "avant toute publication": "before any publication",
+  "en progression constante": "in constant progression",
+  "dès le 1er mois": "from the 1st month",
+  "Zéro compétence technique": "Zero technical skills needed",
+  "Satisfaits → Google · Insatisfaits → vous": "Happy → Google · Unhappy → you",
+  "ROI en 2-3 mois": "ROI in 2-3 months",
+  "Mesurable, chiffré, transparent": "Measurable, quantified, transparent",
+  "Garanti 30 jours": "30-day guarantee",
+  "0 résultat = remboursement intégral": "0 results = full refund",
+  "Choisir Avistars →": "Choose Avistars →",
+  "Investissement": "Pricing",
+  "Un prix simple. Un ROI garanti.": "Simple pricing. Guaranteed ROI.",
+  "meilleure solution de réputation en ligne pour restaurants Paris": "best online reputation solution for Paris restaurants",
+  ". Vous payez pour des résultats, pas des promesses — et la garantie est incluse.": ". You pay for results, not promises — and the guarantee is included.",
+  "Pas encore convaincu ?": "Not convinced yet?",
+  "Essayez 14 jours pour 29,99€": "Try 14 days for €29.99",
+  "Testez le système sur votre restaurant sans engagement. Si vous choisissez un plan à l'issue des 14 jours, les 29,99€ so": "Test the system on your restaurant with no commitment. If you choose a plan after 14 days, the €29.99 are",
+  "déduits de votre premier mois": "deducted from your first month",
+  "Accès complet au système · Sans engagement · Résiliation à tout moment": "Full system access · No commitment · Cancel anytime",
+  "✓ 29,99€ déduits du plan choisi ensuite": "✓ €29.99 deducted from your chosen plan",
+  "Démarrer l'essai →": "Start the trial →",
+  "Sans engagement": "No commitment",
+  "Résiliable à tout moment": "Cancel anytime",
+  "+ 350€ de setup unique": "+ €350 one-time setup",
+  "≈ 8€/jour · ROI dès le 2e mois": "≈ €8/day · ROI from month 2",
+  "1 QR code premium inclus": "1 premium QR code included",
+  "Filtrage automatique intelligent": "Intelligent automatic filtering",
+  "Retours négatifs par email": "Negative feedback by email",
+  "Récapitulatif mensuel": "Monthly summary",
+  "Support email": "Email support",
+  "⭐ PLUS POPULAIRE": "⭐ MOST POPULAR",
+  "Le choix des restaurateurs qui veulent des résultats durables": "The choice of restaurateurs who want lasting results",
+  "≈ 7€/jour · ROI dès le 1er mois": "≈ €7/day · ROI from month 1",
+  "Récapitulatif hebdomadaire": "Weekly summary",
+  "Setup à tarif membre : 250€ (valeur 350€)": "Member setup price: €250 (worth €350)",
+  "Support prioritaire": "Priority support",
+  "Rapport d'impact mensuel": "Monthly impact report",
+  "Choisir ce plan": "Choose this plan",
+  "💰 PLUS ÉCONOMIQUE -20%": "💰 BEST VALUE -20%",
+  "Meilleure valeur": "Best value",
+  "Le meilleur ROI · Pour les restaurateurs ambitieux": "The best ROI · For ambitious restaurateurs",
+  "≈ 6,50€/jour · Meilleur ROI garanti": "≈ €6.50/day · Best ROI guaranteed",
+  "Support prioritaire 7j/7": "Priority support 7/7",
+  "1 QR code supplémentaire offert": "1 extra QR code included",
+  "Obtenir le meilleur ROI →": "Get the best ROI →",
+  "+ 25€/QR code supplémentaire · Sans engagement · Résiliation possible entre chaque période": "+ €25/extra QR code · No commitment · Cancel between periods",
+  "Garantie résultats 30 jours": "30-day results guarantee",
+  "Aucun avis supplémentaire en 30 jours ? On vous rembourse le premier mois. Sans condition, sans question.": "No new reviews in 30 days? We refund your first month. No conditions, no questions.",
+  "Témoignages": "Testimonials",
+  "Ils en parlent mieux que nous": "They say it better than us",
+  "↑ +34 avis en 5 semaines": "↑ +34 reviews in 5 weeks",
+  "Restauratrice, Paris 11e": "Restaurant owner, Paris 11th",
+  "↑ +22 avis en 30 jours": "↑ +22 reviews in 30 days",
+  "Chef propriétaire, Paris 6e": "Chef & owner, Paris 6th",
+  "↑ +41 avis · 1er sur Maps": "↑ +41 reviews · #1 on Maps",
+  "Gérant, Maison Laffitte": "Manager, Maison Laffitte",
+  "Zéro risque": "Zero risk",
+  "Vous ne risquez rien.": "You risk nothing.",
+  "On assume à votre place.": "We take the risk for you.",
+  "Nous sommes tellement confiants dans notre système que c'est nous qui prenons le risque financier.": "We're so confident in our system that we take the financial risk.",
+  "Garantie 30 jours": "30-day guarantee",
+  "Aucun résultat en 30 jours ? On vous rembourse le premier mois intégralement. Sans question, sans condition.": "No results in 30 days? We refund your first month in full. No questions, no conditions.",
+  "Résultats transparents": "Transparent results",
+  "Rapport d'impact mensuel : nombre d'avis, évolution de la note, retours interceptés. Tout est chiffré, tout est visible.": "Monthly impact report: review count, rating evolution, intercepted feedback. Everything measured, everything visible.",
+  "Vos avis vous appartiennent": "Your reviews are yours",
+  "Les avis Google collectés sont sur votre fiche pour toujours. Même si vous résiliez demain, vous les gardez.": "Google reviews collected stay on your profile forever. Even if you cancel tomorrow, you keep them.",
+  "On a déjà répondu à vos questions": "We've already answered your questions",
+  "Tout ce qu'un restaurateur parisien veut savoir sur la": "Everything a Parisian restaurateur wants to know about",
+  "gestion de sa réputation Google": "managing their Google reputation",
+  "\"C'est trop cher pour mon restaurant\"": "\"It's too expensive for my restaurant\"",
+  "Moins de 7€/jour. Un seul nouveau couvert via Google = 25-60€ de CA. ROI payback en 2-3 mois. Vous payez pour des résult": "Less than €7/day. Just one new cover via Google = €25-60 revenue. ROI payback in 2-3 months. You pay for results",
+  "\"Mes clients ne scannent pas les QR codes\"": "\"My customers don't scan QR codes\"",
+  "18% le font en moyenne. 18% × 200 clients = 36 tentatives/mois. Même à 10% de conversion = +20 avis/mois. Contre 2 aujou": "18% do on average. 18% × 200 customers = 36 attempts/month. Even at 10% conversion = +20 reviews/month. vs 2 today",
+  "\"Est-ce légal ? Je cache des avis négatifs ?\"": "\"Is this legal? Am I hiding negative reviews?\"",
+  "Zéro censure. Le client insatisfait vous parle en privé plutôt que de poster — c'est ce qu'il préférerait aussi. 100% ét": "Zero censorship. The unhappy customer talks to you privately rather than posting — which they'd actually prefer too. 100% ethical",
+  "\"Combien de temps avant les premiers résultats ?\"": "\"How long before the first results?\"",
+  "Premiers avis dans les": "First reviews within",
+  "7 à 14 jours": "7 to 14 days",
+  ". En régime de croisière (mois 2-3) : 8 à 12 avis 5★ par semaine.": ". At cruising speed (month 2-3): 8 to 12 five-star reviews per week.",
+  "\"Je peux résilier quand je veux ?\"": "\"Can I cancel when I want?\"",
+  "Plan 1 mois : résiliable à tout moment. Plans 6 mois et 1 an : résiliables entre chaque période. Vos avis Google restent": "1-month plan: cancel anytime. 6-month and 1-year plans: cancel between periods. Your Google reviews stay",
+  ", il y a peut-être un client mécontent qui rentre chez lui. Il ouvre Google.": ", there may be an unhappy customer going home. They open Google.",
+  "Vous dormez.": "You're asleep.",
+  "L'avis sera en ligne avant votre ouverture demain.": "The review will be live before you open tomorrow.",
+  "Rejoignez les 170+": "Join the 170+",
+  "restaurants qui gagnent": "restaurants that are winning",
+  "Laissez votre email ou parlez-nous directement sur WhatsApp.": "Leave your email or speak to us directly on WhatsApp.",
+  "✓ Message bien reçu !": "✓ Message received!",
+  "Notre équipe vous contacte": "Our team will contact you",
+  "dans les 24h": "within 24 hours",
+  "(souvent bien plus vite). En attendant, vous pouvez aussi nous écrire directement sur": "(often much faster). In the meantime, you can also write to us directly on",
+  "pour une réponse immédiate.": "for an immediate response.",
+  "Note Google actuelle": "Current Google rating",
+  "Moins de 3.5★": "Less than 3.5★",
+  "Être contacté gratuitement →": "Contact us for free →",
+  "Ou choisissez votre moyen de contact ↓": "Or choose your contact method ↓",
+  "⚡ Réponse en moins de 2h": "⚡ Response within 2h",
+  "Réserver un appel": "Book a call",
+  "La solution de": "The solution for",
+  ". On s'occupe de tout, vous cuisinez. 170+ restaurants font confiance à Avistars.": ". We handle everything, you cook. 170+ restaurants trust Avistars.",
+  "© 2025 Avistars™ · Zéro censure · Filtrage intelligent · Résultats garantis": "© 2025 Avistars™ · Zero censorship · Smart filtering · Guaranteed results",
+  "Made in France 🇫🇷": "Made in France 🇫🇷",
+  "Avant de partir…": "Before you leave…",
+  "Ce soir, un client mécontent va peut-être poster une 1★ sur votre Google.": "Tonight, an unhappy customer may post a 1★ on your Google.",
+  "Et vous ne le saurez pas avant demain matin.": "And you won't know until tomorrow morning.",
+  "📱 Parlez-nous sur WhatsApp →": "📱 Talk to us on WhatsApp →",
+  "Non merci, je préfère ne rien changer": "No thanks, I prefer to do nothing",
+  "Setup en 72h · Garanti 30j": "Setup in 72h · 30-day guarantee",
+  "Moins de 7€/jour": "Less than €7/day",
+  "Parler à un conseiller": "Talk to an advisor",
+  "Résultats": "Results",
+  "Tarifs": "Pricing"
 };
 
 let _lang = localStorage.getItem('avistars_lang') || 'fr';
 
-function setLang(lang) {
+// Nœuds texte déjà mappés (nodeValue → original FR)
+const _originals = new Map();
+
+function walkTextNodes(el, callback) {
+  if (!el) return;
+  if (el.nodeType === 3) { callback(el); return; }
+  if (['SCRIPT','STYLE','NOSCRIPT'].includes(el.tagName)) return;
+  el.childNodes.forEach(c => walkTextNodes(c, callback));
+}
+
+function applyLang(lang) {
   _lang = lang;
   localStorage.setItem('avistars_lang', lang);
 
-  // Mise à jour des boutons actifs
-  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
-  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  // Boutons actifs
+  const btnFr = document.getElementById('btn-fr');
+  const btnEn = document.getElementById('btn-en');
+  if (btnFr) btnFr.classList.toggle('active', lang === 'fr');
+  if (btnEn) btnEn.classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
 
-  const t = T[lang];
-
-  // Tous les éléments data-i18n simples
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (t[key] !== undefined) el.textContent = t[key];
-  });
-
-  // Hero H1 spécial (structure complexe)
-  const h1 = document.querySelector('.hero-h1');
-  if (h1) {
-    const lines = h1.innerHTML.split(/<br\s*\/?>/i);
-    if (lines.length >= 2) {
-      const goldSpan = h1.querySelector('.gold');
-      if (goldSpan) goldSpan.textContent = t.hero_h1_2;
-      const firstText = h1.childNodes[0];
-      if (firstText && firstText.nodeType === 3) firstText.textContent = t.hero_h1_1+ ' ';
-    }
+  if (lang === 'en') {
+    walkTextNodes(document.body, node => {
+      const orig = node.nodeValue;
+      if (!orig || !orig.trim()) return;
+      // Sauvegarder l'original FR si pas encore sauvé
+      if (!_originals.has(node)) _originals.set(node, orig);
+      // Chercher une traduction partielle ou exacte
+      let translated = orig;
+      for (const [fr, en] of Object.entries(FR_EN)) {
+        if (translated.includes(fr)) {
+          translated = translated.replace(fr, en);
+        }
+      }
+      node.nodeValue = translated;
+    });
+  } else {
+    // Restaurer les originaux FR
+    _originals.forEach((orig, node) => { node.nodeValue = orig; });
   }
-
-  // Hero paragraph
-  const heroP = document.querySelector('.hero-p');
-  if (heroP) {
-    heroP.innerHTML = t.hero_p1 + '<strong>' + t.hero_p1b + '</strong>' + t.hero_p2 + '<strong>' + t.hero_p2b + '</strong>' + t.hero_p2c;
-  }
-
-  // Hero result
-  const heroResult = document.querySelector('.hero-result');
-  if (heroResult) heroResult.textContent = t.hero_result;
-
-  // CTA buttons
-  document.querySelectorAll('[data-i18n-cta="start"]').forEach(el => el.textContent = t.cta_start);
-  document.querySelectorAll('[data-i18n-cta="how"]').forEach(el => el.textContent = t.cta_how);
-
-  // Section eyebrows & titles
-  document.querySelectorAll('[data-i18n-section]').forEach(el => {
-    const key = el.getAttribute('data-i18n-section');
-    if (t[key]) el.textContent = t[key];
-  });
-
-  // Langue du document
-  document.documentElement.lang = lang === 'en' ? 'en' : 'fr';
+  
+  // Mettre à jour l'attribut lang du html
+  document.title = lang === 'en' 
+    ? 'Avistars — Google Reviews for Paris Restaurants | +300% 5★ reviews'
+    : 'Avistars — Avis Google Restaurant Paris | +300% avis 5★';
 }
 
-// Init : appliquer la langue sauvegardée au chargement
-document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'fr') setLang(_lang); });
+function setLang(lang) { applyLang(lang); }
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (_lang === 'en') applyLang('en');
+});
 </script>
 
 </body>
