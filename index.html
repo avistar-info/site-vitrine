@@ -1217,7 +1217,7 @@ document.addEventListener('click', e => {
     track('clic_whatsapp', { label: text, location: _getSection(el) });
   } else if (href.includes('mailto:') || href.includes('contact@avistars')) {
     track('clic_email');
-  } else if (href.includes('calendly') || href.includes('cal.com')) {
+  } else if (href.includes('calendly') || href.includes('cal.com') || href.includes('calendar.app.google')) {
     track('clic_calendly');
   } else if (el.closest('#plan-1mois') || href.includes('7sY7sLg9')) {
     track('clic_tarif_1mois');
