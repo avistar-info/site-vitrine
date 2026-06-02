@@ -1231,7 +1231,7 @@ const _sectionObs = new IntersectionObserver(entries => {
       track(_sectionMap[e.target.id]);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+}, { threshold: 0.3 });
 Object.keys(_sectionMap).forEach(id => {
   const el = document.getElementById(id);
   if (el) _sectionObs.observe(el);
