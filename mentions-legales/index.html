@@ -7,30 +7,46 @@
 <meta name="robots" content="noindex, follow" />
 <meta name="description" content="Mentions légales de Avistars, solution de gestion d'avis Google pour restaurants parisiens." />
 <link rel="canonical" href="https://avistars.fr/" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Outfit',system-ui,sans-serif;background:#0A0A0A;color:#E5E7EB;min-height:100vh;}
-.top-bar{background:#0A0A0A;border-bottom:1px solid rgba(255,255,255,.08);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
-.logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:#C9A84C;text-decoration:none;}
-.back-btn{color:rgba(255,255,255,.5);font-size:.875rem;text-decoration:none;display:flex;align-items:center;gap:.375rem;transition:color .2s;}
-.back-btn:hover{color:#fff;}
-.container{max-width:680px;margin:0 auto;padding:3rem 1.5rem 5rem;}
-h1{font-family:'Playfair Display',serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;color:#fff;margin-bottom:.5rem;}
-.date{font-size:.8125rem;color:rgba(255,255,255,.35);margin-bottom:2.5rem;}
-h2{font-size:1.125rem;font-weight:700;color:#C9A84C;margin:2rem 0 .75rem;}
-p{font-size:.9375rem;line-height:1.75;color:rgba(255,255,255,.7);margin-bottom:1rem;}
-a{color:#C9A84C;}
-section{border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:1.5rem;margin-bottom:1.5rem;}
-section:last-child{border-bottom:none;}
-.footer-legal{text-align:center;padding:2rem 1.5rem;border-top:1px solid rgba(255,255,255,.07);font-size:.8125rem;color:rgba(255,255,255,.3);}
+body{font-family:'Outfit',sans-serif;background:#F4F3F0;color:#1B2B4B;min-height:100vh}
+/* NAV */
+.nav{background:#1B2B4B;padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Montserrat',sans-serif;font-size:1.1rem;font-weight:400;color:#fff;text-decoration:none;display:flex;align-items:center;gap:.5rem}
+.nav-logo b{font-weight:900}
+.nav-back{color:rgba(255,255,255,.55);font-size:.85rem;text-decoration:none;display:flex;align-items:center;gap:.4rem;transition:color .2s}
+.nav-back:hover{color:#ADD8E5}
+/* CONTENT */
+.container{max-width:720px;margin:0 auto;padding:3rem 2rem 5rem}
+.legal-header{margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:2px solid #ADD8E5}
+h1{font-family:'Montserrat',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#1B2B4B;margin-bottom:.4rem;line-height:1.1}
+.date{font-size:.8rem;color:#9CA3AF;font-family:'Montserrat',sans-serif;letter-spacing:.05em;text-transform:uppercase}
+h2{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:900;color:#1B2B4B;margin:2rem 0 .6rem;text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:.5rem}
+h2::before{content:'';display:block;width:3px;height:1em;background:#ADD8E5;border-radius:2px;flex-shrink:0}
+p{font-size:.9rem;line-height:1.8;color:#374151;margin-bottom:.8rem}
+a{color:#1B2B4B;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+a:hover{color:#ADD8E5}
+ul,ol{padding-left:1.4rem;margin-bottom:.8rem}
+li{font-size:.9rem;line-height:1.8;color:#374151;margin-bottom:.3rem}
+section{background:#fff;border-radius:1rem;padding:1.5rem;margin-bottom:1rem;border:1px solid #E5E7EB}
+/* FOOTER */
+.footer-legal{background:#1B2B4B;padding:1.5rem 2rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.footer-legal a{color:rgba(173,216,229,.5);text-decoration:none}
+.footer-legal a:hover{color:#ADD8E5}
 </style>
 </head>
 <body>
-<div class="top-bar">
-  <a href="/" class="logo">Avistars ★</a>
-  <a href="/" class="back-btn">← Retour à l'accueil</a>
-</div>
+<nav class="nav">
+  <a href="/" class="nav-logo">
+    <svg width="20" height="20" viewBox="-3 0 28 28" fill="none">
+      <polygon points="10,.5 12.8,8.5 21,8.5 14.8,12.5 17.6,20.5 10,16 2.4,20.5 5.2,12.5 -1,8.5 7.2,8.5" fill="rgba(173,216,229,0.35)"/>
+      <polygon points="7,3 9.8,11 18,11 11.8,15 14.6,23 7,18.5 -.6,23 2.2,15 -4,11 4.2,11" fill="#ADD8E5"/>
+    </svg>
+    Avi<b>STARS</b>
+  </a>
+  <a href="/" class="nav-back">← Retour à l'accueil</a>
+</nav>
 <div class="container">
   <h1>Mentions légales</h1>
   <p class="date">Dernière mise à jour : mai 2025</p>
@@ -57,6 +73,12 @@ section:last-child{border-bottom:none;}
       </section>
     </div>
 </div>
-<div class="footer-legal">© 2025 Avistars™ · <a href="/cgv">CGV</a> · <a href="/politique-confidentialite">Politique de confidentialité</a> · <a href="/mentions-legales">Mentions légales</a></div>
+<footer class="footer-legal">
+  <span>© 2026 AviStars</span>
+  <a href="/">avistars.fr</a>
+  <a href="/cgv">CGV</a>
+  <a href="/mentions-legales">Mentions légales</a>
+  <a href="/politique-confidentialite">Confidentialité</a>
+</footer>
 </body>
 </html>
