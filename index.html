@@ -1154,7 +1154,7 @@ function toggleFaq(btn) {
     cur = ((i % total) + total) % total;
     car.scrollTo({left: cur * cardW(), behavior:'smooth'});
     dots.forEach(function(d,j){ d.classList.toggle('active', j===cur); });
-    if(!skipAuto){ clearInterval(autoTimer); autoTimer = setInterval(function(){ goTo(cur+1, true); }, 5000); }
+    if(!skipAuto){ clearInterval(autoTimer); autoTimer = setInterval(function(){ goTo(cur+1, true); }, 8000); }
   }
   document.getElementById('spPrev').onclick = function(){ goTo(cur-1); };
   document.getElementById('spNext').onclick = function(){ goTo(cur+1); };
@@ -1170,7 +1170,7 @@ function toggleFaq(btn) {
   car.addEventListener('touchstart',function(e){ startX=e.touches[0].clientX; },{passive:true});
   car.addEventListener('touchend',function(e){ var dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>50) goTo(dx<0?cur+1:cur-1); },{passive:true});
 
-  autoTimer = setInterval(function(){ goTo(cur+1, true); }, 5000);
+  autoTimer = setInterval(function(){ goTo(cur+1, true); }, 8000);
 })();
 
 
