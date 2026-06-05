@@ -333,5 +333,65 @@ h2 span{color:#ADD8E5}
   <p style="margin-top:.4rem">Gestion des avis Google restaurant Paris · Île-de-France · France</p>
 </footer>
 
+<script>
+// ── Tracking avistars.fr/restaurants-paris ──────────────────────────────
+const N8N = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
+const PAGE = 'avistars.fr/restaurants-paris';
+
+function track(type, label) {
+  fetch(N8N, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      type, label: label||'',
+      page: PAGE,
+      device: window.innerWidth < 768 ? 'Mobile' : 'Desktop',
+      source: document.referrer || 'Lien direct',
+      horodatage: new Date().toLocaleString('fr-FR')
+    })
+  }).catch(()=>{});
+}
+
+// Vue de page
+track('Vue de page');
+
+// Sections — IntersectionObserver
+const sections = [
+  ['#hero',           '📖 Section — Problème Paris'],
+  ['.stats-strip',    '📊 Section — Statistiques'],
+  ['#how',            '📖 Section — Comment ça marche'],
+  ['#testi',          '💬 Section — Témoignages Paris'],
+  ['#arrondissements','🗺 Section — Arrondissements'],
+  ['#faq',            '❓ Section — FAQ Paris'],
+  ['#cta',            '🎯 Section — CTA'],
+];
+
+// Add IDs to sections
+document.querySelectorAll('section').forEach((s, i) => {
+  const map = [null,'hero','stats','how','testi','arr','faq','cta'];
+  if(map[i]) s.id = map[i];
+});
+
+const seen = new Set();
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting && !seen.has(e.target.id)) {
+      seen.add(e.target.id);
+      const match = sections.find(s => s[0] === '#'+e.target.id);
+      if(match) track(match[1].split(' — ')[0].replace(/[^\w ]/g,'').trim() || 'Section', match[1]);
+    }
+  });
+}, {threshold: 0.3});
+
+sections.forEach(([sel]) => {
+  const el = document.querySelector(sel);
+  if(el) obs.observe(el);
+});
+
+// CTA clicks
+document.querySelectorAll('a[href="/"],a[href="/#pricing"],a[href="/#how"]').forEach(btn => {
+  btn.addEventListener('click', () => track('Clic CTA', '🎯 Clic — ' + (btn.textContent.trim().slice(0,40))));
+});
+</script>
 </body>
 </html>
