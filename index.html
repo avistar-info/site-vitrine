@@ -1063,9 +1063,9 @@ header.scrolled .lang-btn.active{color:#fff}
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Légal</div>
-      <a href="#" onclick="openModal('modal-confidentialite');return false" data-i18n="legal_privacy">Politique de confidentialité</a>
-      <a href="#" onclick="openModal('modal-cgv');return false" data-i18n="legal_cgv">CGV</a>
-      <a href="#" onclick="openModal('modal-mentions');return false" data-i18n="legal_mentions">Mentions légales</a>
+      <a href="/politique-confidentialite" data-i18n="legal_privacy">Politique de confidentialité</a>
+      <a href="/cgv" data-i18n="legal_cgv">CGV</a>
+      <a href="/mentions-legales" data-i18n="legal_mentions">Mentions légales</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -1443,126 +1443,10 @@ function submitForm(e) {
 </div>
 
 <!-- MODAL : Politique de confidentialité -->
-<div class="modal-overlay" id="modal-confidentialite" data-modal="modal-confidentialite" onclick="handleOverlayClick(event,'modal-confidentialite')">
-  <div class="modal-box" id="modal-confidentialite-box">>
-    <button class="modal-close" onclick="closeModal('modal-confidentialite')">✕</button>
-    <button class="modal-back" onclick="closeModal('modal-confidentialite')" data-i18n="modal_back">← Retour à l'accueil</button>
-    <h2 style="font-family:'Montserrat',sans-serif;font-size:2.25rem;font-weight:700;color:#fff;margin:0 0 .5rem">Politique de confidentialité</h2>
-    <p class="modal-date">Dernière mise à jour : mai 2025</p>
-    <div class="modal-body">
-      <section>
-        <h2>1. Responsable du traitement</h2>
-        <p>Avistars — contact@avistars.fr — +33 6 46 72 36 97 — Paris, Île-de-France, France.</p>
-      </section>
-      <section>
-        <h2>2. Données collectées</h2>
-        <p>Nous collectons uniquement les données nécessaires à la fourniture de notre service : nom, adresse email, numéro de téléphone, nom de l'établissement. Ces données sont collectées lors de l'inscription ou de la prise de contact.</p>
-      </section>
-      <section>
-        <h2>3. Finalités du traitement</h2>
-        <p>Vos données sont utilisées pour : fournir le service Avistars, vous envoyer les récapitulatifs et alertes de retours clients, traiter votre abonnement, vous contacter pour le support client.</p>
-      </section>
-      <section>
-        <h2>4. Base légale</h2>
-        <p>Le traitement est fondé sur l'exécution du contrat (article 6.1.b RGPD) et notre intérêt légitime à améliorer notre service.</p>
-      </section>
-      <section>
-        <h2>5. Durée de conservation</h2>
-        <p>Vos données sont conservées pendant la durée de votre abonnement, puis 3 ans après la fin de la relation commerciale, conformément à la réglementation française.</p>
-      </section>
-      <section>
-        <h2>6. Vos droits</h2>
-        <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, de portabilité et d'opposition. Pour exercer ces droits : <a href="mailto:contact@avistars.fr">contact@avistars.fr</a>.</p>
-      </section>
-      <section>
-        <h2>7. Cookies</h2>
-        <p>Ce site utilise uniquement des cookies techniques nécessaires au fonctionnement. Aucun cookie publicitaire ou de suivi tiers n'est déposé sans votre consentement.</p>
-      </section>
-      <section>
-        <h2>8. Contact &amp; réclamations</h2>
-        <p>Pour toute question : <a href="mailto:contact@avistars.fr">contact@avistars.fr</a>. Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>).</p>
-      </section>
-    </div>
-  </div>
-</div>
 
 <!-- MODAL : CGV -->
-<div class="modal-overlay" id="modal-cgv" data-modal="modal-cgv" onclick="handleOverlayClick(event,'modal-cgv')">
-  <div class="modal-box" id="modal-cgv-box">>
-    <button class="modal-close" onclick="closeModal('modal-cgv')">✕</button>
-    <button class="modal-back" onclick="closeModal('modal-cgv')" data-i18n="modal_back">← Retour à l'accueil</button>
-    <h2 style="font-family:'Montserrat',sans-serif;font-size:2.25rem;font-weight:700;color:#fff;margin:0 0 .5rem">Conditions Générales de Vente</h2>
-    <p class="modal-date">Dernière mise à jour : mai 2025</p>
-    <div class="modal-body">
-      <section>
-        <h2>1. Objet</h2>
-        <p>Les présentes CGV régissent la vente des abonnements au service Avistars, solution de gestion des avis Google pour restaurants, proposée par Avistars (<a href="mailto:contact@avistars.fr">contact@avistars.fr</a>).</p>
-      </section>
-      <section>
-        <h2>2. Tarifs</h2>
-        <p>Les abonnements sont proposés aux tarifs suivants (hors setup) :</p>
-        <ul>
-          <li>1 mois : 249€ HT/mois — sans engagement, résiliable à tout moment</li>
-          <li>6 mois : 219€ HT/mois — engagement 6 mois</li>
-          <li>1 an : 199€ HT/mois — engagement 12 mois</li>
-        </ul>
-        <p style="margin-top:.5rem">Un frais de setup de 250€ HT (valeur 350€) est facturé à l'activation. QR code supplémentaire : +25€ HT/unité.</p>
-      </section>
-      <section>
-        <h2>3. Paiement</h2>
-        <p>Le paiement s'effectue via Stripe, plateforme sécurisée. Les abonnements sont facturés mensuellement ou globalement selon la formule choisie.</p>
-      </section>
-      <section>
-        <h2>4. Résiliation</h2>
-        <p>L'abonnement sans engagement (1 mois) peut être résilié à tout moment avant la prochaine échéance. Les abonnements 6 mois et 1 an sont résiliables entre chaque période de renouvellement.</p>
-      </section>
-      <section>
-        <h2>5. Droit de rétractation</h2>
-        <p>Conformément à l'article L221-28 du Code de la consommation, le droit de rétractation ne s'applique pas aux services pleinement exécutés avant la fin du délai de rétractation avec accord exprès du consommateur.</p>
-      </section>
-      <section>
-        <h2>6. Responsabilité</h2>
-        <p>Avistars ne peut être tenu responsable des décisions prises par les plateformes tierces (Google, etc.) concernant la publication ou le retrait d'avis. Le service agit en amont, sans garantie de résultat spécifique.</p>
-      </section>
-      <section>
-        <h2>7. Droit applicable</h2>
-        <p>Les présentes CGV sont soumises au droit français. Tout litige relève de la compétence des tribunaux de Paris.</p>
-      </section>
-    </div>
-  </div>
-</div>
 
 <!-- MODAL : Mentions légales -->
-<div class="modal-overlay" id="modal-mentions" data-modal="modal-mentions" onclick="handleOverlayClick(event,'modal-mentions')">
-  <div class="modal-box" id="modal-mentions-box">>
-    <button class="modal-close" onclick="closeModal('modal-mentions')">✕</button>
-    <button class="modal-back" onclick="closeModal('modal-mentions')" data-i18n="modal_back">← Retour à l'accueil</button>
-    <h2 style="font-family:'Montserrat',sans-serif;font-size:2.25rem;font-weight:700;color:#fff;margin:0 0 .5rem">Mentions légales</h2>
-    <p class="modal-date">Conformément à l'article 6 de la loi n°2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique.</p>
-    <div class="modal-body">
-      <section>
-        <h2>Éditeur du site</h2>
-        <p><strong>Avistars</strong><br>Paris, Île-de-France, France<br>Email : <a href="mailto:contact@avistars.fr">contact@avistars.fr</a><br>Téléphone : +33 6 46 72 36 97</p>
-      </section>
-      <section>
-        <h2>Hébergement</h2>
-        <p>Ce site est hébergé par Vercel Inc.<br>340 Pine Street, Suite 701<br>San Francisco, CA 94104, États-Unis<br><a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a></p>
-      </section>
-      <section>
-        <h2>Propriété intellectuelle</h2>
-        <p>L'ensemble des contenus présents sur le site avistars.fr (textes, images, logotypes, icônes, sons, logiciels) est la propriété exclusive d'Avistars, protégé par les lois françaises et internationales relatives à la propriété intellectuelle. Toute reproduction est interdite sans autorisation préalable.</p>
-      </section>
-      <section>
-        <h2>Données personnelles</h2>
-        <p>Conformément à la loi Informatique et Libertés et au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Consultez notre <a href="#" onclick="closeModal('modal-mentions');openModal('modal-confidentialite');return false">politique de confidentialité</a>.</p>
-      </section>
-      <section>
-        <h2>Litiges</h2>
-        <p>En cas de litige, les tribunaux de Paris sont seuls compétents. Le droit français est applicable.</p>
-      </section>
-    </div>
-  </div>
-</div>
 
 <script>
 // Social proof toast
