@@ -465,21 +465,21 @@ header.scrolled .lang-btn.active{color:#fff}
 .sp-track{display:flex;flex-wrap:nowrap;gap:1.25rem;padding:0 max(1.5rem,calc((100vw - 1160px)/2));overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab}
 .sp-track::-webkit-scrollbar{display:none}
 .sp-track.dragging{cursor:grabbing;scroll-behavior:auto}
-.sp-card{flex:0 0 340px;background:#1B2B4B;border-radius:1.25rem;overflow:hidden;scroll-snap-align:start;border:1px solid rgba(173,216,229,.14);display:flex;flex-direction:column}
-.sp-img-wrap{width:100%;aspect-ratio:1/1;overflow:hidden;flex-shrink:0}
-.sp-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
-.sp-body{padding:1.4rem 1.5rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
-.sp-metric{font-family:'Montserrat',sans-serif;font-size:2.25rem;font-weight:900;color:#ADD8E5;line-height:1}
-.sp-metric-sub{font-size:.68rem;color:rgba(173,216,229,.55);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-.sp-quote{font-size:.84rem;color:rgba(255,255,255,.72);line-height:1.65;font-style:italic;flex:1}
-.sp-identity{font-size:.67rem;color:rgba(173,216,229,.4);font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding-top:.85rem;border-top:1px solid rgba(173,216,229,.1);margin-top:auto}
+.sp-card{flex:0 0 340px;height:520px;border-radius:1.25rem;overflow:hidden;position:relative;scroll-snap-align:start}
+.sp-card img{width:100%;height:100%;object-fit:cover;display:block}
+.sp-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.82) 42%,rgba(0,0,0,.1) 72%)}
+.sp-content{position:absolute;bottom:0;left:0;right:0;padding:1.6rem 1.5rem}
+.sp-metric{font-family:'Montserrat',sans-serif;font-size:2.5rem;font-weight:900;color:#fff;line-height:1;margin-bottom:.2rem}
+.sp-metric-sub{font-size:.72rem;color:#ADD8E5;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem}
+.sp-quote{font-size:.82rem;color:rgba(255,255,255,.8);line-height:1.62;font-style:italic;margin-bottom:.75rem}
+.sp-identity{font-size:.67rem;color:rgba(255,255,255,.45);font-weight:700;text-transform:uppercase;letter-spacing:.1em}
 .sp-nav{display:flex;justify-content:center;gap:1rem;margin-top:2.5rem;align-items:center}
 .sp-nav-btn{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(173,216,229,.25);background:none;color:#ADD8E5;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .sp-nav-btn:hover{background:rgba(173,216,229,.1);border-color:#ADD8E5}
 .sp-dots{display:flex;gap:.5rem;align-items:center}
 .sp-dot{width:8px;height:8px;border-radius:50%;background:rgba(173,216,229,.2);border:none;cursor:pointer;padding:0;transition:all .2s}
 .sp-dot.active{background:#ADD8E5;width:24px;border-radius:4px}
-@media(max-width:768px){.sp-card{flex:0 0 82vw;min-width:82vw}}
+@media(max-width:768px){.sp-card{flex:0 0 82vw;min-width:82vw;height:480px}}
 
 </style>
 <!-- build:2026-05-29 22:02 --></head>
@@ -752,34 +752,70 @@ header.scrolled .lang-btn.active{color:#fff}
   <div class="sp-track" id="spTrack">
 
     <div class="sp-card">
-      <div class="sp-img-wrap"><img src="images/sp-1.jpg" alt="Sophie M. gérante bistrot Paris 11e" loading="lazy" style="object-position:center 18%"/></div>
-      <div class="sp-body">
-        <div><div class="sp-metric">+0,8★</div><div class="sp-metric-sub" data-i18n="sp1_sub">de 3,8 à 4,6★ en 6 semaines</div></div>
+      <img src="images/sp-1.jpg" alt="Sophie M. gérante bistrot Paris 11e" loading="lazy" style="object-fit:cover;object-position:center 18%"/>
+      <div class="sp-overlay"></div>
+      <div class="sp-content">
+        <div class="sp-metric">+0,8★</div>
+        <div class="sp-metric-sub" data-i18n="sp1_sub">de 3,8 à 4,6★ en 6 semaines</div>
+        <p class="sp-quote"></p>
+        <div class="sp-identity"></div>
+      </div>
+    </div>
 
     <div class="sp-card">
-      <div class="sp-img-wrap"><img src="images/sp-2.jpg" alt="David L. gérant restaurant asiatique Paris 13e" loading="lazy" style="object-position:center 12%"/></div>
-      <div class="sp-body">
-        <div><div class="sp-metric">+63 avis</div><div class="sp-metric-sub" data-i18n="sp2_sub">5★ reçus en 30 jours</div></div>
+      <img src="images/sp-2.jpg" alt="David L. gérant restaurant asiatique Paris 13e" loading="lazy" style="object-fit:cover;object-position:center 12%"/>
+      <div class="sp-overlay"></div>
+      <div class="sp-content">
+        <div class="sp-metric">+63 avis</div>
+        <div class="sp-metric-sub" data-i18n="sp2_sub">5★ reçus en 30 jours</div>
+        <p class="sp-quote"></p>
+        <div class="sp-identity"></div>
+      </div>
+    </div>
 
     <div class="sp-card">
-      <div class="sp-img-wrap"><img src="images/sp-5.jpg" alt="Marc D. gérant brasserie Marseille" loading="lazy" style="object-position:center 18%"/></div>
-      <div class="sp-body">
-        <div><div class="sp-metric">8–12</div><div class="sp-metric-sub" data-i18n="sp6_sub">avis 5★ reçus chaque semaine</div></div>
+      <img src="images/sp-5.jpg" alt="Marc D. gérant brasserie Marseille" loading="lazy" style="object-fit:cover;object-position:center 18%"/>
+      <div class="sp-overlay"></div>
+      <div class="sp-content">
+        <div class="sp-metric">8–12</div>
+        <div class="sp-metric-sub" data-i18n="sp6_sub">avis 5★ reçus chaque semaine</div>
+        <p class="sp-quote"></p>
+        <div class="sp-identity"></div>
+      </div>
+    </div>
 
     <div class="sp-card">
-      <div class="sp-img-wrap"><img src="images/sp-6.jpg" alt="Camille F. gérante pizzeria Bordeaux" loading="lazy" style="object-position:center 14%"/></div>
-      <div class="sp-body">
-        <div><div class="sp-metric">4,7★</div><div class="sp-metric-sub" data-i18n="sp4_sub">maintenue depuis 4 mois</div></div>
+      <img src="images/sp-6.jpg" alt="Camille F. gérante pizzeria Bordeaux" loading="lazy" style="object-fit:cover;object-position:center 14%"/>
+      <div class="sp-overlay"></div>
+      <div class="sp-content">
+        <div class="sp-metric">4,7★</div>
+        <div class="sp-metric-sub" data-i18n="sp4_sub">maintenue depuis 4 mois</div>
+        <p class="sp-quote"></p>
+        <div class="sp-identity"></div>
+      </div>
+    </div>
 
     <div class="sp-card">
-      <div class="sp-img-wrap"><img src="images/sp-4.jpg" alt="Thomas R. gérant restaurant Paris 1er" loading="lazy" style="object-position:center 12%"/></div>
-      <div class="sp-body">
-        <div><div class="sp-metric">4,7★</div><div class="sp-metric-sub" data-i18n="sp4_sub">maintenue depuis 4 mois</div></div>
+      <img src="images/sp-4.jpg" alt="Thomas R. gérant restaurant Paris 1er" loading="lazy" style="object-fit:cover;object-position:center 12%"/>
+      <div class="sp-overlay"></div>
+      <div class="sp-content">
+        <div class="sp-metric">4,7★</div>
+        <div class="sp-metric-sub" data-i18n="sp4_sub">maintenue depuis 4 mois</div>
+        <p class="sp-quote"></p>
+        <div class="sp-identity"></div>
+      </div>
+    </div>
 
     <div class="sp-card">
-      <div class="sp-img-wrap"><img src="images/sp-3.jpg" alt="Yasmine B. gérante franchise Île-de-France" loading="lazy" style="object-position:center 12%"/></div>
-      <div class="sp-body">
-        <div><div class="sp-metric">×3</div><div class="sp-metric-sub" data-i18n="sp3_sub">d'avis positifs dès le 1er mois</div></div>
+      <img src="images/sp-3.jpg" alt="Yasmine B. gérante franchise Île-de-France" loading="lazy" style="object-fit:cover;object-position:center 12%"/>
+      <div class="sp-overlay"></div>
+      <div class="sp-content">
+        <div class="sp-metric">×3</div>
+        <div class="sp-metric-sub" data-i18n="sp3_sub">d'avis positifs dès le 1er mois</div>
+        <p class="sp-quote"></p>
+        <div class="sp-identity"></div>
+      </div>
+    </div>
 
   
   </div>
