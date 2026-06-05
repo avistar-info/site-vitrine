@@ -898,7 +898,7 @@ var _PAGE='avistars.fr',_SRC='Lien direct (Paris)';
 function _track(type,label){fetch(_N8N,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,label:label||'',page:_PAGE,source:_SRC,device:window.innerWidth<768?'Mobile':'Desktop',horodatage:new Date().toLocaleString('fr-FR')})}).catch(function(){});}
 _track('👁 Vue de page');
 var _seen=new Set();
-var _so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!_seen.has(e.target.id)){_seen.add(e.target.id);var m={hero:'📖 Section — Problème Paris',stats:'📊 Section — Stats',how:'📖 Section — Comment ça marche',results:'📊 Section — Résultats',social_proof:'💬 Section — Témoignages',arr:'🗺 Section — Arrondissements',faq:'❓ Section — FAQ Paris',cta:'🎯 Section — CTA'};if(m[e.target.id]){var parts=m[e.target.id].split(' ');_track(parts[0]||'Section',m[e.target.id]);}}});},{threshold:.3});
+var _so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!_seen.has(e.target.id)){_seen.add(e.target.id);var m={hero:'📖 Section — Problème Paris',stats:'📊 Section — Stats',how:'📖 Section — Comment ça marche',results:'📊 Section — Résultats',social_proof:'💬 Section — Témoignages',arr:'🗺 Section — Arrondissements',faq:'❓ Section — FAQ Paris',cta:'🎯 Section — CTA'};if(m[e.target.id])_track(m[e.target.id],'');}});},{threshold:.3});
 ['hero','stats','how','results','social_proof','arr','faq','cta'].forEach(function(id){var el=document.getElementById(id);if(el)_so.observe(el);});
 document.querySelectorAll('a[href="/"],a[href="/#pricing"],.btn-gold,.nav-cta').forEach(function(b){b.addEventListener('click',function(){_track('🎯 Clic CTA',b.textContent.trim().slice(0,40));});});
 </script>
