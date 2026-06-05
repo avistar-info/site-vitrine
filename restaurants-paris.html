@@ -1127,8 +1127,10 @@ function toggleMenu(){
   }, {passive:true});
 })();
 
-// ── Tracking Paris ──────────────────────────────────────────────────────
+// ── Tracking AviStars (VILLE) ─────────────────────────────────────────────
 var _WH = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
+var _PAGE = 'avistars.fr/restaurants-paris';
+var _VILLE_SUFFIX = ' (Paris)';
 
 function _tr(type, label) {
   try {
@@ -1140,7 +1142,7 @@ function _tr(type, label) {
         type: type,
         device: window.innerWidth < 768 ? 'Mobile' : 'Desktop',
         source: document.referrer || 'Lien direct',
-        page: 'avistars.fr/restaurants-paris',
+        page: _PAGE,
         label: label || ''
       }),
       keepalive: true
@@ -1148,59 +1150,85 @@ function _tr(type, label) {
   } catch(e) {}
 }
 
-_tr('\u{1F441} Vue de page');
+_tr('👁 Vue de page' + _VILLE_SUFFIX);
 
 var _seen = new Set();
-var _sMap = {hero:'\u{1F4D6} Section \u2014 Probl\u00E8me Paris',stats:'\u{1F4CA} Section \u2014 Stats',how:'\u{1F4D6} Section \u2014 Comment \u00E7a marche',results:'\u{1F4CA} Section \u2014 R\u00E9sultats',social_proof:'\u{1F4AC} Section \u2014 T\u00E9moignages',arr:'\u{1F5FA} Section \u2014 Arrondissements',faq:'\u2753 Section \u2014 FAQ Paris',cta:'\u{1F3AF} Section \u2014 CTA'};
-var _sObs = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!_seen.has(e.target.id)&&_sMap[e.target.id]){_seen.add(e.target.id);_tr(_sMap[e.target.id]);}});},{threshold:0.3});
-Object.keys(_sMap).forEach(function(id){var el=document.getElementById(id);if(el)_sObs.observe(el);});
+var _sMap = {
+  'how':          '📖 Section — Comment ça marche',
+  'results':      '📊 Section — Résultats',
+  'plan-6mois':   '💰 Section — Tarifs',
+  'faq':          '❓ Section — FAQ',
+  'social-proof': '💬 Section — Témoignages',
+  'social_proof': '💬 Section — Témoignages'
+};
+var _sObs = new IntersectionObserver(function(es) {
+  es.forEach(function(e) {
+    var id = e.target.id;
+    if (e.isIntersecting && !_seen.has(id) && _sMap[id]) {
+      _seen.add(id);
+      _tr(_sMap[id] + _VILLE_SUFFIX);
+    }
+  });
+}, {threshold: 0.3});
+document.querySelectorAll('[id]').forEach(function(el) {
+  if (_sMap[el.id]) _sObs.observe(el);
+});
 
-document.querySelectorAll('.btn-gold,.btn-outline-white,.nav-cta,a[href="/#plan-6mois"]').forEach(function(b){b.addEventListener('click',function(){_tr('\u{1F3AF} Clic CTA',b.textContent.trim().slice(0,40));});});
-document.addEventListener('click',function(e){if(e.target.closest('a[href*="wa.me"]'))_tr('\u{1F4F1} Clic WhatsApp');});
+document.addEventListener('click', function(e) {
+  var el = e.target.closest('a, button');
+  if (!el) return;
+  var href = el.href || '', txt = (el.textContent || '').trim().slice(0, 50);
+  if (href.includes('wa.me')) { _tr('📱 Clic WhatsApp' + _VILLE_SUFFIX); }
+  else if (el.classList.contains('btn-gold') || el.classList.contains('nav-cta') || el.classList.contains('sticky-cta-btn')) { _tr('🟡 CTA Principal' + _VILLE_SUFFIX, txt); }
+  else if (el.classList.contains('btn-essai') || href.includes('essai')) { _tr('🧪 Essai 15 jours' + _VILLE_SUFFIX); }
+  else if (href.includes('7sY7sLg9')) { _tr('💳 Tarif — 1 mois' + _VILLE_SUFFIX); }
+  else if (href.includes('bJe14n2i')) { _tr('💳 Tarif — 6 mois' + _VILLE_SUFFIX); }
+  else if (href.includes('28E5kD8G')) { _tr('💳 Tarif — 1 an' + _VILLE_SUFFIX); }
+  else if (el.classList.contains('faq-btn')) { _tr('❓ Clic FAQ' + _VILLE_SUFFIX, txt); }
+});
+
+(function() {
+  var shown = false;
+  function showExit() {
+    if (shown) return; shown = true;
+    var p = document.getElementById('exit-popup');
+    if (p) { p.style.display = 'flex'; _tr('🚪 Exit Intent' + _VILLE_SUFFIX); }
+  }
+  document.addEventListener('mouseleave', function(e) { if (e.clientY < 5) showExit(); });
+  var t = null;
+  window.addEventListener('scroll', function() {
+    clearTimeout(t);
+    var pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+    if (pct >= 25) t = setTimeout(showExit, 60000);
+  }, {passive: true});
+})();
 
 function submitForm(e) {
   e.preventDefault();
   var email = document.getElementById('emailInput').value.trim();
   if (!email) return;
   var btn = document.getElementById('submitBtn');
-  btn.textContent = '…'; btn.disabled = true;
-
-  fetch(_WH, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      type: 'lead_form',
-      email: email,
-      restaurant: (document.getElementById('restaurantInput') ? document.getElementById('restaurantInput').value.trim() : ''),
-      note_actuelle: (document.getElementById('noteInput') ? document.getElementById('noteInput').value : ''),
-      timestamp: new Date().toISOString(),
-      page: window.location.href,
-      device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-      utm_source: '',
-      utm_medium: '',
-      utm_campaign: ''
-    }),
-    keepalive: true
-  })
-  .then(function() {
-    document.getElementById('contactForm').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
-    _tr('lead_form_succes', email);
+  if (btn) { btn.textContent = '…'; btn.disabled = true; }
+  fetch(_WH, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({
+    type: 'lead_form', email: email,
+    restaurant: (document.getElementById('restaurantInput') || {}).value || '',
+    note_actuelle: (document.getElementById('noteInput') || {}).value || '',
+    timestamp: new Date().toISOString(),
+    page: window.location.href,
+    device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+  }), keepalive: true}).then(function() {
+    var form = document.getElementById('contactForm'), ok = document.getElementById('successMsg');
+    if (form) form.style.display = 'none';
+    if (ok) ok.style.display = 'block';
+    _tr('🔥 Lead Formulaire' + _VILLE_SUFFIX, email);
     setTimeout(function() {
-      document.getElementById('contactForm').style.display = '';
-      document.getElementById('successMsg').style.display = 'none';
-      btn.textContent = 'Être contacté →'; btn.disabled = false;
+      if (form) form.style.display = '';
+      if (ok) ok.style.display = 'none';
+      if (btn) { btn.textContent = 'Être contacté →'; btn.disabled = false; }
     }, 6000);
-  })
-  .catch(function() {
-    btn.textContent = 'Réessayer';
-    btn.disabled = false;
-  });
+  }).catch(function() { if (btn) { btn.textContent = 'Réessayer'; btn.disabled = false; } });
 }
 
-(function(){var shown=false;function showExit(){if(shown)return;shown=true;var p=document.getElementById('exit-popup');if(p){p.style.display='flex';_tr('\uD83D\uDEAA Exit Intent');}}
-document.addEventListener('mouseleave',function(e){if(e.clientY<5)showExit();});
-var t=null;window.addEventListener('scroll',function(){clearTimeout(t);var pct=Math.round((window.scrollY/(document.body.scrollHeight-window.innerHeight))*100);if(pct>=25)t=setTimeout(showExit,60000);},{passive:true});})();
 </script>
 
 <!-- SOCIAL PROOF TOAST -->

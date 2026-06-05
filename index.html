@@ -1218,186 +1218,108 @@ function toggleFaq(btn) {
 
 
 // Contact form
-// ============================================================
-// TRACKING & FORM — Avistars.fr → n8n webhook
-// ============================================================
-const N8N_WEBHOOK = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
+// ── Tracking AviStars (VILLE) ─────────────────────────────────────────────
+var _WH = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
+var _PAGE = 'avistars.fr';
+var _VILLE_SUFFIX = '';
 
-// Lecture des UTM params une seule fois au chargement
-var _utm = (function(){
-  var p = new URLSearchParams(window.location.search);
-  var utm = {
-    source:   p.get('utm_source')   || '',
-    medium:   p.get('utm_medium')   || '',
-    campaign: p.get('utm_campaign') || ''
-  };
-  // Nettoie l'URL sans recharger la page (évite que l'UTM reste visible)
-  if (utm.source && window.history && window.history.replaceState) {
-    var clean = window.location.pathname;
-    window.history.replaceState(null, '', clean);
+function _tr(type, label) {
+  try {
+    fetch(_WH, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        horodatage: new Date().toLocaleString('fr-FR'),
+        type: type,
+        device: window.innerWidth < 768 ? 'Mobile' : 'Desktop',
+        source: document.referrer || 'Lien direct',
+        page: _PAGE,
+        label: label || ''
+      }),
+      keepalive: true
+    });
+  } catch(e) {}
+}
+
+_tr('👁 Vue de page' + _VILLE_SUFFIX);
+
+var _seen = new Set();
+var _sMap = {
+  'how':          '📖 Section — Comment ça marche',
+  'results':      '📊 Section — Résultats',
+  'plan-6mois':   '💰 Section — Tarifs',
+  'faq':          '❓ Section — FAQ',
+  'social-proof': '💬 Section — Témoignages',
+  'social_proof': '💬 Section — Témoignages'
+};
+var _sObs = new IntersectionObserver(function(es) {
+  es.forEach(function(e) {
+    var id = e.target.id;
+    if (e.isIntersecting && !_seen.has(id) && _sMap[id]) {
+      _seen.add(id);
+      _tr(_sMap[id] + _VILLE_SUFFIX);
+    }
+  });
+}, {threshold: 0.3});
+document.querySelectorAll('[id]').forEach(function(el) {
+  if (_sMap[el.id]) _sObs.observe(el);
+});
+
+document.addEventListener('click', function(e) {
+  var el = e.target.closest('a, button');
+  if (!el) return;
+  var href = el.href || '', txt = (el.textContent || '').trim().slice(0, 50);
+  if (href.includes('wa.me')) { _tr('📱 Clic WhatsApp' + _VILLE_SUFFIX); }
+  else if (el.classList.contains('btn-gold') || el.classList.contains('nav-cta') || el.classList.contains('sticky-cta-btn')) { _tr('🟡 CTA Principal' + _VILLE_SUFFIX, txt); }
+  else if (el.classList.contains('btn-essai') || href.includes('essai')) { _tr('🧪 Essai 15 jours' + _VILLE_SUFFIX); }
+  else if (href.includes('7sY7sLg9')) { _tr('💳 Tarif — 1 mois' + _VILLE_SUFFIX); }
+  else if (href.includes('bJe14n2i')) { _tr('💳 Tarif — 6 mois' + _VILLE_SUFFIX); }
+  else if (href.includes('28E5kD8G')) { _tr('💳 Tarif — 1 an' + _VILLE_SUFFIX); }
+  else if (el.classList.contains('faq-btn')) { _tr('❓ Clic FAQ' + _VILLE_SUFFIX, txt); }
+});
+
+(function() {
+  var shown = false;
+  function showExit() {
+    if (shown) return; shown = true;
+    var p = document.getElementById('exit-popup');
+    if (p) { p.style.display = 'flex'; _tr('🚪 Exit Intent' + _VILLE_SUFFIX); }
   }
-  return utm;
+  document.addEventListener('mouseleave', function(e) { if (e.clientY < 5) showExit(); });
+  var t = null;
+  window.addEventListener('scroll', function() {
+    clearTimeout(t);
+    var pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+    if (pct >= 50) t = setTimeout(showExit, 60000);
+  }, {passive: true});
 })();
 
-function track(type, data) {
-  try {
-    var payload = Object.assign({
-      type: type,
-      timestamp: new Date().toISOString(),
-      page: window.location.href,
-      referrer: document.referrer || '',
-      device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-      utm_source:   _utm.source,
-      utm_medium:   _utm.medium,
-      utm_campaign: _utm.campaign
-    }, data || {});
-    var blob = new Blob([JSON.stringify(payload)], {type:'application/json'});
-    // sendBeacon pour les events critiques (avant unload), fetch pour les autres
-    if (typeof navigator.sendBeacon === 'function' && payload.type === 'session_end') {
-      navigator.sendBeacon(N8N_WEBHOOK, blob);
-    } else {
-      fetch(N8N_WEBHOOK, {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(payload),
-        keepalive: true
-      }).catch(function(){});
-    }
-  } catch(err) {}
-}
-
-// A/B test CTA principal
-var _abVariant = Math.random() < 0.5 ? 'A' : 'B';
-if (_abVariant === 'B') {
-  document.querySelectorAll('.btn-gold').forEach(function(btn) {
-    var t = (btn.textContent || '').trim();
-    if (t.indexOf('Démarrer') !== -1) {
-      btn.innerHTML = (_lang === 'en') ? 'See my recommended plan <span>→</span>' : 'Voir mon plan recommandé <span>→</span>';
-    }
-  });
-}
-
-// --- Page view ---
-track('page_view', {
-  screen: window.innerWidth + 'x' + window.innerHeight,
-  lang: navigator.language,
-  ab_cta: _abVariant
-});
-
-// --- Session end ---
-window.addEventListener('pagehide', function() {
-  track('session_end', { duration_s: Math.round((Date.now() - _sessionStart) / 1000) });
-});
-const _sessionStart = Date.now();
-
-// --- Scroll depth ---
-const _scrollMarks = new Set();
-window.addEventListener('scroll', () => {
-  const pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-  [25, 50, 75, 100].forEach(m => {
-    if (pct >= m && !_scrollMarks.has(m)) {
-      _scrollMarks.add(m);
-      track('scroll_depth', { percent: m });
-    }
-  });
-}, { passive: true });
-
-// --- Section visibility (IntersectionObserver) ---
-const _sectionMap = {
-  'how': 'vue_section_comment_ca_marche',
-  'results': 'vue_section_resultats',
-  'plan-6mois': 'vue_section_tarifs',
-  'faq': 'vue_section_faq'
-};
-const _seenSections = new Set();
-const _sectionObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting && !_seenSections.has(e.target.id)) {
-      _seenSections.add(e.target.id);
-      track(_sectionMap[e.target.id]);
-    }
-  });
-}, { threshold: 0.3 });
-Object.keys(_sectionMap).forEach(id => {
-  const el = document.getElementById(id);
-  if (el) _sectionObs.observe(el);
-});
-
-// --- CTA clicks ---
-document.addEventListener('click', e => {
-  const el = e.target.closest('a, button');
-  if (!el) return;
-  const href = el.href || '';
-  const text = (el.textContent || '').trim().slice(0, 60);
-
-  if (href.includes('wa.me')) {
-    track('clic_whatsapp', { label: text, location: _getSection(el) });
-  } else if (href.includes('mailto:') || href.includes('contact@avistars')) {
-    track('clic_email');
-  } else if (href.includes('calendly') || href.includes('cal.com') || href.includes('calendar.app.google')) {
-    track('clic_calendly');
-  } else if (el.closest('#plan-1mois') || href.includes('7sY7sLg9')) {
-    track('clic_tarif_1mois');
-  } else if (el.closest('#plan-6mois') || href.includes('bJe14n2i')) {
-    track('clic_tarif_6mois');
-  } else if (el.closest('#plan-1an') || href.includes('28E5kD8G')) {
-    track('clic_tarif_1an');
-  } else if (el.classList.contains('btn-essai')) {
-    track('clic_essai_15j', { location: _getSection(el) });
-  } else if (el.classList.contains('nav-mobile-btn')) {
-    track('ouverture_menu_mobile');
-  } else if (el.classList.contains('faq-btn')) {
-    track('clic_faq', { question: text });
-  } else if (el.classList.contains('btn-gold') || el.classList.contains('sticky-cta-btn')) {
-    track('clic_cta_principal', { label: text, location: _getSection(el) });
-  }
-});
-
-function _getSection(el) {
-  const section = el.closest('section');
-  return section ? (section.id || section.className.split(' ')[0]) : 'unknown';
-}
-
-// --- Form submit (réel) ---
 function submitForm(e) {
   e.preventDefault();
-  const email = document.getElementById('emailInput').value.trim();
+  var email = document.getElementById('emailInput').value.trim();
   if (!email) return;
-  const btn = document.getElementById('submitBtn');
-  btn.textContent = '…'; btn.disabled = true;
-
-  fetch(N8N_WEBHOOK, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      type: 'lead_form',
-      email,
-      restaurant: (document.getElementById('restaurantInput') ? document.getElementById('restaurantInput').value.trim() : ''),
-      note_actuelle: (document.getElementById('noteInput') ? document.getElementById('noteInput').value : ''),
-      timestamp: new Date().toISOString(),
-      page: window.location.href,
-      device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-      utm_source: _utm.source,
-      utm_medium: _utm.medium,
-      utm_campaign: _utm.campaign
-    }),
-    keepalive: true
-  })
-  .then(() => {
-    document.getElementById('contactForm').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
-    track('lead_form_succes', { email });
-    setTimeout(() => {
-      document.getElementById('contactForm').style.display = '';
-      document.getElementById('successMsg').style.display = 'none';
-      btn.textContent = 'Être contacté →'; btn.disabled = false;
+  var btn = document.getElementById('submitBtn');
+  if (btn) { btn.textContent = '…'; btn.disabled = true; }
+  fetch(_WH, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({
+    type: 'lead_form', email: email,
+    restaurant: (document.getElementById('restaurantInput') || {}).value || '',
+    note_actuelle: (document.getElementById('noteInput') || {}).value || '',
+    timestamp: new Date().toISOString(),
+    page: window.location.href,
+    device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+  }), keepalive: true}).then(function() {
+    var form = document.getElementById('contactForm'), ok = document.getElementById('successMsg');
+    if (form) form.style.display = 'none';
+    if (ok) ok.style.display = 'block';
+    _tr('🔥 Lead Formulaire' + _VILLE_SUFFIX, email);
+    setTimeout(function() {
+      if (form) form.style.display = '';
+      if (ok) ok.style.display = 'none';
+      if (btn) { btn.textContent = 'Être contacté →'; btn.disabled = false; }
     }, 6000);
-  })
-  .catch(() => {
-    btn.textContent = 'Réessayer';
-    btn.disabled = false;
-  });
+  }).catch(function() { if (btn) { btn.textContent = 'Réessayer'; btn.disabled = false; } });
 }
+
 </script>
 
 <!-- EXIT INTENT POPUP -->
