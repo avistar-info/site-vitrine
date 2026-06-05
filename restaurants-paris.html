@@ -1039,6 +1039,43 @@ function toggleFaq(btn){var item=btn.closest('.faq-item'),open=item.classList.co
   setTimeout(()=>{ maybeShow(); setInterval(maybeShow, 40000); }, 25000);
 })();
 
+
+// Lead form
+const N8N_WEBHOOK = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
+function submitForm(e) {
+  e.preventDefault();
+  const email = document.getElementById('emailInput').value.trim();
+  if (!email) return;
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = '…'; btn.disabled = true;
+  fetch(N8N_WEBHOOK, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      type: 'lead_form',
+      email,
+      restaurant: (document.getElementById('restaurantInput') ? document.getElementById('restaurantInput').value.trim() : ''),
+      note_actuelle: (document.getElementById('noteInput') ? document.getElementById('noteInput').value : ''),
+      timestamp: new Date().toISOString(),
+      page: 'avistars.fr/restaurants-paris',
+      source: 'Lien direct (Paris)',
+      device: /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop'
+    }),
+    keepalive: true
+  })
+  .then(() => {
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    _track('🔥 LEAD Formulaire', 'Paris — ' + email);
+    setTimeout(() => {
+      document.getElementById('contactForm').style.display = '';
+      document.getElementById('successMsg').style.display = 'none';
+      btn.textContent = 'Être contacté →'; btn.disabled = false;
+    }, 6000);
+  })
+  .catch(() => { btn.textContent = 'Réessayer'; btn.disabled = false; });
+}
+
 // Tracking
 var _N8N='https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
 var _PAGE='avistars.fr',_SRC='Lien direct (Paris)';
