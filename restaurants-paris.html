@@ -3,91 +3,129 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Avis Google Restaurant Paris — AviStars | +300% d'avis 5★ en 30 jours</title>
-<meta name="description" content="AviStars aide les restaurants parisiens à obtenir plus d'avis Google 5★ automatiquement. Filtrage intelligent, setup en 72h. 170+ restaurants Paris. Résultats en 30 jours."/>
+<title>Avis Google Restaurant Paris — +300% d'avis 5★ en 30 jours | AviStars</title>
+<meta name="description" content="Votre restaurant parisien mérite une meilleure note Google. AviStars filtre les avis négatifs, multiplie les 5★ par 3 en 30 jours. 170+ restaurants à Paris. Setup 72h. Garantie 30 jours."/>
+<meta name="keywords" content="avis google restaurant paris, augmenter avis google restaurant paris, gestion avis google restaurant paris, réputation restaurant paris, note google restaurant paris, filtrer avis négatifs restaurant paris"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://avistars.fr/restaurants-paris"/>
-<meta property="og:title" content="Avis Google Restaurant Paris — AviStars"/>
-<meta property="og:description" content="Automatisez vos avis Google et protégez votre réputation. 170+ restaurants parisiens font confiance à AviStars."/>
+<meta property="og:title" content="Avis Google Restaurant Paris — +300% d'avis 5★ | AviStars"/>
+<meta property="og:description" content="Votre note Google monte automatiquement. 170+ restaurants parisiens font déjà confiance à AviStars."/>
 <meta property="og:url" content="https://avistars.fr/restaurants-paris"/>
 <meta property="og:type" content="website"/>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Service",
-  "name":"AviStars — Gestion avis Google restaurant Paris",
-  "provider":{"@type":"Organization","name":"AviStars","url":"https://avistars.fr"},
-  "areaServed":{"@type":"City","name":"Paris","addressCountry":"FR"},
-  "description":"Service de gestion automatisée des avis Google pour restaurants parisiens. Filtrage intelligent satisfaits/insatisfaits, +300% d'avis 5★ en 30 jours.",
-  "serviceType":"Gestion de réputation en ligne"
-}
+{"@context":"https://schema.org","@type":"Service","name":"AviStars — Avis Google Restaurant Paris","provider":{"@type":"Organization","name":"AviStars","url":"https://avistars.fr"},"areaServed":{"@type":"City","name":"Paris","addressCountry":"FR"},"description":"AviStars automatise la gestion des avis Google pour les restaurants parisiens. Filtrage intelligent, +300% d'avis 5★ en 30 jours. 170+ restaurants à Paris.","serviceType":"Gestion de réputation Google restaurant"}
 </script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Outfit',sans-serif;color:#1B2B4B;background:#fff}
+body{font-family:'Outfit',sans-serif;color:#1B2B4B;background:#fff;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-.nav{background:#1B2B4B;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+
+/* NAV */
+.nav{background:#1B2B4B;padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .nav-logo{font-family:'Montserrat',sans-serif;font-size:1.1rem;font-weight:400;color:#fff;display:flex;align-items:center;gap:.5rem}
 .nav-logo b{font-weight:900}
-.nav-cta{background:#ADD8E5;color:#1B2B4B;font-family:'Montserrat',sans-serif;font-weight:900;font-size:.85rem;padding:.6rem 1.25rem;border-radius:.5rem;transition:opacity .2s}
+.nav-cta{background:#ADD8E5;color:#1B2B4B;font-family:'Montserrat',sans-serif;font-weight:900;font-size:.85rem;padding:.6rem 1.4rem;border-radius:.5rem;transition:opacity .2s;white-space:nowrap}
 .nav-cta:hover{opacity:.85}
+.nav-back{font-size:.8rem;color:rgba(255,255,255,.45);margin-right:1rem}
+.nav-back:hover{color:#ADD8E5}
+.nav-right{display:flex;align-items:center;gap:1rem}
 
-.hero{background:#1B2B4B;padding:4rem 2rem;text-align:center}
-.hero-eyebrow{display:inline-block;background:rgba(173,216,229,.15);border:1px solid rgba(173,216,229,.3);border-radius:999px;padding:.3rem 1rem;font-size:.75rem;font-weight:700;color:#ADD8E5;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem}
-.hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(1.75rem,4vw,3rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1rem;max-width:700px;margin-left:auto;margin-right:auto}
-.hero h1 span{color:#ADD8E5}
-.hero p{font-size:1.05rem;color:rgba(255,255,255,.7);max-width:560px;margin:0 auto 2rem;line-height:1.65}
-.hero-cta{display:inline-block;background:#ADD8E5;color:#1B2B4B;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1rem;padding:.9rem 2rem;border-radius:.75rem;transition:opacity .2s}
-.hero-cta:hover{opacity:.85}
-.hero-trust{display:flex;justify-content:center;gap:2rem;margin-top:2rem;flex-wrap:wrap}
-.hero-trust span{font-size:.85rem;color:rgba(255,255,255,.55)}
+/* HERO */
+.hero{background:#1B2B4B;padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 0%,rgba(173,216,229,.08) 0%,transparent 70%)}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(173,216,229,.12);border:1px solid rgba(173,216,229,.25);border-radius:999px;padding:.35rem 1rem;font-size:.72rem;font-weight:700;color:#ADD8E5;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero-badge .dot{width:6px;height:6px;background:#22C55E;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+h1{font-family:'Montserrat',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:#fff;line-height:1.05;margin-bottom:1.25rem;letter-spacing:-.5px;max-width:760px;margin-left:auto;margin-right:auto}
+h1 span{color:#ADD8E5}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.65);max-width:540px;margin:0 auto 2.5rem;line-height:1.7}
+.hero-sub strong{color:#fff}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:#ADD8E5;color:#1B2B4B;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1rem;padding:.9rem 2.2rem;border-radius:.75rem;transition:all .2s;border:none;cursor:pointer}
+.btn-primary:hover{opacity:.88;transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:rgba(255,255,255,.65);font-size:.9rem;padding:.75rem 1.5rem;border-radius:.75rem;border:1.5px solid rgba(255,255,255,.15);transition:all .2s;cursor:pointer;font-family:'Outfit',sans-serif}
+.btn-ghost:hover{border-color:rgba(173,216,229,.4);color:#ADD8E5}
+.hero-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.hero-trust{display:flex;justify-content:center;gap:2rem;margin-top:2.5rem;flex-wrap:wrap}
+.hero-trust span{font-size:.82rem;color:rgba(255,255,255,.45)}
 .hero-trust strong{color:#ADD8E5}
 
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:3rem 2rem;max-width:900px;margin:0 auto;text-align:center}
-.stat-val{font-family:'Montserrat',sans-serif;font-size:2.5rem;font-weight:900;color:#1B2B4B;line-height:1}
-.stat-label{font-size:.875rem;color:#6B7280;margin-top:.4rem;line-height:1.4}
+/* STATS */
+.stats-strip{background:#fff;border-bottom:1px solid #E5E7EB;padding:2.5rem 2rem}
+.stats-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;text-align:center}
+.stat-val{font-family:'Montserrat',sans-serif;font-size:2.75rem;font-weight:900;color:#1B2B4B;line-height:1}
+.stat-val.red{color:#E63946}
+.stat-val.green{color:#22C55E}
+.stat-label{font-size:.85rem;color:#6B7280;margin-top:.4rem;line-height:1.5}
 .stat-source{font-size:.7rem;color:#9CA3AF;margin-top:.2rem}
 
-.section{padding:4rem 2rem;max-width:900px;margin:0 auto}
-.section-light{background:#F4F3F0;padding:4rem 2rem}
-.section-light .inner{max-width:900px;margin:0 auto}
-.section-dark{background:#1B2B4B;padding:4rem 2rem}
-.section-dark .inner{max-width:900px;margin:0 auto}
-
-.eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ADD8E5;margin-bottom:.6rem}
-.eyebrow.dark{color:#1B2B4B;opacity:.5}
-h2{font-family:'Montserrat',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;line-height:1.15;margin-bottom:1rem}
+/* SECTIONS */
+.section{padding:5rem 2rem}
+.section-dark{background:#1B2B4B;padding:5rem 2rem}
+.section-light{background:#F4F3F0;padding:5rem 2rem}
+.inner{max-width:900px;margin:0 auto}
+.inner-sm{max-width:680px;margin:0 auto}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#ADD8E5;text-align:center;margin-bottom:.6rem}
+.eyebrow.dark{color:rgba(27,43,75,.4)}
+h2{font-family:'Montserrat',sans-serif;font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:900;line-height:1.1;text-align:center;margin-bottom:1rem}
 h2.light{color:#fff}
-h3{font-family:'Montserrat',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
-p{line-height:1.7;color:#374151;margin-bottom:1rem}
-p.light{color:rgba(255,255,255,.75)}
+h2.dark{color:#1B2B4B}
+h2 span{color:#ADD8E5}
+.section-sub{text-align:center;font-size:1rem;color:#6B7280;max-width:520px;margin:.5rem auto 2.5rem;line-height:1.65}
+.section-sub.light{color:rgba(255,255,255,.55)}
 
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:2rem}
-.card{background:#fff;border-radius:1rem;padding:1.5rem;border:1px solid #E5E7EB}
-.card-icon{font-size:1.5rem;margin-bottom:.75rem}
-.card h3{color:#1B2B4B}
-.card p{font-size:.9rem;margin:0}
+/* CARDS */
+.cards-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem}
+.card{background:#fff;border-radius:1.25rem;padding:1.75rem;border:1px solid #E5E7EB}
+.card.blue{background:#EAF6FA;border-color:#BAE6F2}
+.card.green{background:#F0FDF4;border-color:#BBF7D0}
+.card-icon{font-size:1.75rem;margin-bottom:.75rem}
+.card h3{font-family:'Montserrat',sans-serif;font-size:.95rem;font-weight:700;color:#1B2B4B;margin-bottom:.4rem}
+.card p{font-size:.875rem;color:#374151;line-height:1.65}
 
-.arr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-top:1.5rem}
-.arr-item{background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-size:.85rem;font-weight:600;color:#1B2B4B}
+/* HOW IT WORKS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
+.step{text-align:center;padding:1.5rem 1rem}
+.step-num{width:2.5rem;height:2.5rem;background:#ADD8E5;color:#1B2B4B;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem}
+.step h3{font-family:'Montserrat',sans-serif;font-size:.875rem;font-weight:700;color:#fff;margin-bottom:.4rem}
+.step p{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.6}
 
-.faq{max-width:700px;margin:2rem auto 0}
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem}
+.testi-card{background:#fff;border-radius:1.25rem;padding:1.5rem;border:1px solid #E5E7EB}
+.testi-stars{color:#FBBC05;font-size:1rem;margin-bottom:.75rem}
+.testi-quote{font-size:.875rem;color:#374151;line-height:1.7;margin-bottom:1rem;font-style:italic}
+.testi-badge{display:inline-block;background:rgba(34,197,94,.1);color:#16A34A;font-size:.72rem;font-weight:700;padding:.3rem .75rem;border-radius:999px;margin-bottom:.75rem}
+.testi-name{font-size:.8rem;font-weight:700;color:#1B2B4B}
+.testi-role{font-size:.75rem;color:#9CA3AF}
+
+/* ARRONDISSEMENTS */
+.arr-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;margin-top:1.5rem}
+.arr{background:#fff;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B;border:1px solid #E5E7EB}
+
+/* FAQ */
+.faq-list{margin-top:2rem}
 .faq-item{border-bottom:1px solid #E5E7EB;padding:1.25rem 0}
 .faq-q{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;color:#1B2B4B;margin-bottom:.5rem}
-.faq-a{font-size:.9rem;color:#374151;line-height:1.65}
+.faq-a{font-size:.875rem;color:#374151;line-height:1.7}
 
-.cta-band{background:#1B2B4B;padding:4rem 2rem;text-align:center}
-.cta-band h2{color:#fff;margin-bottom:.75rem}
-.cta-band p{color:rgba(255,255,255,.65);max-width:500px;margin:0 auto 2rem}
+/* CTA */
+.cta-section{background:#1B2B4B;padding:5rem 2rem;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(173,216,229,.08),transparent 70%)}
+.cta-trust{display:flex;justify-content:center;gap:2rem;margin-top:1.5rem;flex-wrap:wrap}
+.cta-trust span{font-size:.82rem;color:rgba(255,255,255,.45)}
 
-.footer{background:#0D0D0D;padding:1.5rem 2rem;text-align:center;font-size:.8rem;color:#6B7280}
-.footer a{color:#ADD8E5}
+/* FOOTER */
+.footer{background:#0D0D0D;padding:1.5rem 2rem;text-align:center;font-size:.78rem;color:#4B5563}
+.footer a{color:rgba(173,216,229,.5)}
+.footer a:hover{color:#ADD8E5}
 
-@media(max-width:640px){
-  .stats{grid-template-columns:1fr;gap:1rem}
-  .cards{grid-template-columns:1fr}
-  .arr-grid{grid-template-columns:repeat(2,1fr)}
+/* RESPONSIVE */
+@media(max-width:768px){
+  .stats-inner{grid-template-columns:1fr;gap:1.5rem}
+  .cards-2,.cards-3,.steps,.testi-grid{grid-template-columns:1fr}
+  .arr-grid{grid-template-columns:repeat(4,1fr)}
   .hero-trust{gap:1rem}
 }
 </style>
@@ -102,162 +140,197 @@ p.light{color:rgba(255,255,255,.75)}
     </svg>
     Avi<b>STARS</b>
   </a>
-  <a href="/#pricing" class="nav-cta">Commencer →</a>
+  <div class="nav-right">
+    <a href="/" class="nav-back">← avistars.fr</a>
+    <a href="/#pricing" class="nav-cta">Commencer →</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">Restaurants Paris · Île-de-France</div>
-  <h1>Avis Google restaurant Paris :<br><span>+300% d'avis 5★ en 30 jours</span></h1>
-  <p>AviStars automatise la gestion des avis Google pour les restaurants parisiens. Vos clients satisfaits vont sur Google. Les mécontents vous écrivent en privé. Votre note monte. Vous ne faites rien.</p>
-  <a href="/" class="hero-cta">Découvrir AviStars →</a>
+  <div class="hero-badge"><span class="dot"></span>170+ restaurants parisiens</div>
+  <h1>Votre note Google à Paris<br><span>ne descendra plus jamais.</span></h1>
+  <p class="hero-sub">
+    AviStars est le système de <strong>gestion d'avis Google pour restaurants parisiens</strong> qui intercepte vos clients insatisfaits avant qu'ils publient — et guide automatiquement les satisfaits vers votre fiche.
+    <strong>+300% d'avis 5★ dès le 1er mois.</strong>
+  </p>
+  <div class="hero-btns">
+    <a href="/" class="btn-primary">Protéger ma réputation →</a>
+    <a href="/#how" class="btn-ghost">Voir comment ça marche ↓</a>
+  </div>
   <div class="hero-trust">
     <span><strong>170+</strong> restaurants à Paris</span>
-    <span><strong>4,8★</strong> note moyenne</span>
-    <span><strong>Setup</strong> en 72h</span>
-    <span><strong>Garantie</strong> 30 jours</span>
+    <span><strong>4,8★</strong> note moyenne clients</span>
+    <span><strong>72h</strong> pour être opérationnel</span>
+    <span><strong>30 jours</strong> garantie résultats</span>
   </div>
 </section>
 
 <!-- STATS -->
-<div style="border-bottom:1px solid #E5E7EB">
-<div class="stats">
-  <div>
-    <div class="stat-val">94%</div>
-    <div class="stat-label">des Parisiens lisent les avis Google avant de choisir un restaurant</div>
-    <div class="stat-source">BrightLocal 2024</div>
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-val">94%</div>
+      <div class="stat-label">des Parisiens lisent les avis Google avant de choisir un restaurant</div>
+      <div class="stat-source">BrightLocal 2024</div>
+    </div>
+    <div>
+      <div class="stat-val red">−31%</div>
+      <div class="stat-label">de CA perdu avec une note sous 4★ vs un concurrent à 4,5★ à Paris</div>
+      <div class="stat-source">Harvard Business School</div>
+    </div>
+    <div>
+      <div class="stat-val green">+300%</div>
+      <div class="stat-label">d'avis 5★ dès le 1er mois chez nos clients parisiens</div>
+      <div class="stat-source">AviStars — données internes 2026</div>
+    </div>
   </div>
-  <div>
-    <div class="stat-val" style="color:#E63946">−31%</div>
-    <div class="stat-label">de CA perdu avec une note sous 4★ vs un concurrent à 4,5★</div>
-    <div class="stat-source">Harvard Business School</div>
-  </div>
-  <div>
-    <div class="stat-val" style="color:#22C55E">+300%</div>
-    <div class="stat-label">d'avis 5★ générés dès le 1er mois chez nos clients parisiens</div>
-    <div class="stat-source">AviStars — données 2026</div>
-  </div>
-</div>
 </div>
 
 <!-- PROBLÈME -->
 <section class="section">
-  <p class="eyebrow dark">Le problème</p>
-  <h2>Pourquoi votre note Google stagne à Paris</h2>
-  <p>Paris est la ville la plus concurrentielle de France pour la restauration. Avec plus de <strong>40 000 restaurants</strong> dans la capitale, votre note Google est votre premier outil de différenciation — avant le menu, avant l'adresse, avant les photos.</p>
-  <p>Pourtant, la réalité est brutale : <strong>un client satisfait rentre chez lui et oublie</strong>. Un client mécontent, lui, poste dans les 2 heures qui suivent sa visite — directement sur Google, publiquement, sans vous prévenir.</p>
-  <p>Résultat : les avis négatifs s'accumulent. Les positifs sont rares. Votre note descend, vos concurrents montent, et vous perdez des réservations sans même comprendre pourquoi.</p>
-
-  <div class="cards">
-    <div class="card">
-      <div class="card-icon">😤</div>
-      <h3>Sans AviStars</h3>
-      <p>2 avis par mois en moyenne. Les mécontents publient. Les satisfaits ne font rien. Votre note stagne ou descend.</p>
-    </div>
-    <div class="card" style="border-color:#ADD8E5;background:#EAF6FA">
-      <div class="card-icon">⭐</div>
-      <h3>Avec AviStars</h3>
-      <p>8 à 12 avis 5★ par semaine. Les mécontents vous écrivent en privé. Votre note monte chaque semaine automatiquement.</p>
+  <div class="inner">
+    <p class="eyebrow dark">La réalité des restaurants parisiens</p>
+    <h2 class="dark">Votre prochaine 1★ est en train<br>d'être écrite. En ce moment.</h2>
+    <p class="section-sub">Avec 40 000+ restaurants à Paris, votre note Google est votre vitrine principale. Pourtant, les clients mécontents postent dans les 2h suivant leur visite — sans vous prévenir.</p>
+    <div class="cards-2">
+      <div class="card">
+        <div class="card-icon">😤</div>
+        <h3>Sans AviStars</h3>
+        <p>2 avis par mois en moyenne. Les insatisfaits publient directement sur Google. Vous répondez trop tard. Votre note descend en silence.</p>
+      </div>
+      <div class="card blue">
+        <div class="card-icon">⭐</div>
+        <h3>Avec AviStars</h3>
+        <p>8 à 12 avis 5★ par semaine. Les insatisfaits vous écrivent en privé. Votre note monte automatiquement, chaque semaine, sans rien faire.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SOLUTION -->
-<section class="section-light">
+<!-- COMMENT ÇA MARCHE -->
+<section class="section-dark">
   <div class="inner">
-    <p class="eyebrow">La solution</p>
-    <h2>Comment ça fonctionne à Paris</h2>
-    <p>AviStars place un QR code dans votre restaurant — sur les tables, l'addition, le comptoir. Quand un client scanne, notre système détecte s'il est satisfait ou non.</p>
-    <div class="cards">
-      <div class="card">
-        <div class="card-icon">😊</div>
-        <h3>Client satisfait</h3>
+    <p class="eyebrow">Comment ça fonctionne à Paris</p>
+    <h2 class="light">Posez ce QR code sur votre table.<br><span>C'est tout ce qu'on vous demande.</span></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>QR code sur la table</h3>
+        <p>Votre client scanne après son repas. Notre système détecte immédiatement son niveau de satisfaction.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Satisfait → Google</h3>
         <p>Redirigé automatiquement vers votre fiche Google Maps. Il laisse un avis 5★ en 30 secondes.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">😞</div>
-        <h3>Client insatisfait</h3>
-        <p>Redirigé vers un formulaire privé. Son retour vous parvient uniquement à vous. <strong>Jamais publié.</strong></p>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Insatisfait → vous</h3>
+        <p>Redirigé vers un formulaire privé. Son retour vous parvient uniquement à vous. Jamais publié.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">📊</div>
-        <h3>Tableau de bord</h3>
-        <p>Suivez l'évolution de votre note, le nombre d'avis reçus et les retours clients en temps réel.</p>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Votre note monte</h3>
+        <p>Semaine après semaine, votre note Google progresse. Vos concurrents ne comprennent pas pourquoi.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">🚀</div>
-        <h3>Setup en 72h</h3>
-        <p>Notre équipe configure tout. QR codes livrés, page personnalisée aux couleurs de votre restaurant.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES PARIS -->
+<section class="section">
+  <div class="inner">
+    <p class="eyebrow dark">Ils en parlent mieux que nous</p>
+    <h2 class="dark">Vos concurrents ont déjà 4,7★.<br>Ce sont nos clients.</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-badge">↑ +0,8★ en 6 semaines</div>
+        <p class="testi-quote">"On avait des avis injustes qui nous tiraient vers le bas depuis des mois. En 6 semaines on était à 4,6. Mes habitués envoient leurs amis maintenant."</p>
+        <div class="testi-name">Sophie M.</div>
+        <div class="testi-role">Gérante · Bistrot · Paris 11e</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-badge">↑ +63 avis 5★ en 30 jours</div>
+        <p class="testi-quote">"Je n'avais pas le temps de gérer ça. Maintenant quand un client est mécontent, je le sais avant qu'il poste. Ça change vraiment tout."</p>
+        <div class="testi-name">David L.</div>
+        <div class="testi-role">Gérant · Restaurant asiatique · Paris 13e</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-badge">↑ 4,7★ maintenue depuis 4 mois</div>
+        <p class="testi-quote">"Zone très touristique, les clients sont exigeants. Depuis AviStars les mécontents nous écrivent en privé. Ma note tient à 4,7 depuis 4 mois malgré la haute saison."</p>
+        <div class="testi-name">Thomas R.</div>
+        <div class="testi-role">Gérant · Restaurant · Paris 1er</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ARRONDISSEMENTS -->
-<section class="section">
-  <p class="eyebrow dark">Couverture Paris</p>
-  <h2>Présent dans tous les arrondissements de Paris</h2>
-  <p>AviStars accompagne les restaurants dans l'ensemble des 20 arrondissements parisiens — des brasseries du Marais aux restaurants gastronomiques du 8e, en passant par les bistrots de Montmartre et les adresses branchées de Pigalle.</p>
-  <div class="arr-grid">
-    <div class="arr-item">Paris 1er</div>
-    <div class="arr-item">Paris 2e</div>
-    <div class="arr-item">Paris 3e</div>
-    <div class="arr-item">Paris 4e</div>
-    <div class="arr-item">Paris 5e</div>
-    <div class="arr-item">Paris 6e</div>
-    <div class="arr-item">Paris 7e</div>
-    <div class="arr-item">Paris 8e</div>
-    <div class="arr-item">Paris 9e</div>
-    <div class="arr-item">Paris 10e</div>
-    <div class="arr-item">Paris 11e</div>
-    <div class="arr-item">Paris 12e</div>
-    <div class="arr-item">Paris 13e</div>
-    <div class="arr-item">Paris 14e</div>
-    <div class="arr-item">Paris 15e</div>
-    <div class="arr-item">Paris 16e</div>
-    <div class="arr-item">Paris 17e</div>
-    <div class="arr-item">Paris 18e</div>
-    <div class="arr-item">Paris 19e</div>
-    <div class="arr-item">Paris 20e</div>
+<section class="section-light">
+  <div class="inner">
+    <p class="eyebrow dark">Couverture complète</p>
+    <h2 class="dark">Présent dans les 20 arrondissements<br>de Paris</h2>
+    <p class="section-sub" style="color:#6B7280">Du Marais au 15e, de Montmartre au 13e — AviStars accompagne les restaurants dans toute la capitale.</p>
+    <div class="arr-grid">
+      <div class="arr">Paris 1er</div><div class="arr">Paris 2e</div><div class="arr">Paris 3e</div><div class="arr">Paris 4e</div><div class="arr">Paris 5e</div>
+      <div class="arr">Paris 6e</div><div class="arr">Paris 7e</div><div class="arr">Paris 8e</div><div class="arr">Paris 9e</div><div class="arr">Paris 10e</div>
+      <div class="arr">Paris 11e</div><div class="arr">Paris 12e</div><div class="arr">Paris 13e</div><div class="arr">Paris 14e</div><div class="arr">Paris 15e</div>
+      <div class="arr">Paris 16e</div><div class="arr">Paris 17e</div><div class="arr">Paris 18e</div><div class="arr">Paris 19e</div><div class="arr">Paris 20e</div>
+    </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="section-light">
-  <div class="inner">
-    <p class="eyebrow">Questions fréquentes</p>
-    <h2>Ce que les restaurateurs parisiens nous demandent</h2>
-    <div class="faq">
+<section class="section">
+  <div class="inner-sm">
+    <p class="eyebrow dark">Questions fréquentes</p>
+    <h2 class="dark">Vous hésitez encore ?<br>Ces objections ont toutes une réponse.</h2>
+    <div class="faq-list">
       <div class="faq-item">
         <div class="faq-q">Est-ce légal de filtrer les avis à Paris ?</div>
-        <div class="faq-a">Oui, 100% légal et éthique. AviStars ne supprime aucun avis. Nous offrons aux clients insatisfaits un canal privé pour s'exprimer directement auprès du gérant — au lieu de le faire publiquement sur Google. C'est exactement ce que Google recommande. Notre système est 100% RGPD compliant.</div>
+        <div class="faq-a">Oui, 100% légal. AviStars ne supprime aucun avis. Nous offrons aux clients insatisfaits un canal privé pour s'exprimer directement. C'est ce que Google recommande. 100% RGPD compliant.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Combien de temps avant de voir des résultats à Paris ?</div>
-        <div class="faq-a">Les premiers avis arrivent en général dans les 7 à 14 premiers jours. En régime de croisière (mois 2-3), nos clients parisiens génèrent en moyenne 8 à 12 avis 5★ par semaine — contre 2 par mois avant AviStars.</div>
+        <div class="faq-q">Combien de temps avant les premiers résultats à Paris ?</div>
+        <div class="faq-a">Les premiers avis arrivent en 7 à 14 jours. En régime de croisière (mois 2-3) : 8 à 12 avis 5★ par semaine. Nos clients parisiens génèrent en moyenne +22 avis par mois.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Mes clients parisiens scannent-ils les QR codes ?</div>
-        <div class="faq-a">Oui — 18% des clients scannent un QR code bien positionné (table, addition). Sur 200 couverts/mois, c'est 36 interactions. Même avec un taux de conversion de 50%, c'est 18 nouveaux avis par mois.</div>
+        <div class="faq-a">18% des clients scannent un QR code bien positionné. Sur 200 couverts/mois, c'est 36 interactions minimum. Même à 50% de conversion, c'est 18 nouveaux avis par mois contre 2 aujourd'hui.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Quel est le prix pour un restaurant parisien ?</div>
-        <div class="faq-a">À partir de 199€/mois (plan 12 mois) avec setup inclus. Moins de 7€ par jour pour protéger et développer votre réputation Google dans une ville aussi concurrentielle que Paris. Garantie 30 jours : si zéro résultat, remboursement intégral.</div>
+        <div class="faq-a">À partir de 199€/mois (plan 12 mois, setup inclus). Moins de 7€ par jour. Garantie 30 jours : zéro résultat = remboursement intégral, sans condition.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Comment augmenter sa note Google à Paris ?</div>
+        <div class="faq-a">La méthode la plus efficace : un QR code qui redirige les satisfaits vers Google et capte les insatisfaits en privé. +300% d'avis 5★ dès le 1er mois pour 170+ restaurants parisiens.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="cta-band">
-  <h2>Votre restaurant parisien mérite une meilleure note</h2>
-  <p>Rejoignez les 170+ restaurants parisiens qui ont automatisé leur réputation Google avec AviStars. Setup en 72h, résultats en 30 jours.</p>
-  <a href="/" class="hero-cta">Commencer gratuitement →</a>
+<!-- CTA -->
+<section class="cta-section">
+  <p class="eyebrow">Rejoignez les 170+ restaurants parisiens</p>
+  <h2 class="light" style="margin-bottom:.75rem">Votre restaurant parisien<br>mérite une meilleure note.</h2>
+  <p style="color:rgba(255,255,255,.55);max-width:480px;margin:0 auto 2rem;font-size:.95rem;line-height:1.65">Setup en 72h. Résultats en 30 jours. Zéro compétence technique requise.</p>
+  <a href="/" class="btn-primary" style="font-size:1.05rem;padding:1rem 2.5rem">Protéger ma réputation Google →</a>
+  <div class="cta-trust">
+    <span>✓ Sans engagement</span>
+    <span>✓ Setup en 72h</span>
+    <span>✓ Garantie 30 jours</span>
+    <span>✓ Support 7j/7</span>
+  </div>
 </section>
 
 <footer class="footer">
-  <p>© 2026 AviStars — <a href="/">avistars.fr</a> · <a href="/mentions-legales.html">Mentions légales</a> · <a href="/politique-confidentialite.html">Confidentialité</a></p>
-  <p style="margin-top:.5rem">Gestion des avis Google pour restaurants parisiens · Paris · Île-de-France</p>
+  <p>© 2026 <a href="/">AviStars</a> · <a href="/">avistars.fr</a> · <a href="/cgv">CGV</a> · <a href="/mentions-legales">Mentions légales</a> · <a href="/politique-confidentialite">Confidentialité</a></p>
+  <p style="margin-top:.4rem">Gestion des avis Google restaurant Paris · Île-de-France · France</p>
 </footer>
 
 </body>
