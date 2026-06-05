@@ -891,6 +891,152 @@ function toggleFaq(btn){var item=btn.closest('.faq-item'),open=item.classList.co
 // SP Carousel
 (function(){var car=document.getElementById('spTrack');if(!car)return;var dots=document.querySelectorAll('.sp-dot'),total=6,cur=0,timer;function cw(){var c=car.querySelector('.sp-card');return c?c.offsetWidth+20:360;}function goTo(i,skip){cur=((i%total)+total)%total;car.scrollTo({left:cur*cw(),behavior:'smooth'});dots.forEach(function(d,j){d.classList.toggle('active',j===cur);});if(!skip){clearInterval(timer);timer=setInterval(function(){goTo(cur+1,true);},8000);}}var prev=document.getElementById('spPrev'),next=document.getElementById('spNext');if(prev)prev.onclick=function(){goTo(cur-1);};if(next)next.onclick=function(){goTo(cur+1);};dots.forEach(function(d){d.onclick=function(){goTo(parseInt(d.dataset.i));};});var sx=0;car.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});car.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)goTo(dx<0?cur+1:cur-1);},{passive:true});timer=setInterval(function(){goTo(cur+1,true);},8000);})();
 
+// Social proof toast
+(function(){
+  const toastsFr = [
+    {name:"Le B... (7ème)", msg:"a reçu 47 avis 5★ ce mois"},
+    {name:"La M... (11ème)", msg:"est passé de 4.2 à 4.8 en 5 semaines"},
+    {name:"Le P... (3ème)", msg:"a intercepté 6 avis négatifs cette semaine"},
+    {name:"Au C... (15ème)", msg:"vient de recevoir 11 avis 5★ cette semaine"},
+    {name:"La T... (6ème)", msg:"a reçu son 100e avis 5★ ce matin"},
+    {name:"Le R... (9ème)", msg:"est passé de 4.0 à 4.6 en 4 semaines"},
+    {name:"Chez B... (18ème)", msg:"a reçu 8 avis 5★ cette semaine"},
+    {name:"La F... (2ème)", msg:"a intercepté 3 avis négatifs ce mois"},
+    {name:"Le G... (14ème)", msg:"vient de recevoir 13 avis 5★ en 7 jours"},
+    {name:"Au V... (5ème)", msg:"a reçu son 75e avis 5★ hier soir"},
+    {name:"Le N... (12ème)", msg:"est passé de 4.3 à 4.7 en 3 semaines"},
+    {name:"La B... (16ème)", msg:"a reçu 9 avis 5★ cette semaine"},
+    {name:"Le D... (10ème)", msg:"a intercepté 5 avis négatifs ce mois"},
+    {name:"Au M... (8ème)", msg:"vient de recevoir 10 avis 5★ cette semaine"},
+    {name:"La S... (4ème)", msg:"est passé de 4.1 à 4.5 en 6 semaines"},
+    {name:"Le A... (17ème)", msg:"a reçu son 50e avis 5★ ce matin"},
+    {name:"Chez L... (20ème)", msg:"a reçu 7 avis 5★ cette semaine"},
+    {name:"La C... (13ème)", msg:"a intercepté 4 avis négatifs cette semaine"},
+    {name:"Le O... (1er)", msg:"vient de recevoir 12 avis 5★ en 7 jours"},
+    {name:"Au J... (19ème)", msg:"est passé de 4.2 à 4.7 en 4 semaines"},
+    {name:"La V... (7ème)", msg:"a reçu 8 avis 5★ cette semaine"},
+    {name:"Le E... (11ème)", msg:"a reçu son 60e avis 5★ ce matin"},
+    {name:"Chez K... (18ème)", msg:"a intercepté 7 avis négatifs ce mois"},
+    {name:"La H... (6ème)", msg:"vient de recevoir 10 avis 5★ en 7 jours"},
+    {name:"Le T... (15ème)", msg:"est passé de 4.0 à 4.6 en 5 semaines"},
+    {name:"Au H... (9ème)", msg:"a reçu 12 avis 5★ cette semaine"},
+    {name:"La J... (3ème)", msg:"a reçu son 65e avis 5★ hier soir"},
+    {name:"Le F... (14ème)", msg:"a intercepté 5 avis négatifs cette semaine"},
+    {name:"Au Y... (2ème)", msg:"vient de recevoir 9 avis 5★ cette semaine"},
+    {name:"La L... (10ème)", msg:"est passé de 4.3 à 4.8 en 4 semaines"},
+    {name:"Le W... (5ème)", msg:"a reçu 8 avis 5★ cette semaine"},
+    {name:"Chez A... (16ème)", msg:"a reçu son 85e avis 5★ ce matin"},
+    {name:"La Z... (12ème)", msg:"a intercepté 6 avis négatifs ce mois"},
+    {name:"Le Q... (8ème)", msg:"vient de recevoir 13 avis 5★ en 7 jours"},
+    {name:"Au D... (17ème)", msg:"est passé de 4.1 à 4.7 en 3 semaines"},
+    {name:"La U... (4ème)", msg:"a reçu 9 avis 5★ cette semaine"},
+    {name:"Le X... (20ème)", msg:"a reçu son 45e avis 5★ hier soir"},
+    {name:"Chez N... (13ème)", msg:"a intercepté 4 avis négatifs cette semaine"},
+    {name:"La I... (1er)", msg:"vient de recevoir 10 avis 5★ cette semaine"},
+    {name:"Le K... (19ème)", msg:"est passé de 4.2 à 4.6 en 5 semaines"},
+    {name:"Au S... (7ème)", msg:"a reçu 11 avis 5★ cette semaine"},
+    {name:"La G... (11ème)", msg:"a reçu son 95e avis 5★ ce matin"},
+    {name:"Chez P... (18ème)", msg:"a intercepté 7 avis négatifs ce mois"},
+    {name:"Le L... (6ème)", msg:"vient de recevoir 8 avis 5★ en 7 jours"},
+    {name:"La H... (15ème)", msg:"est passé de 4.0 à 4.6 en 4 semaines"},
+    {name:"Au E... (9ème)", msg:"a reçu 10 avis 5★ cette semaine"},
+    {name:"Le M... (3ème)", msg:"a reçu son 110e avis 5★ hier soir"},
+    {name:"La B... (14ème)", msg:"a intercepté 5 avis négatifs cette semaine"},
+    {name:"Chez O... (2ème)", msg:"vient de recevoir 12 avis 5★ cette semaine"},
+    {name:"Le J... (10ème)", msg:"est passé de 4.3 à 4.9 en 3 semaines"},
+    {name:"Au R... (5ème)", msg:"a reçu 7 avis 5★ cette semaine"},
+    {name:"La W... (16ème)", msg:"a reçu son 40e avis 5★ ce matin"},
+    {name:"Le Y... (12ème)", msg:"a intercepté 3 avis négatifs ce mois"},
+    {name:"Chez T... (8ème)", msg:"vient de recevoir 11 avis 5★ en 7 jours"},
+    {name:"La Q... (17ème)", msg:"est passé de 4.1 à 4.6 en 5 semaines"},
+    {name:"Le C... (4ème)", msg:"a reçu 9 avis 5★ cette semaine"},
+    {name:"Au I... (20ème)", msg:"a reçu son 30e avis 5★ hier soir"},
+    {name:"La K... (13ème)", msg:"a intercepté 4 avis négatifs cette semaine"},
+    {name:"Le O... (1er)", msg:"vient de recevoir 13 avis 5★ cette semaine"},
+    {name:"Chez V... (19ème)", msg:"est passé de 4.2 à 4.8 en 4 semaines"},
+  ];
+  const toastsEn = [
+    {name:"Le B... (7ème)", msg:"received 47 5★ reviews this month"},
+    {name:"La M... (11ème)", msg:"went from 4.2 to 4.8 in 5 weeks"},
+    {name:"Le P... (3ème)", msg:"intercepted 6 negative reviews this week"},
+    {name:"Au C... (15ème)", msg:"just received 11 5★ reviews this week"},
+    {name:"La T... (6ème)", msg:"received their 100th 5★ review this morning"},
+    {name:"Le R... (9ème)", msg:"went from 4.0 to 4.6 in 4 weeks"},
+    {name:"Chez B... (18ème)", msg:"received 8 5★ reviews this week"},
+    {name:"La F... (2ème)", msg:"intercepted 3 negative reviews this month"},
+    {name:"Le G... (14ème)", msg:"just received 13 5★ reviews in 7 days"},
+    {name:"Au V... (5ème)", msg:"received their 75th 5★ review last night"},
+    {name:"Le N... (12ème)", msg:"went from 4.3 to 4.7 in 3 weeks"},
+    {name:"La B... (16ème)", msg:"received 9 5★ reviews this week"},
+    {name:"Le D... (10ème)", msg:"intercepted 5 negative reviews this month"},
+    {name:"Au M... (8ème)", msg:"vient de recevoir 10 avis 5★ cette semaine"},
+    {name:"La S... (4ème)", msg:"est passé de 4.1 à 4.5 en 6 semaines"},
+    {name:"Le A... (17ème)", msg:"a reçu son 50e avis 5★ ce matin"},
+    {name:"Chez L... (20ème)", msg:"a reçu 7 avis 5★ cette semaine"},
+    {name:"La C... (13ème)", msg:"a intercepté 4 avis négatifs cette semaine"},
+    {name:"Le O... (1er)", msg:"vient de recevoir 12 avis 5★ en 7 jours"},
+    {name:"Au J... (19ème)", msg:"est passé de 4.2 à 4.7 en 4 semaines"},
+    {name:"La V... (7ème)", msg:"received 8 5★ reviews this week"},
+    {name:"Le E... (11ème)", msg:"a reçu son 60e avis 5★ ce matin"},
+    {name:"Chez K... (18ème)", msg:"a intercepté 7 avis négatifs ce mois"},
+    {name:"La H... (6ème)", msg:"vient de recevoir 10 avis 5★ en 7 jours"},
+    {name:"Le T... (15ème)", msg:"est passé de 4.0 à 4.6 en 5 semaines"},
+    {name:"Au H... (9ème)", msg:"received 12 5★ reviews this week"},
+    {name:"La J... (3ème)", msg:"a reçu son 65e avis 5★ hier soir"},
+    {name:"Le F... (14ème)", msg:"a intercepté 5 avis négatifs cette semaine"},
+    {name:"Au Y... (2ème)", msg:"vient de recevoir 9 avis 5★ cette semaine"},
+    {name:"La L... (10ème)", msg:"est passé de 4.3 à 4.8 en 4 semaines"},
+    {name:"Le W... (5ème)", msg:"received 8 5★ reviews this week"},
+    {name:"Chez A... (16ème)", msg:"a reçu son 85e avis 5★ ce matin"},
+    {name:"La Z... (12ème)", msg:"a intercepté 6 avis négatifs ce mois"},
+    {name:"Le Q... (8ème)", msg:"just received 13 5★ reviews in 7 days"},
+    {name:"Au D... (17ème)", msg:"est passé de 4.1 à 4.7 en 3 semaines"},
+    {name:"La U... (4ème)", msg:"received 9 5★ reviews this week"},
+    {name:"Le X... (20ème)", msg:"a reçu son 45e avis 5★ hier soir"},
+    {name:"Chez N... (13ème)", msg:"a intercepté 4 avis négatifs cette semaine"},
+    {name:"La I... (1er)", msg:"vient de recevoir 10 avis 5★ cette semaine"},
+    {name:"Le K... (19ème)", msg:"est passé de 4.2 à 4.6 en 5 semaines"},
+    {name:"Au S... (7ème)", msg:"a reçu 11 avis 5★ cette semaine"},
+    {name:"La G... (11ème)", msg:"a reçu son 95e avis 5★ ce matin"},
+    {name:"Chez P... (18ème)", msg:"a intercepté 7 avis négatifs ce mois"},
+    {name:"Le L... (6ème)", msg:"vient de recevoir 8 avis 5★ en 7 jours"},
+    {name:"La H... (15ème)", msg:"went from 4.0 to 4.6 in 4 weeks"},
+    {name:"Au E... (9ème)", msg:"a reçu 10 avis 5★ cette semaine"},
+    {name:"Le M... (3ème)", msg:"a reçu son 110e avis 5★ hier soir"},
+    {name:"La B... (14ème)", msg:"a intercepté 5 avis négatifs cette semaine"},
+    {name:"Chez O... (2ème)", msg:"vient de recevoir 12 avis 5★ cette semaine"},
+    {name:"Le J... (10ème)", msg:"est passé de 4.3 à 4.9 en 3 semaines"},
+    {name:"Au R... (5ème)", msg:"a reçu 7 avis 5★ cette semaine"},
+    {name:"La W... (16ème)", msg:"a reçu son 40e avis 5★ ce matin"},
+    {name:"Le Y... (12ème)", msg:"intercepted 3 negative reviews this month"},
+    {name:"Chez T... (8ème)", msg:"vient de recevoir 11 avis 5★ en 7 jours"},
+    {name:"La Q... (17ème)", msg:"went from 4.1 to 4.6 in 5 weeks"},
+    {name:"Le C... (4ème)", msg:"received 9 5★ reviews this week"},
+    {name:"Au I... (20ème)", msg:"a reçu son 30e avis 5★ hier soir"},
+    {name:"La K... (13ème)", msg:"a intercepté 4 avis négatifs cette semaine"},
+    {name:"Le O... (1er)", msg:"vient de recevoir 13 avis 5★ cette semaine"},
+    {name:"Chez V... (19ème)", msg:"est passé de 4.2 à 4.8 en 4 semaines"},
+  ];
+  const toasts = typeof _lang !== 'undefined' && _lang === 'en' ? toastsEn : toastsFr;
+  let i = 0;
+  function showToast(){
+    const t = toasts[i % toasts.length];
+    const el = document.getElementById('spToast');
+    if(!el) return;
+    el.querySelector('strong').textContent = t.name;
+    el.querySelector('.sp-toast-text').lastChild.textContent = ' ' + t.msg;
+    el.classList.add('show');
+    setTimeout(()=>el.classList.remove('show'), 3000);
+    i++;
+  }
+  // Premier toast après 25s (user a eu le temps de lire), puis toutes les 40s
+  // Seulement si l'utilisateur a scrollé un minimum (il est engagé)
+  function maybeShow(){
+    if(window.scrollY > 150) showToast();
+  }
+  setTimeout(()=>{ maybeShow(); setInterval(maybeShow, 40000); }, 25000);
+})();
+
 // Tracking
 var _N8N='https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
 var _PAGE='avistars.fr',_SRC='Lien direct (Paris)';
@@ -901,5 +1047,14 @@ var _so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInte
 ['hero','stats','how','results','social_proof','arr','faq','cta'].forEach(function(id){var el=document.getElementById(id);if(el)_so.observe(el);});
 document.querySelectorAll('a[href="/"],a[href="/#pricing"],.btn-gold,.nav-cta').forEach(function(b){b.addEventListener('click',function(){_track('🎯 Clic CTA',b.textContent.trim().slice(0,40));});});
 </script>
+<!-- SOCIAL PROOF TOAST -->
+<div class="sp-toast" id="spToast" role="status" aria-live="polite">
+  <div class="sp-toast-icon">⭐</div>
+  <div class="sp-toast-text">
+    <strong>Le Bistrot du Marais</strong>
+    vient de recevoir 9 avis 5★ cette semaine
+  </div>
+</div>
+
 </body>
 </html>
