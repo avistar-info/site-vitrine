@@ -1853,6 +1853,20 @@ document.getElementById('email-modal').addEventListener('click', function(e) {
 });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var phrases = [
+    "Vous validez la livraison de demain",
+    "Vous soutenez l’équipe en salle",
+    "Vous gérez le coup de feu du soir",
+    "Vous formez le nouveau serveur",
+    "Vous rectifiez une assiette avant l’envoi",
+    "Vous signez les bons de commande"
+  ];
+  var el = document.getElementById('h1-rotate');
+  if(el) el.textContent = phrases[Math.floor(Math.random()*phrases.length)];
+});
+</script>
 </body>
 </html>
 
