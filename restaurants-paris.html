@@ -871,151 +871,37 @@ header.scrolled .lang-btn.active{color:#fff}
   <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
 </a>
 
+
+
 <script>
-// Nav + Notif bar scroll
-(function(){
-  var navbar = document.getElementById('navbar');
-  var notifBar = document.querySelector('.notif-bar');
-  var notifH = notifBar ? notifBar.offsetHeight : 36;
-
-  window.addEventListener('scroll', function(){
-    var y = window.scrollY;
-    // Bandeau : disparaît après sa propre hauteur
-    if (y > notifH) {
-      if (notifBar) notifBar.classList.add('notif-hidden');
-      if (navbar)   navbar.classList.add('notif-gone');
-    } else {
-      if (notifBar) notifBar.classList.remove('notif-hidden');
-      if (navbar)   navbar.classList.remove('notif-gone');
-    }
-    // Nav devient opaque après 80px de scroll total
-    if (navbar) navbar.classList.toggle('scrolled', y > 80);
-    // Ferme le menu mobile au scroll
-    var menu = document.getElementById('mobileMenu');
-    if (menu && menu.style.display === 'flex') toggleMenu();
-  }, {passive:true});
-})();
-
-// Mobile menu
-function toggleMenu() {
-  const m = document.getElementById('mobileMenu');
-  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
-}
-
-// Smooth scroll — custom easing for a slower, more elegant feel
-function navTo(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const start = window.scrollY;
-  const target = el.getBoundingClientRect().top + start - 80; // 80px offset for sticky nav
-  const distance = target - start;
-  const duration = Math.min(1200, Math.max(700, Math.abs(distance) * 0.6)); // speed proportional to distance
-  let startTime = null;
-
-  function easeInOutCubic(t) {
-    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  }
-
-  function step(timestamp) {
-    if (!startTime) startTime = timestamp;
-    const elapsed = timestamp - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    window.scrollTo(0, start + distance * easeInOutCubic(progress));
-    if (progress < 1) requestAnimationFrame(step);
-  }
-
-  requestAnimationFrame(step);
-}
-
-// Fade on scroll — rootMargin positif pour que les éléments déjà dans le viewport se déclenchent immédiatement
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
-}, {threshold:0.05, rootMargin:'60px'});
-document.querySelectorAll('.fade').forEach(el => obs.observe(el));
-// Fallback de sécurité : si JS/observer échoue, rendre visible après 1.5s
-setTimeout(() => {
-  document.querySelectorAll('.fade:not(.visible)').forEach(el => el.classList.add('visible'));
-}, 1500);
+// Fade
+var _fo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');_fo.unobserve(e.target);}});},{threshold:.05,rootMargin:'60px'});
+document.querySelectorAll('.fade').forEach(function(el){_fo.observe(el);});
+setTimeout(function(){document.querySelectorAll('.fade:not(.visible)').forEach(function(el){el.classList.add('visible');});},1000);
 
 // Counters
-function animCounter(el) {
-  const target = parseFloat(el.dataset.target);
-  const suffix = el.dataset.suffix || '';
-  const dec = parseInt(el.dataset.dec || '0');
-  const dur = 1800;
-  const start = performance.now();
-  (function step(now) {
-    const p = Math.min((now - start) / dur, 1);
-    const e = 1 - Math.pow(1-p, 3);
-    const v = target * e;
-    el.textContent = (dec > 0 ? v.toFixed(dec) : Math.floor(v).toLocaleString('fr-FR')) + suffix;
-    if(p < 1) requestAnimationFrame(step);
-  })(start);
-}
-const cobs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){animCounter(e.target);cobs.unobserve(e.target);} });
-}, {threshold:0.3});
-document.querySelectorAll('.counter').forEach(el => cobs.observe(el));
+function _ac(el){var t=parseFloat(el.dataset.target),s=el.dataset.suffix||'',d=parseInt(el.dataset.dec||0),dur=1800,t0=performance.now();(function r(n){var p=Math.min((n-t0)/dur,1),v=t*(1-Math.pow(1-p,3));el.textContent=(d?v.toFixed(d):Math.floor(v).toLocaleString('fr-FR'))+s;if(p<1)requestAnimationFrame(r);})(t0);}
+var _co=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){_ac(e.target);_co.unobserve(e.target);}});},{threshold:.3});
+document.querySelectorAll('.counter').forEach(function(el){_co.observe(el);});
+
+// navTo → scroll local ou redirect main site
+function navTo(id){var el=document.getElementById(id);if(el){var s=window.scrollY,t=el.getBoundingClientRect().top+s-80,d=t-s,dur=Math.min(1200,Math.max(600,Math.abs(d)*.6)),t0=null;function ease(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;}(function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);window.scrollTo(0,s+d*ease(p));if(p<1)requestAnimationFrame(step);})(t0);}else{window.location.href='/#'+id;}}
 
 // FAQ
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if(!isOpen) item.classList.add('open');
-}
+function toggleFaq(btn){var item=btn.closest('.faq-item'),open=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});if(!open)item.classList.add('open');}
 
+// SP Carousel
+(function(){var car=document.getElementById('spTrack');if(!car)return;var dots=document.querySelectorAll('.sp-dot'),total=6,cur=0,timer;function cw(){var c=car.querySelector('.sp-card');return c?c.offsetWidth+20:360;}function goTo(i,skip){cur=((i%total)+total)%total;car.scrollTo({left:cur*cw(),behavior:'smooth'});dots.forEach(function(d,j){d.classList.toggle('active',j===cur);});if(!skip){clearInterval(timer);timer=setInterval(function(){goTo(cur+1,true);},8000);}}var prev=document.getElementById('spPrev'),next=document.getElementById('spNext');if(prev)prev.onclick=function(){goTo(cur-1);};if(next)next.onclick=function(){goTo(cur+1);};dots.forEach(function(d){d.onclick=function(){goTo(parseInt(d.dataset.i));};});var sx=0;car.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});car.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)goTo(dx<0?cur+1:cur-1);},{passive:true});timer=setInterval(function(){goTo(cur+1,true);},8000);})();
 
-// Social Proof Carousel
-(function(){
-  var car = document.getElementById('spTrack');
-  if(!car) return;
-  var dots = document.querySelectorAll('.sp-dot');
-  var total = 6;
-  var cur = 0;
-  var autoTimer;
-
-  function cardW(){
-    var c = car.querySelector('.sp-card');
-    return c ? c.offsetWidth + 20 : 360;
-  }
-  function goTo(i, skipAuto){
-    cur = ((i % total) + total) % total;
-    car.scrollTo({left: cur * cardW(), behavior:'smooth'});
-    dots.forEach(function(d,j){ d.classList.toggle('active', j===cur); });
-    if(!skipAuto){ clearInterval(autoTimer); autoTimer = setInterval(function(){ goTo(cur+1, true); }, 8000); }
-  }
-  document.getElementById('spPrev').onclick = function(){ goTo(cur-1); };
-  document.getElementById('spNext').onclick = function(){ goTo(cur+1); };
-  dots.forEach(function(d){ d.onclick = function(){ goTo(parseInt(d.dataset.i)); }; });
-
-  // drag / swipe
-  var startX=0, isDrag=false;
-  car.addEventListener('mousedown', function(e){ startX=e.clientX; isDrag=true; car.classList.add('dragging'); });
-  window.addEventListener('mouseup', function(e){
-    if(!isDrag) return; isDrag=false; car.classList.remove('dragging');
-    var dx=e.clientX-startX; if(Math.abs(dx)>50) goTo(dx<0?cur+1:cur-1);
-  });
-  car.addEventListener('touchstart',function(e){ startX=e.touches[0].clientX; },{passive:true});
-  car.addEventListener('touchend',function(e){ var dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>50) goTo(dx<0?cur+1:cur-1); },{passive:true});
-
-  autoTimer = setInterval(function(){ goTo(cur+1, true); }, 8000);
-})();
-
-
-// Contact form
-
-<script>
-const _N8N='https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
-const _PAGE='avistars.fr/restaurants-paris';
-function _track(type,label){fetch(_N8N,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type,label:label||'',page:_PAGE,device:window.innerWidth<768?'Mobile':'Desktop',source:document.referrer||'Lien direct',horodatage:new Date().toLocaleString('fr-FR')})}).catch(()=>{})}
-_track('Vue de page');
-const _seen=new Set();
-const _obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!_seen.has(e.target.id)){_seen.add(e.target.id);const m={hero:'👁 Vue section Hero',stats:'📊 Section — Stats',how:'📖 Section — Comment ça marche',results:'📊 Section — Résultats',social_proof:'💬 Section — Témoignages',arr:'🗺 Section — Arrondissements',faq:'❓ Section — FAQ',cta:'🎯 Section — CTA'};if(m[e.target.id])_track(m[e.target.id].split(' ')[0],m[e.target.id]);}}),{threshold:.3});
-['hero','stats','how','results','social_proof','arr','faq','cta'].forEach(id=>{const el=document.getElementById(id);if(el)_obs.observe(el);});
-document.querySelectorAll('a[href="/"],a[href="/#pricing"],a[href="/#how"],.btn-gold,.nav-cta').forEach(b=>b.addEventListener('click',()=>_track('Clic CTA','🎯 '+b.textContent.trim().slice(0,40))));
+// Tracking
+var _N8N='https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
+var _PAGE='avistars.fr',_SRC='Lien direct (Paris)';
+function _track(type,label){fetch(_N8N,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,label:label||'',page:_PAGE,source:_SRC,device:window.innerWidth<768?'Mobile':'Desktop',horodatage:new Date().toLocaleString('fr-FR')})}).catch(function(){});}
+_track('👁 Vue de page');
+var _seen=new Set();
+var _so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!_seen.has(e.target.id)){_seen.add(e.target.id);var m={hero:'📖 Section — Problème Paris',stats:'📊 Section — Stats',how:'📖 Section — Comment ça marche',results:'📊 Section — Résultats',social_proof:'💬 Section — Témoignages',arr:'🗺 Section — Arrondissements',faq:'❓ Section — FAQ Paris',cta:'🎯 Section — CTA'};if(m[e.target.id])_track(m[e.target.id],m[e.target.id]);}});},{threshold:.3});
+['hero','stats','how','results','social_proof','arr','faq','cta'].forEach(function(id){var el=document.getElementById(id);if(el)_so.observe(el);});
+document.querySelectorAll('a[href="/"],a[href="/#pricing"],.btn-gold,.nav-cta').forEach(function(b){b.addEventListener('click',function(){_track('🎯 Clic CTA',b.textContent.trim().slice(0,40));});});
 </script>
-
-
 </body>
 </html>
