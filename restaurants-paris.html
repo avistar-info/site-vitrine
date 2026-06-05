@@ -1040,51 +1040,76 @@ function toggleFaq(btn){var item=btn.closest('.faq-item'),open=item.classList.co
 })();
 
 
-// Lead form
-const N8N_WEBHOOK = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
-function submitForm(e) {
-  e.preventDefault();
-  const email = document.getElementById('emailInput').value.trim();
-  if (!email) return;
-  const btn = document.getElementById('submitBtn');
-  btn.textContent = '…'; btn.disabled = true;
-  fetch(N8N_WEBHOOK, {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({
-      type: 'lead_form',
-      email,
-      restaurant: (document.getElementById('restaurantInput') ? document.getElementById('restaurantInput').value.trim() : ''),
-      note_actuelle: (document.getElementById('noteInput') ? document.getElementById('noteInput').value : ''),
-      timestamp: new Date().toISOString(),
-      page: 'avistars.fr/restaurants-paris',
-      source: 'Lien direct (Paris)',
-      device: /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop'
-    }),
-    keepalive: true
-  })
-  .then(() => {
-    document.getElementById('contactForm').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
-    _track('🔥 LEAD Formulaire', 'Paris — ' + email);
-    setTimeout(() => {
-      document.getElementById('contactForm').style.display = '';
-      document.getElementById('successMsg').style.display = 'none';
-      btn.textContent = 'Être contacté →'; btn.disabled = false;
-    }, 6000);
-  })
-  .catch(() => { btn.textContent = 'Réessayer'; btn.disabled = false; });
+// ── Paris Tracking ──────────────────────────────────────────────────────
+var _WH='https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
+function _t(type,label){
+  try{
+    fetch(_WH,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        type:type,
+        label:label||'',
+        page:'avistars.fr',
+        source:'Lien direct (Paris)',
+        device:window.innerWidth<768?'Mobile':'Desktop',
+        horodatage:new Date().toLocaleString('fr-FR')
+      }),
+      keepalive:true
+    });
+  }catch(e){}
 }
 
-// Tracking
-var _N8N='https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
-var _PAGE='avistars.fr',_SRC='Lien direct (Paris)';
-function _track(type,label){fetch(_N8N,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,label:label||'',page:_PAGE,source:_SRC,device:window.innerWidth<768?'Mobile':'Desktop',horodatage:new Date().toLocaleString('fr-FR')})}).catch(function(){});}
-_track('👁 Vue de page');
+// Page view
+_t('\u{1F441}\uFE0F Vue de page');
+
+// Section observer
 var _seen=new Set();
-var _so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!_seen.has(e.target.id)){_seen.add(e.target.id);var m={hero:'📖 Section — Problème Paris',stats:'📊 Section — Stats',how:'📖 Section — Comment ça marche',results:'📊 Section — Résultats',social_proof:'💬 Section — Témoignages',arr:'🗺 Section — Arrondissements',faq:'❓ Section — FAQ Paris',cta:'🎯 Section — CTA'};if(m[e.target.id])_track(m[e.target.id],'');}});},{threshold:.3});
-['hero','stats','how','results','social_proof','arr','faq','cta'].forEach(function(id){var el=document.getElementById(id);if(el)_so.observe(el);});
-document.querySelectorAll('a[href="/"],a[href="/#pricing"],.btn-gold,.nav-cta').forEach(function(b){b.addEventListener('click',function(){_track('🎯 Clic CTA',b.textContent.trim().slice(0,40));});});
+var _sMap={hero:'📖 Section — Problème Paris',stats:'📊 Section — Stats',how:'📖 Section — Comment ça marche',results:'📊 Section — Résultats',social_proof:'💬 Section — Témoignages',arr:'🗺 Section — Arrondissements',faq:'❓ Section — FAQ Paris',cta:'🎯 Section — CTA'};
+var _sObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!_seen.has(e.target.id)){_seen.add(e.target.id);if(_sMap[e.target.id])_t(_sMap[e.target.id]);}});},{threshold:.3});
+['hero','stats','how','results','social_proof','arr','faq','cta'].forEach(function(id){var el=document.getElementById(id);if(el)_sObs.observe(el);});
+
+// CTA clicks
+document.querySelectorAll('.btn-gold,.btn-outline-white,.nav-cta,a[href="/#plan-6mois"]').forEach(function(b){
+  b.addEventListener('click',function(){_t('🎯 Clic CTA',b.textContent.trim().slice(0,40));});
+});
+
+// Lead form
+function submitForm(e){
+  e.preventDefault();
+  var email=(document.getElementById('emailInput')||{}).value||'';
+  if(!email.trim())return;
+  var btn=document.getElementById('submitBtn');
+  if(btn){btn.textContent='…';btn.disabled=true;}
+  fetch(_WH,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      type:'🔥 LEAD Formulaire',
+      label:'Paris — '+email.trim(),
+      page:'avistars.fr',
+      source:'Lien direct (Paris)',
+      device:window.innerWidth<768?'Mobile':'Desktop',
+      horodatage:new Date().toLocaleString('fr-FR'),
+      email:email.trim(),
+      restaurant:(document.getElementById('restaurantInput')||{}).value||'',
+      note_actuelle:(document.getElementById('noteInput')||{}).value||''
+    }),
+    keepalive:true
+  }).then(function(){
+    var form=document.getElementById('contactForm');
+    var ok=document.getElementById('successMsg');
+    if(form)form.style.display='none';
+    if(ok)ok.style.display='block';
+    setTimeout(function(){
+      if(form)form.style.display='';
+      if(ok)ok.style.display='none';
+      if(btn){btn.textContent='Être contacté →';btn.disabled=false;}
+    },6000);
+  }).catch(function(){
+    if(btn){btn.textContent='Réessayer';btn.disabled=false;}
+  });
+}
 </script>
 <!-- SOCIAL PROOF TOAST -->
 <div class="sp-toast" id="spToast" role="status" aria-live="polite">
