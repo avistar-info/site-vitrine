@@ -481,10 +481,10 @@ header.scrolled .lang-btn.active{color:#fff}
       </svg>
     </div>
     <nav class="nav-center" aria-label="Navigation principale">
-      <button onclick="window.location.href='/#how'" data-i18n="nav_how">Comment ça marche</button>
-      <button onclick="window.location.href='/#results'" data-i18n="nav_results">Résultats</button>
+      <button onclick="navTo('how')" data-i18n="nav_how">Comment ça marche</button>
+      <button onclick="navTo('results')" data-i18n="nav_results">Résultats</button>
       <button onclick="window.location.href='/#plan-6mois'" data-i18n="nav_pricing">Tarifs</button>
-      <button onclick="window.location.href='/#faq'" data-i18n="nav_faq">FAQ</button>
+      <button onclick="navTo('faq')" data-i18n="nav_faq">FAQ</button>
     </nav>
     <button class="nav-cta" id="nav-cta-btn" onclick="window.location.href='/#plan-6mois'" data-i18n="nav_cta">Commencer →</button>
     <button class="nav-mobile-btn" onclick="toggleMenu()" aria-label="Menu">
@@ -492,10 +492,10 @@ header.scrolled .lang-btn.active{color:#fff}
     </button>
   </div>
   <div class="nav-mobile-menu" id="mobileMenu">
-    <button onclick="window.location.href='/#how'">Comment ça marche</button>
-    <button onclick="window.location.href='/#results'">Résultats</button>
+    <button onclick="navTo('how')">Comment ça marche</button>
+    <button onclick="navTo('results')">Résultats</button>
     <button onclick="window.location.href='/#plan-6mois'">Tarifs</button>
-    <button onclick="window.location.href='/#faq'">FAQ</button>
+    <button onclick="navTo('faq')">FAQ</button>
     <button class="nav-mobile-cta" onclick="window.location.href='/#plan-6mois'">Commencer →</button>
   </div>
 </header>
