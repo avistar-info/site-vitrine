@@ -81,5 +81,17 @@ section{background:#fff;border-radius:1rem;padding:1.5rem;margin-bottom:1rem;bor
   <a href="/mentions-legales">Mentions légales</a>
   <a href="/politique-confidentialite">Confidentialité</a>
 </footer>
+
+<script>
+(function(){
+  var N8N='https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
+  fetch(N8N,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    type:'👁 Vue de page',label:'',page:'avistars.fr',
+    source:document.referrer||'Lien direct (mentions-legales)',
+    device:window.innerWidth<768?'Mobile':'Desktop',
+    horodatage:new Date().toLocaleString('fr-FR')
+  })}).catch(()=>{});
+})();
+</script>
 </body>
 </html>
