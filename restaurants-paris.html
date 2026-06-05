@@ -529,10 +529,10 @@ header.scrolled .lang-btn.active{color:#fff}
     <div class="hero-inner">
       <div class="hero-badge fade">
         <span class="dot"></span>
-        170+ établissements parisiens
+        Gestion avis Google restaurant · 170+ établissements parisiens
       </div>
       <h1 class="hero-h1 fade d1" aria-label="Gestion des avis Google pour restaurants parisiens — Augmentez vos avis 5 étoiles avec Avistars">
-        Vous cuisinez<br>
+        <span id="h1-rotate">Vous cuisinez</span><br>
         <span class="gold">Mais qui protège votre réputation Google</span>
       </h1>
       <p class="hero-p fade d2">
@@ -1106,6 +1106,21 @@ function toggleMenu(){
   var m=document.getElementById('mobileMenu');
   m.style.display=m.style.display==='flex'?'none':'flex';
 }
+
+
+// Rotating H1 first line
+(function(){
+  var phrases = [
+    "Vous cuisinez",
+    "Vous gérez le service",
+    "Vous formez votre équipe",
+    "Vous êtes en plein coup de feu",
+    "Vous vérifiez les stocks",
+    "Vous accueillez les clients"
+  ];
+  var el = document.getElementById('h1-rotate');
+  if(el) el.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+})();
 
 // Notif bar + header scroll
 (function(){
