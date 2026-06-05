@@ -1040,74 +1040,179 @@ function toggleFaq(btn){var item=btn.closest('.faq-item'),open=item.classList.co
 })();
 
 
-// ── Paris Tracking ──────────────────────────────────────────────────────
-var _WH='https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
-function _t(type,label){
-  try{
-    fetch(_WH,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        type:type,
-        label:label||'',
-        page:'avistars.fr',
-        source:'Lien direct (Paris)',
-        device:window.innerWidth<768?'Mobile':'Desktop',
-        horodatage:new Date().toLocaleString('fr-FR')
-      }),
-      keepalive:true
-    });
-  }catch(e){}
+const N8N_WEBHOOK = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
+
+// Lecture des UTM params une seule fois au chargement
+var _utm = (function(){
+  var p = new URLSearchParams(window.location.search);
+  var utm = {
+    source:   p.get('utm_source')   || '',
+    medium:   p.get('utm_medium')   || '',
+    campaign: p.get('utm_campaign') || ''
+  };
+  // Nettoie l'URL sans recharger la page (évite que l'UTM reste visible)
+  if (utm.source && window.history && window.history.replaceState) {
+    var clean = window.location.pathname;
+    window.history.replaceState(null, '', clean);
+  }
+  return utm;
+})();
+
+function track(type, data) {
+  try {
+    var payload = Object.assign({
+      type: type,
+      timestamp: new Date().toISOString(),
+      page: window.location.href,
+      referrer: document.referrer || '',
+      device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+      utm_source:   _utm.source,
+      utm_medium:   _utm.medium,
+      utm_campaign: _utm.campaign
+    }, data || {});
+    var blob = new Blob([JSON.stringify(payload)], {type:'application/json'});
+    // sendBeacon pour les events critiques (avant unload), fetch pour les autres
+    if (typeof navigator.sendBeacon === 'function' && payload.type === 'session_end') {
+      navigator.sendBeacon(N8N_WEBHOOK, blob);
+    } else {
+      fetch(N8N_WEBHOOK, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function(){});
+    }
+  } catch(err) {}
 }
 
-// Page view
-_t('\u{1F441}\uFE0F Vue de page');
+// A/B test CTA principal
+var _abVariant = Math.random() < 0.5 ? 'A' : 'B';
+if (_abVariant === 'B') {
+  document.querySelectorAll('.btn-gold').forEach(function(btn) {
+    var t = (btn.textContent || '').trim();
+    if (t.indexOf('Démarrer') !== -1) {
+      btn.innerHTML = (_lang === 'en') ? 'See my recommended plan <span>→</span>' : 'Voir mon plan recommandé <span>→</span>';
+    }
+  });
+}
 
-// Section observer
-var _seen=new Set();
-var _sMap={hero:'📖 Section — Problème Paris',stats:'📊 Section — Stats',how:'📖 Section — Comment ça marche',results:'📊 Section — Résultats',social_proof:'💬 Section — Témoignages',arr:'🗺 Section — Arrondissements',faq:'❓ Section — FAQ Paris',cta:'🎯 Section — CTA'};
-var _sObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!_seen.has(e.target.id)){_seen.add(e.target.id);if(_sMap[e.target.id])_t(_sMap[e.target.id]);}});},{threshold:.3});
-['hero','stats','how','results','social_proof','arr','faq','cta'].forEach(function(id){var el=document.getElementById(id);if(el)_sObs.observe(el);});
-
-// CTA clicks
-document.querySelectorAll('.btn-gold,.btn-outline-white,.nav-cta,a[href="/#plan-6mois"]').forEach(function(b){
-  b.addEventListener('click',function(){_t('🎯 Clic CTA',b.textContent.trim().slice(0,40));});
+// --- Page view ---
+track('page_view', {
+  screen: window.innerWidth + 'x' + window.innerHeight,
+  lang: navigator.language,
+  ab_cta: _abVariant
 });
 
-// Lead form
-function submitForm(e){
+// --- Session end ---
+window.addEventListener('pagehide', function() {
+  track('session_end', { duration_s: Math.round((Date.now() - _sessionStart) / 1000) });
+});
+const _sessionStart = Date.now();
+
+// --- Scroll depth ---
+const _scrollMarks = new Set();
+window.addEventListener('scroll', () => {
+  const pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+  [25, 50, 75, 100].forEach(m => {
+    if (pct >= m && !_scrollMarks.has(m)) {
+      _scrollMarks.add(m);
+      track('scroll_depth', { percent: m });
+    }
+  });
+}, { passive: true });
+
+// --- Section visibility (IntersectionObserver) ---
+const _sectionMap = {
+  'how': 'vue_section_comment_ca_marche',
+  'results': 'vue_section_resultats',
+  'plan-6mois': 'vue_section_tarifs',
+  'faq': 'vue_section_faq'
+};
+const _seenSections = new Set();
+const _sectionObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !_seenSections.has(e.target.id)) {
+      _seenSections.add(e.target.id);
+      track(_sectionMap[e.target.id]);
+    }
+  });
+}, { threshold: 0.3 });
+Object.keys(_sectionMap).forEach(id => {
+  const el = document.getElementById(id);
+  if (el) _sectionObs.observe(el);
+});
+
+// --- CTA clicks ---
+document.addEventListener('click', e => {
+  const el = e.target.closest('a, button');
+  if (!el) return;
+  const href = el.href || '';
+  const text = (el.textContent || '').trim().slice(0, 60);
+
+  if (href.includes('wa.me')) {
+    track('clic_whatsapp', { label: text, location: _getSection(el) });
+  } else if (href.includes('mailto:') || href.includes('contact@avistars')) {
+    track('clic_email');
+  } else if (href.includes('calendly') || href.includes('cal.com') || href.includes('calendar.app.google')) {
+    track('clic_calendly');
+  } else if (el.closest('#plan-1mois') || href.includes('7sY7sLg9')) {
+    track('clic_tarif_1mois');
+  } else if (el.closest('#plan-6mois') || href.includes('bJe14n2i')) {
+    track('clic_tarif_6mois');
+  } else if (el.closest('#plan-1an') || href.includes('28E5kD8G')) {
+    track('clic_tarif_1an');
+  } else if (el.classList.contains('btn-essai')) {
+    track('clic_essai_15j', { location: _getSection(el) });
+  } else if (el.classList.contains('nav-mobile-btn')) {
+    track('ouverture_menu_mobile');
+  } else if (el.classList.contains('faq-btn')) {
+    track('clic_faq', { question: text });
+  } else if (el.classList.contains('btn-gold') || el.classList.contains('sticky-cta-btn')) {
+    track('clic_cta_principal', { label: text, location: _getSection(el) });
+  }
+});
+
+function _getSection(el) {
+  const section = el.closest('section');
+  return section ? (section.id || section.className.split(' ')[0]) : 'unknown';
+}
+
+// --- Form submit (réel) ---
+
+// --- Lead form Paris ---
+function submitForm(e) {
   e.preventDefault();
-  var email=(document.getElementById('emailInput')||{}).value||'';
-  if(!email.trim())return;
-  var btn=document.getElementById('submitBtn');
-  if(btn){btn.textContent='…';btn.disabled=true;}
-  fetch(_WH,{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      type:'🔥 LEAD Formulaire',
-      label:'Paris — '+email.trim(),
-      page:'avistars.fr',
-      source:'Lien direct (Paris)',
-      device:window.innerWidth<768?'Mobile':'Desktop',
-      horodatage:new Date().toLocaleString('fr-FR'),
-      email:email.trim(),
-      restaurant:(document.getElementById('restaurantInput')||{}).value||'',
-      note_actuelle:(document.getElementById('noteInput')||{}).value||''
+  var email = (document.getElementById('emailInput') || {}).value || '';
+  if (!email.trim()) return;
+  var btn = document.getElementById('submitBtn');
+  if (btn) { btn.textContent = '…'; btn.disabled = true; }
+  fetch(N8N_WEBHOOK, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      type: 'lead_form',
+      email: email.trim(),
+      restaurant: (document.getElementById('restaurantInput') || {}).value || '',
+      note_actuelle: (document.getElementById('noteInput') || {}).value || '',
+      timestamp: new Date().toISOString(),
+      page: window.location.href,
+      referrer: document.referrer || 'Lien direct (Paris)',
+      device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
     }),
-    keepalive:true
-  }).then(function(){
-    var form=document.getElementById('contactForm');
-    var ok=document.getElementById('successMsg');
-    if(form)form.style.display='none';
-    if(ok)ok.style.display='block';
-    setTimeout(function(){
-      if(form)form.style.display='';
-      if(ok)ok.style.display='none';
-      if(btn){btn.textContent='Être contacté →';btn.disabled=false;}
-    },6000);
-  }).catch(function(){
-    if(btn){btn.textContent='Réessayer';btn.disabled=false;}
+    keepalive: true
+  }).then(function() {
+    var form = document.getElementById('contactForm');
+    var ok = document.getElementById('successMsg');
+    if (form) form.style.display = 'none';
+    if (ok) ok.style.display = 'block';
+    track('lead_form_succes', { email: email.trim() });
+    setTimeout(function() {
+      if (form) form.style.display = '';
+      if (ok) ok.style.display = 'none';
+      if (btn) { btn.textContent = 'Être contacté →'; btn.disabled = false; }
+    }, 6000);
+  }).catch(function() {
+    if (btn) { btn.textContent = 'Réessayer'; btn.disabled = false; }
   });
 }
 </script>
