@@ -446,15 +446,28 @@ header.scrolled .lang-btn.active{color:#fff}
 @media(max-width:768px){.sp-card{flex:0 0 82vw;min-width:82vw;height:480px}}
 
 
-.notif-bar-paris{background:#1B2B4B;border-bottom:1px solid rgba(173,216,229,.15);padding:.45rem 1.5rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.8);font-family:'Outfit',sans-serif}
-.notif-bar-paris strong{color:#fff}
-.notif-bar-paris a{color:#ADD8E5;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(173,216,229,.4);padding-bottom:1px;margin-left:.5rem}
-@media(max-width:600px){.notif-bar-paris{font-size:.72rem;padding:.4rem 1rem;line-height:1.5}}
+
+/* NOTIFICATION BAR */
+.notif-bar{
+  position:fixed;top:0;left:0;right:0;z-index:201;
+  background:#132039;border-bottom:1px solid rgba(173,216,229,.2);
+  color:#ADD8E5;text-align:center;font-size:.75rem;font-weight:600;
+  padding:.35rem 1rem;letter-spacing:.04em;
+  transform:translateY(0);transition:transform .35s ease
+}
+.notif-bar.notif-hidden{transform:translateY(-110%)}
+.notif-bar strong{color:#fff}
+.notif-bar a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(173,216,229,.4);padding-bottom:1px;transition:border-color .2s}
+.notif-bar a:hover{border-bottom-color:#ADD8E5}
+@media(max-width:768px){.notif-bar{font-size:.68rem;padding:.3rem .75rem;white-space:normal;line-height:1.4}}
 </style>
 </head>
 <body>
 
-<div class="notif-bar-paris">⭐ <strong>Setup inclus à 250€</strong> (valeur 350€) pour les plans 6 mois et 1 an<a href="/#plan-6mois">Je passe à l'action →</a></div>
+<div class="notif-bar" role="status">
+  ⭐&nbsp; <strong>Setup inclus à 250€</strong> (valeur 350€) pour les plans 6 mois et 1 an &nbsp;·&nbsp; <a href="/#plan-6mois">Je passe à l'action →</a>
+</div>
+
 <header style="position:sticky;top:0;z-index:1000;background:#1B2B4B">
   <div style="max-width:1280px;margin:0 auto;padding:.5rem 1.25rem;display:flex;align-items:center;justify-content:space-between">
     <a href="/" style="font-family:'Montserrat',sans-serif;font-size:13pt;font-weight:400;color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px">
@@ -1044,6 +1057,18 @@ function toggleFaq(btn){var item=btn.closest('.faq-item'),open=item.classList.co
   setTimeout(()=>{ maybeShow(); setInterval(maybeShow, 40000); }, 25000);
 })();
 
+
+
+// Notif bar scroll
+(function(){
+  var notifBar = document.querySelector('.notif-bar');
+  var notifH = notifBar ? notifBar.offsetHeight : 36;
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY;
+    if(y > notifH){ if(notifBar) notifBar.classList.add('notif-hidden'); }
+    else { if(notifBar) notifBar.classList.remove('notif-hidden'); }
+  }, {passive:true});
+})();
 
 // ── Tracking Paris ──────────────────────────────────────────────────────
 var _WH = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
