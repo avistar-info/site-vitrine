@@ -1134,11 +1134,38 @@ document.addEventListener('click',function(e){if(e.target.closest('a[href*="wa.m
 
 function submitForm(e){
   e.preventDefault();
-  var email=(document.getElementById('emailInput')||{}).value||'';
-  if(!email.trim())return;
+  var email=(document.getElementById('emailInput')||{value:''}).value.trim();
+  if(!email)return;
   var btn=document.getElementById('submitBtn');
-  if(btn){btn.textContent='\u2026';btn.disabled=true;}
-  fetch(_WH,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({horodatage:new Date().toLocaleString('fr-FR'),type:'\uD83D\uDD25 LEAD Formulaire',device:window.innerWidth<768?'Mobile':'Desktop',source:document.referrer||'Lien direct',page:'avistars.fr/restaurants-paris',label:'Paris \u2014 '+email.trim(),email:email.trim(),restaurant:(document.getElementById('restaurantInput')||{}).value||'',note_actuelle:(document.getElementById('noteInput')||{}).value||''}),keepalive:true}).then(function(){var form=document.getElementById('contactForm');var ok=document.getElementById('successMsg');if(form)form.style.display='none';if(ok)ok.style.display='block';_tr('\u2705 Lead Succ\u00E8s',email.trim());setTimeout(function(){if(form)form.style.display='';if(ok)ok.style.display='none';if(btn){btn.textContent='\u00CAtre contact\u00E9 \u2192';btn.disabled=false;}},6000);}).catch(function(){if(btn){btn.textContent='R\u00E9essayer';btn.disabled=false;}});
+  if(btn){btn.textContent='…';btn.disabled=true;}
+  fetch(_WH,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      type:'lead_form',
+      email:email,
+      restaurant:(document.getElementById('restaurantInput')||{value:''}).value.trim(),
+      note_actuelle:(document.getElementById('noteInput')||{value:''}).value,
+      horodatage:new Date().toLocaleString('fr-FR'),
+      page:'avistars.fr/restaurants-paris',
+      source:document.referrer||'Lien direct',
+      device:window.innerWidth<768?'Mobile':'Desktop'
+    }),
+    keepalive:true
+  }).then(function(){
+    var form=document.getElementById('contactForm');
+    var ok=document.getElementById('successMsg');
+    if(form)form.style.display='none';
+    if(ok)ok.style.display='block';
+    _tr('lead_form_succes',email);
+    setTimeout(function(){
+      if(form)form.style.display='';
+      if(ok)ok.style.display='none';
+      if(btn){btn.textContent='Être contacté →';btn.disabled=false;}
+    },6000);
+  }).catch(function(){
+    if(btn){btn.textContent='Réessayer';btn.disabled=false;}
+  });
 }
 
 (function(){var shown=false;function showExit(){if(shown)return;shown=true;var p=document.getElementById('exit-popup');if(p){p.style.display='flex';_tr('\uD83D\uDEAA Exit Intent');}}
