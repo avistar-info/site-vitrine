@@ -1132,39 +1132,43 @@ Object.keys(_sMap).forEach(function(id){var el=document.getElementById(id);if(el
 document.querySelectorAll('.btn-gold,.btn-outline-white,.nav-cta,a[href="/#plan-6mois"]').forEach(function(b){b.addEventListener('click',function(){_tr('\u{1F3AF} Clic CTA',b.textContent.trim().slice(0,40));});});
 document.addEventListener('click',function(e){if(e.target.closest('a[href*="wa.me"]'))_tr('\u{1F4F1} Clic WhatsApp');});
 
-function submitForm(e){
+function submitForm(e) {
   e.preventDefault();
-  var email=(document.getElementById('emailInput')||{value:''}).value.trim();
-  if(!email)return;
-  var btn=document.getElementById('submitBtn');
-  if(btn){btn.textContent='…';btn.disabled=true;}
-  fetch(_WH,{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      type:'lead_form',
-      email:email,
-      restaurant:(document.getElementById('restaurantInput')||{value:''}).value.trim(),
-      note_actuelle:(document.getElementById('noteInput')||{value:''}).value,
-      horodatage:new Date().toLocaleString('fr-FR'),
-      page:'avistars.fr/restaurants-paris',
-      source:document.referrer||'Lien direct',
-      device:window.innerWidth<768?'Mobile':'Desktop'
+  var email = document.getElementById('emailInput').value.trim();
+  if (!email) return;
+  var btn = document.getElementById('submitBtn');
+  btn.textContent = '…'; btn.disabled = true;
+
+  fetch(_WH, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      type: 'lead_form',
+      email: email,
+      restaurant: (document.getElementById('restaurantInput') ? document.getElementById('restaurantInput').value.trim() : ''),
+      note_actuelle: (document.getElementById('noteInput') ? document.getElementById('noteInput').value : ''),
+      timestamp: new Date().toISOString(),
+      page: window.location.href,
+      device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+      utm_source: '',
+      utm_medium: '',
+      utm_campaign: ''
     }),
-    keepalive:true
-  }).then(function(){
-    var form=document.getElementById('contactForm');
-    var ok=document.getElementById('successMsg');
-    if(form)form.style.display='none';
-    if(ok)ok.style.display='block';
-    _tr('lead_form_succes',email);
-    setTimeout(function(){
-      if(form)form.style.display='';
-      if(ok)ok.style.display='none';
-      if(btn){btn.textContent='Être contacté →';btn.disabled=false;}
-    },6000);
-  }).catch(function(){
-    if(btn){btn.textContent='Réessayer';btn.disabled=false;}
+    keepalive: true
+  })
+  .then(function() {
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    _tr('lead_form_succes', email);
+    setTimeout(function() {
+      document.getElementById('contactForm').style.display = '';
+      document.getElementById('successMsg').style.display = 'none';
+      btn.textContent = 'Être contacté →'; btn.disabled = false;
+    }, 6000);
+  })
+  .catch(function() {
+    btn.textContent = 'Réessayer';
+    btn.disabled = false;
   });
 }
 
