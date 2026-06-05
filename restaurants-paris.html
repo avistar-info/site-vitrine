@@ -1087,7 +1087,7 @@ function submitForm(e){
 
 (function(){var shown=false;function showExit(){if(shown)return;shown=true;var p=document.getElementById('exit-popup');if(p){p.style.display='flex';_tr('\uD83D\uDEAA Exit Intent');}}
 document.addEventListener('mouseleave',function(e){if(e.clientY<5)showExit();});
-var t=null;window.addEventListener('scroll',function(){clearTimeout(t);var pct=Math.round((window.scrollY/(document.body.scrollHeight-window.innerHeight))*100);if(pct>=50)t=setTimeout(showExit,60000);},{passive:true});})();
+var t=null;window.addEventListener('scroll',function(){clearTimeout(t);var pct=Math.round((window.scrollY/(document.body.scrollHeight-window.innerHeight))*100);if(pct>=25)t=setTimeout(showExit,60000);},{passive:true});})();
 </script>
 
 <!-- SOCIAL PROOF TOAST -->
