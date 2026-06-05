@@ -468,17 +468,35 @@ header.scrolled .lang-btn.active{color:#fff}
   ⭐&nbsp; <strong>Setup inclus à 250€</strong> (valeur 350€) pour les plans 6 mois et 1 an &nbsp;·&nbsp; <a href="/#plan-6mois">Je passe à l'action →</a>
 </div>
 
-<header style="position:sticky;top:0;z-index:1000;background:#1B2B4B">
-  <div style="max-width:1280px;margin:0 auto;padding:.5rem 1.25rem;display:flex;align-items:center;justify-content:space-between">
-    <a href="/" style="font-family:'Montserrat',sans-serif;font-size:13pt;font-weight:400;color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px">
-      <svg width="22" height="22" viewBox="-3 0 28 28" fill="none">
-        <polygon points="10,.5 12.8,8.5 21,8.5 14.8,12.5 17.6,20.5 10,16 2.4,20.5 5.2,12.5 -1,8.5 7.2,8.5" fill="rgba(173,216,229,0.35)"/>
+<!-- NAV -->
+<header id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="window.location.href='/'">
+      <svg width="130" height="34" viewBox="-5 0 130 34" fill="none" style="display:block">
+        <polygon points="10,.5 12.8,8.5 21,8.5 14.8,12.5 17.6,20.5 10,16 2.4,20.5 5.2,12.5 -1,8.5 7.2,8.5" fill="rgba(173,216,229,0.4)"/>
         <polygon points="7,3 9.8,11 18,11 11.8,15 14.6,23 7,18.5 -.6,23 2.2,15 -4,11 4.2,11" fill="#ADD8E5"/>
-      </svg><span style="letter-spacing:.3px">Avi<b style="font-weight:900">STARS</b></span>
-    </a>
-    <div style="display:flex;align-items:center;gap:1.5rem">
-      <a href="/#plan-6mois" style="background:#ADD8E5;color:#1B2B4B;font-family:'Montserrat',sans-serif;font-weight:900;font-size:.85rem;padding:.6rem 1.4rem;border-radius:.5rem;text-decoration:none">Commencer →</a>
+        <text x="23" y="23" font-family="Montserrat,sans-serif" font-size="21" letter-spacing="-.3">
+          <tspan font-weight="400" fill="#fff">Avi</tspan><tspan font-weight="900" fill="#fff">STARS</tspan>
+        </text>
+      </svg>
     </div>
+    <nav class="nav-center" aria-label="Navigation principale">
+      <button onclick="window.location.href='/#how'" data-i18n="nav_how">Comment ça marche</button>
+      <button onclick="window.location.href='/#results'" data-i18n="nav_results">Résultats</button>
+      <button onclick="window.location.href='/#plan-6mois'" data-i18n="nav_pricing">Tarifs</button>
+      <button onclick="window.location.href='/#faq'" data-i18n="nav_faq">FAQ</button>
+    </nav>
+    <button class="nav-cta" id="nav-cta-btn" onclick="window.location.href='/#plan-6mois'" data-i18n="nav_cta">Commencer →</button>
+    <button class="nav-mobile-btn" onclick="toggleMenu()" aria-label="Menu">
+      <span id="mb1"></span><span id="mb2"></span><span id="mb3"></span>
+    </button>
+  </div>
+  <div class="nav-mobile-menu" id="mobileMenu">
+    <button onclick="window.location.href='/#how'">Comment ça marche</button>
+    <button onclick="window.location.href='/#results'">Résultats</button>
+    <button onclick="window.location.href='/#plan-6mois'">Tarifs</button>
+    <button onclick="window.location.href='/#faq'">FAQ</button>
+    <button class="nav-mobile-cta" onclick="window.location.href='/#plan-6mois'">Commencer →</button>
   </div>
 </header>
 
@@ -493,7 +511,7 @@ header.scrolled .lang-btn.active{color:#fff}
     <div class="hero-inner">
       <div class="hero-badge fade">
         <span class="dot"></span>
-        ⚡ 170+ restaurants parisiens. Résultats en 7 jours.
+        Avis Google restaurant Paris · 170+ établissements
       </div>
       <h1 class="hero-h1 fade d1" aria-label="Gestion des avis Google pour restaurants parisiens — Augmentez vos avis 5 étoiles avec Avistars">
         Vous cuisinez<br>
@@ -1059,14 +1077,27 @@ function toggleFaq(btn){var item=btn.closest('.faq-item'),open=item.classList.co
 
 
 
-// Notif bar scroll
+
+function toggleMenu(){
+  var m=document.getElementById('mobileMenu');
+  m.style.display=m.style.display==='flex'?'none':'flex';
+}
+
+// Notif bar + header scroll
 (function(){
   var notifBar = document.querySelector('.notif-bar');
+  var navbar = document.getElementById('navbar');
   var notifH = notifBar ? notifBar.offsetHeight : 36;
   window.addEventListener('scroll', function(){
     var y = window.scrollY;
-    if(y > notifH){ if(notifBar) notifBar.classList.add('notif-hidden'); }
-    else { if(notifBar) notifBar.classList.remove('notif-hidden'); }
+    if(y > notifH){
+      if(notifBar) notifBar.classList.add('notif-hidden');
+      if(navbar) navbar.classList.add('notif-gone');
+    } else {
+      if(notifBar) notifBar.classList.remove('notif-hidden');
+      if(navbar) navbar.classList.remove('notif-gone');
+    }
+    if(navbar) navbar.classList.toggle('scrolled', y > 80);
   }, {passive:true});
 })();
 
