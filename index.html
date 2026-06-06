@@ -847,7 +847,7 @@ header.scrolled .lang-btn.active{color:#fff}
       <div class="essai-price">29,99€ <span>/ 14 jours</span></div>
       <div class="essai-sub">Accès complet au système · Sans engagement · Résiliation à tout moment</div>
       <div class="essai-deduit">✓ 29,99€ déduits du plan choisi ensuite</div>
-      <a href="#" onclick="track('clic_essai_15j');openEmailModal('https://buy.stripe.com/14AcN57CQ1GlgtHdyO9Zm09','Plan');return false;" target="_blank" class="btn-essai">
+      <a href="#" onclick="openEmailModal('https://buy.stripe.com/14AcN57CQ1GlgtHdyO9Zm09','Plan');return false;" target="_blank" class="btn-essai">
         Démarrer l'essai →
       </a>
     </div>
@@ -1221,6 +1221,7 @@ function toggleFaq(btn) {
 // ── Tracking AviStars (VILLE) ─────────────────────────────────────────────
 var _WH = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
 var _PAGE = 'avistars.fr';
+var _VILLE = '';
 var _VILLE_SUFFIX = '';
 
 function _tr(type, label) {
@@ -1234,7 +1235,8 @@ function _tr(type, label) {
         device: window.innerWidth < 768 ? 'Mobile' : 'Desktop',
         source: document.referrer || 'Lien direct',
         page: _PAGE,
-        label: label || ''
+        label: label || '',
+        location: _VILLE
       }),
       keepalive: true
     });
@@ -1271,10 +1273,6 @@ document.addEventListener('click', function(e) {
   var href = el.href || '', txt = (el.textContent || '').trim().slice(0, 50);
   if (href.includes('wa.me')) { _tr('📱 Clic WhatsApp' + _VILLE_SUFFIX); }
   else if (el.classList.contains('btn-gold') || el.classList.contains('nav-cta') || el.classList.contains('sticky-cta-btn')) { _tr('🟡 CTA Principal' + _VILLE_SUFFIX, txt); }
-  else if (el.classList.contains('btn-essai') || href.includes('essai')) { _tr('🧪 Essai 15 jours' + _VILLE_SUFFIX); }
-  else if (href.includes('7sY7sLg9')) { _tr('💳 Tarif — 1 mois' + _VILLE_SUFFIX); }
-  else if (href.includes('bJe14n2i')) { _tr('💳 Tarif — 6 mois' + _VILLE_SUFFIX); }
-  else if (href.includes('28E5kD8G')) { _tr('💳 Tarif — 1 an' + _VILLE_SUFFIX); }
   else if (el.classList.contains('faq-btn')) { _tr('❓ Clic FAQ' + _VILLE_SUFFIX, txt); }
 });
 
@@ -1687,7 +1685,12 @@ let _stripeUrl = '';
 
 function openEmailModal(stripeUrl, planName) {
   _stripeUrl = stripeUrl;
-  document.getElementById('em-title').textContent = 
+  // Tracking immédiat du tarif cliqué
+  if (stripeUrl.includes('14AcN5')) _tr('🧪 Essai 14 jours' + _VILLE_SUFFIX);
+  else if (stripeUrl.includes('dRm3cv')) _tr('💳 Tarif — 1 mois' + _VILLE_SUFFIX);
+  else if (stripeUrl.includes('aFabJ1')) _tr('💳 Tarif — 6 mois' + _VILLE_SUFFIX);
+  else _tr('💳 Tarif — 1 an' + _VILLE_SUFFIX);
+  document.getElementById('em-title').textContent =
     typeof _lang !== 'undefined' && _lang === 'en' ? 'One more step' : 'Encore une étape';
   document.getElementById('em-sub').textContent =
     typeof _lang !== 'undefined' && _lang === 'en'
@@ -1719,10 +1722,10 @@ function proceedToStripe() {
 
   // 1. Déterminer le plan depuis l'URL Stripe
   const planMap = {
-    '14AcN5': '1 Mois — 249€',
-    'dRm3cv': '6 Mois — 219€',
-    'aFabJ1': '12 Mois — 199€',
-    'essai': 'Essai 14j — 29,99€'
+    '14AcN5': 'Essai 14j — 29,99€',
+    'dRm3cv': '1 Mois — 249€',
+    'aFabJ1': '6 Mois — 219€',
+    'aFaaEX': '1 An — 199€'
   };
   let plan = 'Plan inconnu';
   for (const [key, val] of Object.entries(planMap)) {
@@ -1735,30 +1738,17 @@ function proceedToStripe() {
   window.open(stripeUrl.toString(), '_blank');
   closeEmailModal();
 
-  // 3. Tracking en arrière-plan (ne bloque pas la redirection)
+  // 3. Lead stripe en arrière-plan
   fetch('https://nicolasanquetin.app.n8n.cloud/webhook/avistars-lead-stripe', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       email: email,
       plan: plan,
+      location: _VILLE,
       source: 'stripe_modal',
       lang: typeof _lang !== 'undefined' ? _lang : 'fr',
       url: window.location.href,
-      timestamp: new Date().toISOString()
-    })
-  }).catch(() => {});
-
-  fetch(N8N_WEBHOOK, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      type: 'clic_paiement',
-      email: email,
-      plan: plan,
-      page: window.location.href,
-      referrer: document.referrer || '',
-      device: /iPhone|iPad|Android|Mobi/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
       timestamp: new Date().toISOString()
     })
   }).catch(() => {});
