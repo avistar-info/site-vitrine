@@ -1658,13 +1658,7 @@ function applyLang(lang) {
   }
 }
 
-function setLang(lang) {
-  applyLang(lang);
-  if (window.__h1) {
-    var el = document.getElementById('h1-rotate');
-    if (el) el.textContent = (lang === 'en' ? window.__h1.en : window.__h1.fr)[window.__h1.idx];
-  }
-}
+function setLang(lang) { applyLang(lang); }
 document.addEventListener('DOMContentLoaded', () => { if (_lang==='en') setTimeout(()=>applyLang('en'), 80); });
 </script>
 
@@ -1785,15 +1779,18 @@ document.getElementById('email-modal').addEventListener('click', function(e) {
 </script>
 
 <script>
-(function() {
-  var fr = ["Vous validez la livraison de demain","Vous soutenez l’équipe en salle","Vous gérez le coup de feu du soir","Vous formez le nouveau serveur","Vous rectifiez une assiette avant l’envoi","Vous signez les bons de commande"];
-  var en = ["You’re confirming tomorrow’s delivery","You’re supporting the front of house","You’re managing the dinner rush","You’re training the new waiter","You’re fixing a dish before service","You’re signing purchase orders"];
-  var idx = Math.floor(Math.random() * 6);
-  var lang = localStorage.getItem(‘avistars_lang’) || ‘fr’;
+document.addEventListener(‘DOMContentLoaded’, function() {
+  var phrases = [
+    "Vous validez la livraison de demain",
+    "Vous soutenez l’équipe en salle",
+    "Vous gérez le coup de feu du soir",
+    "Vous formez le nouveau serveur",
+    "Vous rectifiez une assiette avant l’envoi",
+    "Vous signez les bons de commande"
+  ];
   var el = document.getElementById(‘h1-rotate’);
-  if (el) el.textContent = (lang === ‘en’ ? en : fr)[idx];
-  window.__h1 = {idx: idx, fr: fr, en: en};
-})();
+  if (el) el.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+});
 </script>
 </body>
 </html>
