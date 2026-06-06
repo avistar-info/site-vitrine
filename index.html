@@ -362,6 +362,44 @@ footer{background:#1B2B4B;border-top:1px solid rgba(255,255,255,.06);padding:2.5
 
 
 
+/* ── CALCULATEUR ROI ─────────────────────────────────────────────────── */
+#calculateur{background:linear-gradient(160deg,#060606 0%,#0D1E35 60%,#060606 100%);padding:6rem 0}
+.calc-eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#ADD8E5;margin-bottom:1rem}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin:3rem 0 0}
+@media(max-width:900px){.calc-grid{grid-template-columns:1fr;gap:2rem}}
+.calc-input-group{margin-bottom:1.75rem}
+.calc-input-group:last-child{margin-bottom:0}
+.calc-label{font-size:.875rem;color:#9CA3AF;margin-bottom:.625rem;display:flex;justify-content:space-between;align-items:center}
+.calc-val-display{font-family:'Montserrat',sans-serif;font-size:1.25rem;font-weight:700;color:#ADD8E5}
+.calc-slider{width:100%;height:4px;border-radius:2px;background:rgba(173,216,229,.2);outline:none;cursor:pointer;-webkit-appearance:none;margin-top:.25rem}
+.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#ADD8E5;cursor:pointer;box-shadow:0 0 14px rgba(173,216,229,.55);transition:transform .15s}
+.calc-slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.calc-slider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#ADD8E5;cursor:pointer;border:none;box-shadow:0 0 14px rgba(173,216,229,.55)}
+.calc-note-btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.625rem}
+.calc-note-btn{padding:.4rem .9rem;border-radius:999px;border:1.5px solid rgba(173,216,229,.25);background:transparent;color:#9CA3AF;font-size:.78rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.calc-note-btn.active{background:#ADD8E5;border-color:#ADD8E5;color:#1B2B4B;font-weight:700}
+.calc-results-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(173,216,229,.15);border-radius:1.5rem;padding:2rem;position:sticky;top:90px}
+@media(max-width:900px){.calc-results-wrap{position:static}}
+.calc-results-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+@media(max-width:420px){.calc-results-grid{grid-template-columns:1fr}}
+.calc-result-item{text-align:center;padding:1.25rem .75rem;background:rgba(173,216,229,.05);border-radius:1rem;border:1px solid rgba(173,216,229,.1);transition:all .3s}
+.calc-result-item.highlight{background:rgba(173,216,229,.1);border-color:rgba(173,216,229,.3)}
+.calc-result-num{font-family:'Montserrat',sans-serif;font-size:1.75rem;font-weight:900;color:#ADD8E5;line-height:1.1;transition:all .25s}
+.calc-result-num.xl{font-size:2.2rem}
+.calc-result-lbl{font-size:.68rem;color:#6B7280;text-transform:uppercase;letter-spacing:.09em;margin-top:.4rem}
+.calc-note-row{display:flex;align-items:center;justify-content:center;gap:.5rem}
+.calc-note-arr{color:#4CAF82;font-size:1.2rem;font-weight:700}
+.calc-cta-block{border-top:1px solid rgba(173,216,229,.15);padding-top:1.5rem}
+.calc-cta-intro{text-align:center;font-size:.9rem;color:#D1D5DB;margin-bottom:.75rem}
+.calc-form-row{display:flex;gap:.625rem}
+@media(max-width:600px){.calc-form-row{flex-direction:column}}
+.calc-email-in{flex:1;padding:.875rem 1.1rem;border:1.5px solid rgba(173,216,229,.25);border-radius:.75rem;background:rgba(255,255,255,.05);color:#fff;font-family:'Outfit',sans-serif;font-size:.95rem;outline:none;transition:border-color .2s}
+.calc-email-in:focus{border-color:#ADD8E5}
+.calc-email-in::placeholder{color:#6B7280}
+.calc-send-btn{background:linear-gradient(135deg,#ADD8E5,#7BC8DB);color:#1B2B4B;font-weight:700;padding:.875rem 1.25rem;border-radius:.75rem;border:none;cursor:pointer;font-family:'Outfit',sans-serif;font-size:.9rem;white-space:nowrap;transition:transform .2s,box-shadow .2s}
+.calc-send-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(173,216,229,.35)}
+.calc-trust-sm{text-align:center;font-size:.73rem;color:#6B7280;margin-top:.625rem}
+.calc-success{display:none;text-align:center;padding:1rem;background:rgba(76,175,130,.1);border:1px solid rgba(76,175,130,.3);border-radius:.75rem;color:#4CAF82;font-weight:600}
 /* STICKY MOBILE CTA */
 .sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:7500;background:rgba(27,43,75,.97);backdrop-filter:blur(12px);border-top:1px solid rgba(173,216,229,.2);padding:.75rem 1.25rem;gap:.75rem;align-items:center}
 @media(max-width:768px){.sticky-cta{display:flex}}
@@ -603,6 +641,95 @@ header.scrolled .lang-btn.active{color:#fff}
   </div>
 </section>
 
+<!-- SOCIAL PROOF IMMEDIATE -->
+<section class="sp-section" id="social-proof">
+  <div class="container" style="text-align:center;margin-bottom:3rem">
+    <div class="fade d1"><h2 class="section-h2 light-text">170+ restaurants.<br><span style="color:#ADD8E5">Des résultats, pas des promesses.</span></h2></div>
+  </div>
+  <div class="sp-track" id="spTrack">
+
+    <div class="sp-card">
+      <img src="images/sp-1.jpg" alt="Sophie M. gérante bistrot Paris 11e" loading="lazy" style="object-fit:cover;object-position:center 18%"/>
+      <div class="sp-overlay"></div>
+      <div class="sp-content">
+        <div class="sp-metric">+0,8★</div>
+        <div class="sp-metric-sub" data-i18n="sp1_sub">de 3,8 à 4,6★ en 6 semaines</div>
+        <p class="sp-quote" data-i18n="sp1_q">"On avait des avis injustes qui nous tiraient vers le bas depuis des mois. En 6 semaines on était à 4,6. Mes habitués envoient leurs amis maintenant."</p>
+        <div class="sp-identity">Sophie M. · Gérante · Bistrot · Paris 11e</div>
+      </div>
+    </div>
+
+    <div class="sp-card">
+      <img src="images/sp-2.jpg" alt="David L. gérant restaurant asiatique Paris 13e" loading="lazy" style="object-fit:cover;object-position:center 12%"/>
+      <div class="sp-overlay"></div>
+      <div class="sp-content">
+        <div class="sp-metric">+63 avis</div>
+        <div class="sp-metric-sub" data-i18n="sp2_sub">5★ reçus en 30 jours</div>
+        <p class="sp-quote" data-i18n="sp2_q">"Je n'avais pas le temps de gérer ça. Maintenant quand un client est mécontent, je le sais avant qu'il poste. Ça change vraiment tout."</p>
+        <div class="sp-identity">David L. · Gérant · Restaurant asiatique · Paris 13e</div>
+      </div>
+    </div>
+
+    <div class="sp-card">
+      <img src="images/sp-5.jpg" alt="Marc D. gérant brasserie Marseille" loading="lazy" style="object-fit:cover;object-position:center 18%"/>
+      <div class="sp-overlay"></div>
+      <div class="sp-content">
+        <div class="sp-metric">+1,1★</div>
+        <div class="sp-metric-sub" data-i18n="sp5_sub">de 3,6 à 4,7★ en 3 mois</div>
+        <p class="sp-quote" data-i18n="sp5_q">"J'étais sceptique. En 3 mois je suis passé de 3,6 à 4,7. La saison d'été a été la meilleure depuis 5 ans — les gens réservent en regardant Google avant tout."</p>
+        <div class="sp-identity">Marc D. · Gérant · Brasserie · Marseille</div>
+      </div>
+    </div>
+
+    <div class="sp-card">
+      <img src="images/sp-6.jpg" alt="Camille F. gérante pizzeria Bordeaux" loading="lazy" style="object-fit:cover;object-position:center 14%"/>
+      <div class="sp-overlay"></div>
+      <div class="sp-content">
+        <div class="sp-metric">4,7★</div>
+        <div class="sp-metric-sub" data-i18n="sp4_sub">maintenue depuis 4 mois</div>
+        <p class="sp-quote" data-i18n="sp4_q">"Zone très touristique, les clients sont exigeants. Depuis AviStars les mécontents nous écrivent en privé. Ma note tient à 4,7 depuis 4 mois malgré la haute saison."</p>
+        <div class="sp-identity">Thomas R. · Gérant · Restaurant · Paris 1er</div>
+      </div>
+    </div>
+
+    <div class="sp-card">
+      <img src="images/sp-4.jpg" alt="Thomas R. gérant restaurant Paris 1er" loading="lazy" style="object-fit:cover;object-position:center 12%"/>
+      <div class="sp-overlay"></div>
+      <div class="sp-content">
+        <div class="sp-metric">4,7★</div>
+        <div class="sp-metric-sub" data-i18n="sp4_sub">maintenue depuis 4 mois</div>
+        <p class="sp-quote" data-i18n="sp4_q">"Zone très touristique, les clients sont exigeants. Depuis AviStars les mécontents nous écrivent en privé. Ma note tient à 4,7 depuis 4 mois malgré la haute saison."</p>
+        <div class="sp-identity">Thomas R. · Gérant · Restaurant · Paris 1er</div>
+      </div>
+    </div>
+
+    <div class="sp-card">
+      <img src="images/sp-3.jpg" alt="Yasmine B. gérante franchise Île-de-France" loading="lazy" style="object-fit:cover;object-position:center 12%"/>
+      <div class="sp-overlay"></div>
+      <div class="sp-content">
+        <div class="sp-metric">×3</div>
+        <div class="sp-metric-sub" data-i18n="sp3_sub">d'avis positifs dès le 1er mois</div>
+        <p class="sp-quote" data-i18n="sp3_q">"Sur 3 établissements c'était impossible de tout suivre. Maintenant tout est centralisé. Le premier mois j'ai multiplié par 3 mes avis positifs."</p>
+        <div class="sp-identity">Yasmine B. · Gérante · Franchise · Île-de-France</div>
+      </div>
+    </div>
+
+  
+  </div>
+  <div class="sp-nav">
+    <button class="sp-nav-btn" id="spPrev" aria-label="Précédent">&#8592;</button>
+    <div class="sp-dots" id="spDots">
+      <button class="sp-dot active" data-i="0" aria-label="Témoignage 1"></button>
+      <button class="sp-dot" data-i="1" aria-label="Témoignage 2"></button>
+      <button class="sp-dot" data-i="2" aria-label="Témoignage 3"></button>
+      <button class="sp-dot" data-i="3" aria-label="Témoignage 4"></button>
+      <button class="sp-dot" data-i="4" aria-label="Témoignage 5"></button>
+      <button class="sp-dot" data-i="5" aria-label="Témoignage 6"></button>
+    </div>
+    <button class="sp-nav-btn" id="spNext" aria-label="Suivant">&#8594;</button>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section id="how" style="background:#1B2B4B">
   <div class="container">
@@ -749,93 +876,82 @@ header.scrolled .lang-btn.active{color:#fff}
   </div>
 </section>
 
-<!-- PRICING -->
-<!-- SOCIAL PROOF -->
-<section class="sp-section" id="social-proof">
-  <div class="container" style="text-align:center;margin-bottom:3rem">
-    <div class="fade d1"><h2 class="section-h2 light-text">170+ restaurants.<br><span style="color:#ADD8E5">Des résultats, pas des promesses.</span></h2></div>
-  </div>
-  <div class="sp-track" id="spTrack">
 
-    <div class="sp-card">
-      <img src="images/sp-1.jpg" alt="Sophie M. gérante bistrot Paris 11e" loading="lazy" style="object-fit:cover;object-position:center 18%"/>
-      <div class="sp-overlay"></div>
-      <div class="sp-content">
-        <div class="sp-metric">+0,8★</div>
-        <div class="sp-metric-sub" data-i18n="sp1_sub">de 3,8 à 4,6★ en 6 semaines</div>
-        <p class="sp-quote" data-i18n="sp1_q">"On avait des avis injustes qui nous tiraient vers le bas depuis des mois. En 6 semaines on était à 4,6. Mes habitués envoient leurs amis maintenant."</p>
-        <div class="sp-identity">Sophie M. · Gérante · Bistrot · Paris 11e</div>
+<!-- CALCULATEUR ROI -->
+<section id="calculateur">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:1rem" class="fade">
+      <div class="calc-eyebrow">🧮 Calculateur ROI</div>
+      <h2 class="section-h2 light-text">Combien d'avis 5★ allez-vous recevoir ?<br><span style="color:#ADD8E5">Calculez en 30 secondes.</span></h2>
+      <p class="section-sub gray-light">Ajustez selon votre restaurant — les résultats se mettent à jour en temps réel.</p>
+    </div>
+    <div class="calc-grid fade d1">
+      <!-- INPUTS -->
+      <div>
+        <div class="calc-input-group">
+          <div class="calc-label">
+            <span>Couverts par service</span>
+            <span class="calc-val-display" id="c-couv-val">150</span>
+          </div>
+          <input type="range" class="calc-slider" id="c-couv" min="30" max="400" value="150" oninput="updateCalc()">
+        </div>
+        <div class="calc-input-group">
+          <div class="calc-label">
+            <span>Services par semaine</span>
+            <span class="calc-val-display" id="c-serv-val">6</span>
+          </div>
+          <input type="range" class="calc-slider" id="c-serv" min="3" max="21" value="6" oninput="updateCalc()">
+        </div>
+        <div class="calc-input-group">
+          <div class="calc-label"><span>Votre note Google actuelle</span></div>
+          <div class="calc-note-btns" style="margin-top:.75rem">
+            <button class="calc-note-btn active" data-note="3.2" data-slug="moins-35" onclick="setCalcNote(this)">Moins de 3,5★</button>
+            <button class="calc-note-btn" data-note="3.75" data-slug="35-40" onclick="setCalcNote(this)">3,5 – 4,0★</button>
+            <button class="calc-note-btn" data-note="4.25" data-slug="40-45" onclick="setCalcNote(this)">4,0 – 4,5★</button>
+            <button class="calc-note-btn" data-note="4.7" data-slug="plus-45" onclick="setCalcNote(this)">Plus de 4,5★</button>
+          </div>
+        </div>
+        <div style="margin-top:2rem;padding:1rem 1.25rem;background:rgba(173,216,229,.07);border-radius:.875rem;border-left:3px solid #ADD8E5">
+          <p style="font-size:.82rem;color:#9CA3AF;margin:0;line-height:1.6"><strong style="color:#ADD8E5">Basé sur 170+ restaurants.</strong> 18% des clients scannent le QR code. 40% laissent un avis 5★. ROI payback moyen : 2 semaines.</p>
+        </div>
+      </div>
+      <!-- RESULTS -->
+      <div class="calc-results-wrap">
+        <div class="calc-results-grid">
+          <div class="calc-result-item highlight">
+            <div class="calc-result-num xl" id="r-avis">+22</div>
+            <div class="calc-result-lbl">avis 5★ / mois</div>
+          </div>
+          <div class="calc-result-item highlight">
+            <div class="calc-note-row">
+              <span class="calc-result-num" id="r-note-before" style="color:#9CA3AF;font-size:1.3rem">3,2★</span>
+              <span class="calc-note-arr">→</span>
+              <span class="calc-result-num" id="r-note-after" style="color:#4CAF82;font-size:1.5rem">4,1★</span>
+            </div>
+            <div class="calc-result-lbl">votre note en 60 jours</div>
+          </div>
+          <div class="calc-result-item">
+            <div class="calc-result-num" id="r-ca">+770€</div>
+            <div class="calc-result-lbl">CA / mois estimé</div>
+          </div>
+          <div class="calc-result-item">
+            <div class="calc-result-num" id="r-roi">2 sem.</div>
+            <div class="calc-result-lbl">payback estimé</div>
+          </div>
+        </div>
+        <div class="calc-cta-block">
+          <p class="calc-cta-intro">Recevez votre analyse complète et démarrez :</p>
+          <form id="calcForm" onsubmit="submitCalc(event)">
+            <div class="calc-form-row">
+              <input type="email" class="calc-email-in" id="calc-email" placeholder="votre@restaurant.fr" required autocomplete="email">
+              <button type="submit" class="calc-send-btn" id="calc-send-btn">Démarrer l'essai →</button>
+            </div>
+          </form>
+          <div class="calc-success" id="calc-success">✓ Email reçu ! Votre essai s'ouvre...</div>
+          <div class="calc-trust-sm">✓ Sans engagement · ✓ 29,99€ déduits du plan ensuite · ✓ Résultats en 7 jours</div>
+        </div>
       </div>
     </div>
-
-    <div class="sp-card">
-      <img src="images/sp-2.jpg" alt="David L. gérant restaurant asiatique Paris 13e" loading="lazy" style="object-fit:cover;object-position:center 12%"/>
-      <div class="sp-overlay"></div>
-      <div class="sp-content">
-        <div class="sp-metric">+63 avis</div>
-        <div class="sp-metric-sub" data-i18n="sp2_sub">5★ reçus en 30 jours</div>
-        <p class="sp-quote" data-i18n="sp2_q">"Je n'avais pas le temps de gérer ça. Maintenant quand un client est mécontent, je le sais avant qu'il poste. Ça change vraiment tout."</p>
-        <div class="sp-identity">David L. · Gérant · Restaurant asiatique · Paris 13e</div>
-      </div>
-    </div>
-
-    <div class="sp-card">
-      <img src="images/sp-5.jpg" alt="Marc D. gérant brasserie Marseille" loading="lazy" style="object-fit:cover;object-position:center 18%"/>
-      <div class="sp-overlay"></div>
-      <div class="sp-content">
-        <div class="sp-metric">+1,1★</div>
-        <div class="sp-metric-sub" data-i18n="sp5_sub">de 3,6 à 4,7★ en 3 mois</div>
-        <p class="sp-quote" data-i18n="sp5_q">"J'étais sceptique. En 3 mois je suis passé de 3,6 à 4,7. La saison d'été a été la meilleure depuis 5 ans — les gens réservent en regardant Google avant tout."</p>
-        <div class="sp-identity">Marc D. · Gérant · Brasserie · Marseille</div>
-      </div>
-    </div>
-
-    <div class="sp-card">
-      <img src="images/sp-6.jpg" alt="Camille F. gérante pizzeria Bordeaux" loading="lazy" style="object-fit:cover;object-position:center 14%"/>
-      <div class="sp-overlay"></div>
-      <div class="sp-content">
-        <div class="sp-metric">4,7★</div>
-        <div class="sp-metric-sub" data-i18n="sp4_sub">maintenue depuis 4 mois</div>
-        <p class="sp-quote" data-i18n="sp4_q">"Zone très touristique, les clients sont exigeants. Depuis AviStars les mécontents nous écrivent en privé. Ma note tient à 4,7 depuis 4 mois malgré la haute saison."</p>
-        <div class="sp-identity">Thomas R. · Gérant · Restaurant · Paris 1er</div>
-      </div>
-    </div>
-
-    <div class="sp-card">
-      <img src="images/sp-4.jpg" alt="Thomas R. gérant restaurant Paris 1er" loading="lazy" style="object-fit:cover;object-position:center 12%"/>
-      <div class="sp-overlay"></div>
-      <div class="sp-content">
-        <div class="sp-metric">4,7★</div>
-        <div class="sp-metric-sub" data-i18n="sp4_sub">maintenue depuis 4 mois</div>
-        <p class="sp-quote" data-i18n="sp4_q">"Zone très touristique, les clients sont exigeants. Depuis AviStars les mécontents nous écrivent en privé. Ma note tient à 4,7 depuis 4 mois malgré la haute saison."</p>
-        <div class="sp-identity">Thomas R. · Gérant · Restaurant · Paris 1er</div>
-      </div>
-    </div>
-
-    <div class="sp-card">
-      <img src="images/sp-3.jpg" alt="Yasmine B. gérante franchise Île-de-France" loading="lazy" style="object-fit:cover;object-position:center 12%"/>
-      <div class="sp-overlay"></div>
-      <div class="sp-content">
-        <div class="sp-metric">×3</div>
-        <div class="sp-metric-sub" data-i18n="sp3_sub">d'avis positifs dès le 1er mois</div>
-        <p class="sp-quote" data-i18n="sp3_q">"Sur 3 établissements c'était impossible de tout suivre. Maintenant tout est centralisé. Le premier mois j'ai multiplié par 3 mes avis positifs."</p>
-        <div class="sp-identity">Yasmine B. · Gérante · Franchise · Île-de-France</div>
-      </div>
-    </div>
-
-  
-  </div>
-  <div class="sp-nav">
-    <button class="sp-nav-btn" id="spPrev" aria-label="Précédent">&#8592;</button>
-    <div class="sp-dots" id="spDots">
-      <button class="sp-dot active" data-i="0" aria-label="Témoignage 1"></button>
-      <button class="sp-dot" data-i="1" aria-label="Témoignage 2"></button>
-      <button class="sp-dot" data-i="2" aria-label="Témoignage 3"></button>
-      <button class="sp-dot" data-i="3" aria-label="Témoignage 4"></button>
-      <button class="sp-dot" data-i="4" aria-label="Témoignage 5"></button>
-      <button class="sp-dot" data-i="5" aria-label="Témoignage 6"></button>
-    </div>
-    <button class="sp-nav-btn" id="spNext" aria-label="Suivant">&#8594;</button>
   </div>
 </section>
 
@@ -966,15 +1082,15 @@ header.scrolled .lang-btn.active{color:#fff}
 <section id="faq">
   <div class="container-md">
     <div class="fade" style="text-align:center;margin-bottom:3rem">
-      <h2 class="section-h2 light-text">Vous hésitez encore ?<br><span style="color:#ADD8E5">Ces objections ont toutes une réponse.</span></h2>
-      <p class="section-sub gray-light" style="margin-bottom:0">Tout ce qu'un restaurateur parisien veut savoir sur la <strong style="color:#ADD8E5">gestion de sa réputation Google</strong>.</p>
+      <h2 class="section-h2 light-text">Vos doutes.<br><span style="color:#ADD8E5">Nos réponses directes.</span></h2>
+      <p class="section-sub gray-light" style="margin-bottom:0">Chaque objection a été soulevée. Chaque réponse a été prouvée sur 170+ restaurants.</p>
     </div>
     <div class="fade d1">
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span>"C'est trop cher pour mon restaurant"</span><span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Moins de 7€/jour. Un seul nouveau couvert via Google = 25-60€ de CA. ROI payback en 2-3 mois. Vous payez pour des résultats, pas des promesses.</div></div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span>"Mes clients ne scannent pas les QR codes"</span><span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">18% le font en moyenne. 18% × 200 clients = 36 tentatives/mois. Même à 10% de conversion = +20 avis/mois. Contre 2 aujourd'hui.</div></div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span>"Est-ce légal ? Je cache des avis négatifs ?"</span><span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Zéro censure. Le client insatisfait vous parle en privé plutôt que de poster — c'est ce qu'il préférerait aussi. 100% éthique, RGPD compliant.</div></div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span>"Combien de temps avant les premiers résultats ?"</span><span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Premiers avis dans les <strong style="color:#fff">7 à 14 jours</strong>. En régime de croisière (mois 2-3) : 8 à 12 avis 5★ par semaine.</div></div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span>"Je peux résilier quand je veux ?"</span><span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Plan 1 mois : résiliable à tout moment. Plans 6 mois et 1 an : résiliables entre chaque période. Vos avis Google restent sur votre fiche pour toujours.</div></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span>"7€/jour c'est trop cher pour mon restaurant"</span><span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Un seul nouveau couvert via Google = 25 à 60€ de CA. Si AviStars vous ramène <strong style="color:#fff">1 table de plus par semaine</strong>, vous êtes rentable dès la première semaine. Nos clients récupèrent leur investissement en moyenne en <strong style="color:#ADD8E5">2 à 3 semaines</strong>. La vraie question : combien ça vous coûte de ne rien faire ?</div></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span>"Mes clients ne scannent pas les QR codes"</span><span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">18% le font. Ça semble peu ? <strong style="color:#fff">18% de 200 clients = 36 tentatives par service.</strong> Même à 50% de conversion = +18 avis 5★ ce mois. Contre 2 aujourd'hui. Et votre concurrent d'en face — il utilise peut-être déjà AviStars pendant que vous lisez ceci.</div></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span>"Est-ce légal ? Je cache des avis négatifs ?"</span><span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner"><strong style="color:#fff">Zéro censure. Rien n'est supprimé.</strong> Vous offrez au client insatisfait un canal privé — exactement comme un service client sérieux. Il préfère vous parler plutôt que poster sur Google. C'est ce qu'il voulait faire de toute façon. 100% éthique, 100% RGPD compliant. 170+ restaurants l'utilisent. <strong style="color:#ADD8E5">Zéro problème depuis le jour 1.</strong></div></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span>"Et si ça ne marche pas pour mon restaurant ?"</span><span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner"><strong style="color:#fff">0 avis supplémentaire en 30 jours = remboursement intégral.</strong> Sans condition. Sans question. On prend le risque financier à votre place. Vous ne risquez absolument rien. La seule chose que vous risquez, c'est de laisser vos concurrents prendre de l'avance pendant que vous attendez.</div></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span>"Je peux résilier quand je veux ?"</span><span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Plan 1 mois : résiliable à tout moment avant votre prochaine échéance. Mais voilà la réalité : <strong style="color:#fff">aucun de nos clients à Paris ne résilie.</strong> Ils upgradent vers le plan annuel quand ils voient leurs résultats. Vos avis Google restent sur votre fiche <strong style="color:#ADD8E5">pour toujours</strong> — même si vous partez demain.</div></div></div>
     </div>
   </div>
 </section>
@@ -1258,6 +1374,7 @@ var _sMap = {
   'results':      '📊 Section — Résultats',
   'plan-6mois':   '💰 Section — Tarifs',
   'faq':          '❓ Section — FAQ',
+  'calculateur':  '🧮 Calculateur ROI',
   'social-proof': '💬 Section — Témoignages',
   'social_proof': '💬 Section — Témoignages'
 };
@@ -1326,6 +1443,72 @@ function submitForm(e) {
       if (btn) { btn.textContent = 'Être contacté →'; btn.disabled = false; }
     }, 6000);
   }).catch(function() { if (btn) { btn.textContent = 'Réessayer'; btn.disabled = false; } });
+}
+
+// ── Calculateur ROI ──────────────────────────────────────────────────────────
+var _calcNote = 3.2;
+var _calcNoteSlug = 'moins-35';
+var _calcInteracted = false;
+
+function setCalcNote(btn) {
+  document.querySelectorAll('.calc-note-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  _calcNote = parseFloat(btn.getAttribute('data-note'));
+  _calcNoteSlug = btn.getAttribute('data-slug');
+  updateCalc();
+}
+
+function updateCalc() {
+  if (!_calcInteracted) {
+    _calcInteracted = true;
+    _tr('🧮 Calculateur ROI — Interaction' + _VILLE_SUFFIX);
+  }
+  var couv = parseInt(document.getElementById('c-couv').value);
+  var serv = parseInt(document.getElementById('c-serv').value);
+  document.getElementById('c-couv-val').textContent = couv;
+  document.getElementById('c-serv-val').textContent = serv;
+
+  var avis = Math.min(80, Math.round(couv * serv * 0.024));
+  var note_after = Math.min(4.9, _calcNote + Math.min(0.9, avis * 2 / 28));
+  var ca = avis * 35;
+  var payback_w = Math.ceil(219 / Math.max(1, ca / 4));
+
+  document.getElementById('r-avis').textContent = '+' + avis;
+  document.getElementById('r-note-before').textContent = _calcNote.toFixed(1).replace('.', ',') + '★';
+  document.getElementById('r-note-after').textContent = note_after.toFixed(1).replace('.', ',') + '★';
+  document.getElementById('r-ca').textContent = '+' + ca.toLocaleString('fr-FR') + '€';
+  document.getElementById('r-roi').textContent = payback_w <= 4 ? payback_w + ' sem.' : Math.ceil(payback_w / 4) + ' mois';
+}
+
+function submitCalc(e) {
+  e.preventDefault();
+  var email = document.getElementById('calc-email').value.trim();
+  if (!email) return;
+  var btn = document.getElementById('calc-send-btn');
+  var couv = document.getElementById('c-couv').value;
+  var serv = document.getElementById('c-serv').value;
+  var avis = Math.min(80, Math.round(parseInt(couv) * parseInt(serv) * 0.024));
+  var ca = avis * 35;
+  var resume = couv + ' couverts × ' + serv + ' services → +' + avis + ' avis/mois · +' + ca + '€/mois · note: ' + _calcNote.toFixed(1) + '→' + Math.min(4.9, _calcNote + Math.min(0.9, avis * 2 / 28)).toFixed(1) + '★';
+
+  btn.textContent = '⏳ Envoi...'; btn.disabled = true;
+  _tr('📊 Lead Calculateur' + _VILLE_SUFFIX, email);
+
+  fetch(_WH, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
+    type: 'lead_form', email: email,
+    restaurant: '📊 [Calculateur ROI] ' + resume,
+    note_actuelle: _calcNoteSlug,
+    ville: _VILLE_SUFFIX ? _VILLE_SUFFIX.replace(' — ', '') : '',
+    page: _PAGE, label: 'calculateur_roi',
+    timestamp: new Date().toISOString(),
+    device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+  }), keepalive: true }).catch(function() {});
+
+  setTimeout(function() {
+    document.getElementById('calc-success').style.display = 'block';
+    document.getElementById('calcForm').style.display = 'none';
+    window.open('https://buy.stripe.com/14AcN57CQ1GlgtHdyO9Zm09?prefilled_email=' + encodeURIComponent(email), '_blank');
+  }, 500);
 }
 
 </script>
