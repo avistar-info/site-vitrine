@@ -1235,21 +1235,6 @@ function _tr(type, label) {
 
 _tr('👁 Vue de page' + _VILLE_SUFFIX);
 
-var _seen = new Set();
-var _sObs = new IntersectionObserver(function(es) {
-  es.forEach(function(e) {
-    if (e.isIntersecting && !_seen.has(e.target.id)) {
-      _seen.add(e.target.id);
-      var labels = {'how': '📖 Section — Comment ça marche', 'results': '📊 Section — Résultats'};
-      _tr(labels[e.target.id] + _VILLE_SUFFIX);
-    }
-  });
-}, {threshold: 0.5});
-['how','results'].forEach(function(id) {
-  var el = document.getElementById(id);
-  if (el) _sObs.observe(el);
-});
-
 document.addEventListener('click', function(e) {
   var el = e.target.closest('a, button');
   if (!el) return;
