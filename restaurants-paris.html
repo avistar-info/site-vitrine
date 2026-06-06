@@ -1130,7 +1130,8 @@ function toggleMenu(){
 // ── Tracking AviStars (VILLE) ─────────────────────────────────────────────
 var _WH = 'https://nicolasanquetin.app.n8n.cloud/webhook/1715b815-0635-4016-a1b2-e647818c580b';
 var _PAGE = 'avistars.fr/restaurants-paris';
-var _VILLE_SUFFIX = ' (Paris)';
+var _VILLE = 'Paris';
+var _VILLE_SUFFIX = ' — Paris';
 
 function _tr(type, label) {
   try {
@@ -1143,7 +1144,8 @@ function _tr(type, label) {
         device: window.innerWidth < 768 ? 'Mobile' : 'Desktop',
         source: document.referrer || 'Lien direct',
         page: _PAGE,
-        label: label || ''
+        label: label || '',
+        location: _VILLE
       }),
       keepalive: true
     });
@@ -1180,10 +1182,6 @@ document.addEventListener('click', function(e) {
   var href = el.href || '', txt = (el.textContent || '').trim().slice(0, 50);
   if (href.includes('wa.me')) { _tr('📱 Clic WhatsApp' + _VILLE_SUFFIX); }
   else if (el.classList.contains('btn-gold') || el.classList.contains('nav-cta') || el.classList.contains('sticky-cta-btn')) { _tr('🟡 CTA Principal' + _VILLE_SUFFIX, txt); }
-  else if (el.classList.contains('btn-essai') || href.includes('essai')) { _tr('🧪 Essai 15 jours' + _VILLE_SUFFIX); }
-  else if (href.includes('7sY7sLg9')) { _tr('💳 Tarif — 1 mois' + _VILLE_SUFFIX); }
-  else if (href.includes('bJe14n2i')) { _tr('💳 Tarif — 6 mois' + _VILLE_SUFFIX); }
-  else if (href.includes('28E5kD8G')) { _tr('💳 Tarif — 1 an' + _VILLE_SUFFIX); }
   else if (el.classList.contains('faq-btn')) { _tr('❓ Clic FAQ' + _VILLE_SUFFIX, txt); }
 });
 
