@@ -346,7 +346,7 @@ footer{background:#1B2B4B;border-top:1px solid rgba(255,255,255,.06);padding:2.5
 
 
 /* ── CALCULATEUR ROI ─────────────────────────────────────────────────── */
-#calculateur{background:linear-gradient(160deg,#060606 0%,#0D1E35 60%,#060606 100%);padding:6rem 0}
+#calculateur{background:linear-gradient(160deg,#060606 0%,#0D1E35 60%,#060606 100%);padding:6rem 2rem}
 .calc-eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#ADD8E5;margin-bottom:1rem}
 .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin:3rem 0 0}
 @media(max-width:900px){.calc-grid{grid-template-columns:1fr;gap:2rem}}
@@ -355,14 +355,14 @@ footer{background:#1B2B4B;border-top:1px solid rgba(255,255,255,.06);padding:2.5
 .calc-label{font-size:.875rem;color:#9CA3AF;margin-bottom:.625rem;display:flex;justify-content:space-between;align-items:center}
 .calc-val-display{font-family:'Montserrat',sans-serif;font-size:1.25rem;font-weight:700;color:#ADD8E5}
 .calc-slider{width:100%;height:4px;border-radius:2px;background:rgba(173,216,229,.2);outline:none;cursor:pointer;-webkit-appearance:none;margin-top:.25rem}
-.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#ADD8E5;cursor:pointer;box-shadow:0 0 14px rgba(173,216,229,.55)}
+.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#ADD8E5;cursor:pointer;box-shadow:0 0 14px rgba(173,216,229,.55);margin-top:-9px}
 .calc-slider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#ADD8E5;cursor:pointer;border:none}
 .calc-note-btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.625rem}
 .calc-note-btn{padding:.4rem .9rem;border-radius:999px;border:1.5px solid rgba(173,216,229,.25);background:transparent;color:#9CA3AF;font-size:.78rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
 .calc-note-btn.active{background:#ADD8E5;border-color:#ADD8E5;color:#1B2B4B;font-weight:700}
-.calc-results-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(173,216,229,.15);border-radius:1.5rem;padding:2rem}
+.calc-results-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(173,216,229,.15);border-radius:1.5rem;padding:2rem}@media(max-width:900px){.calc-results-wrap{position:static;order:-1}}@media(max-width:768px){#calculateur{padding:3rem 1.25rem}}
 .calc-results-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
-@media(max-width:420px){.calc-results-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.calc-results-grid{grid-template-columns:1fr}}
 .calc-result-item{text-align:center;padding:1.25rem .75rem;background:rgba(173,216,229,.05);border-radius:1rem;border:1px solid rgba(173,216,229,.1)}
 .calc-result-item.highlight{background:rgba(173,216,229,.1);border-color:rgba(173,216,229,.3)}
 .calc-result-num{font-family:'Montserrat',sans-serif;font-size:1.75rem;font-weight:900;color:#ADD8E5;line-height:1.1;transition:all .25s}
@@ -571,6 +571,8 @@ header.scrolled .lang-btn.active{color:#fff}
 </header>
 
 <!-- HERO -->
+
+
 <section id="hero">
   <div class="hero-bg">
     <picture><source srcset="images/hero-bg.webp" type="image/webp" /><img src="images/hero-bg.jpg" width="1400" height="900" fetchpriority="high" alt="Brasserie parisienne élégante — gestion avis Google restaurant" /></picture>
@@ -614,6 +616,7 @@ header.scrolled .lang-btn.active{color:#fff}
 </section>
 
 <!-- STATS -->
+
 <section id="stats">
   <div class="stats-grid">
     <div><div class="stat-val counter" data-target="170" data-suffix="+">0+</div><div class="stat-label">Restaurants Paris</div></div>
@@ -630,6 +633,7 @@ header.scrolled .lang-btn.active{color:#fff}
 </div>
 
 <!-- PROBLEM -->
+
 <section class="light">
   <div class="container-md">
     <div class="fade"><p class="section-eyebrow">Réputation Google restaurant</p></div>
@@ -658,92 +662,7 @@ header.scrolled .lang-btn.active{color:#fff}
 </section>
 
 <!-- HOW IT WORKS -->
-<section id="how" style="background:#1B2B4B">
-  <div class="container">
-    <div class="fade" style="text-align:center;margin-bottom:5rem">
-      <p class="section-eyebrow">Solution avis Google restaurant</p>
-      <h2 class="section-h2 light-text">On intercepte. On filtre.<br><span style="color:#ADD8E5">Votre note monte. Vous ne faites rien.</span></h2>
-      <p class="section-sub gray-light">Notre système d'<strong style="color:#ADD8E5">automatisation des avis Google restaurant</strong> filtre intelligemment. On n'efface rien. Les satisfaits vont sur Google — les autres viennent vous parler en privé.</p>
-    </div>
 
-    <!-- Row 1 -->
-    <div class="how-grid">
-      <div class="fade">
-        <div class="how-img-wrap">
-          <picture><source srcset="images/step1-restaurant.webp" type="image/webp" /><img src="images/step1-restaurant.jpg" width="800" height="450" loading="lazy" alt="QR code Avistars sur table de restaurant" /></picture>
-          <div class="how-img-overlay"></div>
-          <div class="how-step-badge">
-            <div class="step-circle">1</div>
-            <div>
-              <div class="step-badge-title">Le client scanne</div>
-              <div class="step-badge-sub">QR code sur chevalet ou addition. 45 secondes.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="steps-list">
-        <div class="step-item fade d1">
-          <div class="step-circle">2</div>
-          <div>
-            <div class="step-title">Filtrage intelligent</div>
-            <p class="step-desc"><strong>Client satisfait ?</strong> → Direction Google Maps directement.<br><strong>Client insatisfait ?</strong> → Formulaire privé envoyé uniquement à vous. Jamais publié.</p>
-          </div>
-        </div>
-        <div class="step-item fade d2">
-          <div class="step-circle">3</div>
-          <div>
-            <div class="step-title">Vous intervenez en privé</div>
-            <p class="step-desc">Vous recevez chaque retour négatif par email en temps réel. Vous recontactez, vous résolvez. <strong>Jamais de crise publique.</strong></p>
-          </div>
-        </div>
-        <div class="step-item fade d3">
-          <div class="step-circle">4</div>
-          <div>
-            <div class="step-title">Votre réputation explose</div>
-            <p class="step-desc"><strong>8 à 12 avis 5★ par semaine</strong> en moyenne. Votre note monte. De nouveaux clients arrivent. Le cycle s'accélère.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Row 2 -->
-    <div class="how-grid">
-      <div class="fade d1" style="order:2">
-        <div class="recap-box">
-          <h3>Ce que vous recevez chaque semaine</h3>
-          <div class="recap-item"><span>📊</span><span>Récapitulatif: nombre de scans, avis positifs, retours privés</span></div>
-          <div class="recap-item"><span>🔴</span><span>Chaque retour négatif en temps réel par email</span></div>
-          <div class="recap-item"><span>📈</span><span>Évolution de votre note Google semaine par semaine</span></div>
-          <div class="recap-item"><span>💡</span><span>Suggestions d'amélioration issues des retours clients</span></div>
-          <div class="recap-divider">
-            <p class="recap-quote">"On s'occupe de tout, vous cuisinez."</p>
-          </div>
-        </div>
-      </div>
-      <div class="fade" style="order:1">
-        <div class="lifestyle-wrap">
-          <picture><source srcset="images/step2-qr.webp" type="image/webp" /><img src="images/step2-qr.jpg" width="800" height="450" loading="lazy" alt="Client scannant le QR code Avistars" /></picture>
-          <div class="lifestyle-badge">✓ 45 secondes</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- RESULTS -->
-<section id="results" class="light">
-  <div class="container-md">
-    <div class="fade"><p class="section-eyebrow">Résultats avis Google restaurant</p></div>
-    <div class="fade d1"><h2 class="section-h2 dark">Pendant que vous lisez ça,<br>vos concurrents accumulent des 5★.</h2></div>
-    <div class="results-cards" style="margin-top:2.5rem">
-      <div class="result-card fade"><div class="result-val">+300%</div><div class="result-label">d'avis en plus</div><div class="result-sub">Moyenne sur 30 jours</div></div>
-      <div class="result-card fade d1"><div class="result-val">8-12</div><div class="result-label">avis 5★/semaine</div><div class="result-sub">En régime de croisière</div></div>
-      <div class="result-card fade d2"><div class="result-val">2-3 mois</div><div class="result-label">pour le ROI</div><div class="result-sub">Payback moyen constaté</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- SOCIAL PROOF -->
 <section class="sp-section" id="social-proof">
   <div class="container" style="text-align:center;margin-bottom:3rem">
     <div class="fade d1"><h2 class="section-h2 light-text">170+ restaurants.<br><span style="color:#ADD8E5">Des résultats, pas des promesses.</span></h2></div>
@@ -825,129 +744,95 @@ header.scrolled .lang-btn.active{color:#fff}
 </section>
 
 <!-- POURQUOI AVISTARS -->
-<section style="background:#1B2B4B;padding:4rem 2rem">
-  <div class="container-md">
 
-    <div class="fade" style="text-align:center;margin-bottom:2.5rem">
-      <p class="section-eyebrow">Gestion réputation restaurant Paris</p>
-      <h2 class="section-h2 light-text">Un avis 1★ coûte des milliers d'euros.<br><span style="color:#ADD8E5">AviStars les intercepte avant publication.</span></h2>
+<section id="how" style="background:#1B2B4B">
+  <div class="container">
+    <div class="fade" style="text-align:center;margin-bottom:5rem">
+      <p class="section-eyebrow">Solution avis Google restaurant</p>
+      <h2 class="section-h2 light-text">On intercepte. On filtre.<br><span style="color:#ADD8E5">Votre note monte. Vous ne faites rien.</span></h2>
+      <p class="section-sub gray-light">Notre système d'<strong style="color:#ADD8E5">automatisation des avis Google restaurant</strong> filtre intelligemment. On n'efface rien. Les satisfaits vont sur Google — les autres viennent vous parler en privé.</p>
     </div>
 
-    <!-- VS -->
-    <div class="fade d1" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem">
-      <div style="background:rgba(230,57,70,.05);border:1px solid rgba(230,57,70,.18);border-radius:1rem;padding:1.4rem">
-        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#E63946;font-weight:700;margin-bottom:1rem">✗ Sans Avistars</div>
-        <div style="display:flex;flex-direction:column;gap:.7rem;font-size:.82rem;color:#6B7280;line-height:1.45">
-          <span>2 avis Google par mois en moyenne</span>
-          <span>Les clients insatisfaits vont directement sur Google</span>
-          <span>Vous l'apprenez trop tard</span>
-          <span>Note stagnante ou en baisse</span>
-          <span>Clients perdus sans comprendre pourquoi</span>
+    <!-- Row 1 -->
+    <div class="how-grid">
+      <div class="fade">
+        <div class="how-img-wrap">
+          <picture><source srcset="images/step1-restaurant.webp" type="image/webp" /><img src="images/step1-restaurant.jpg" width="800" height="450" loading="lazy" alt="QR code Avistars sur table de restaurant" /></picture>
+          <div class="how-img-overlay"></div>
+          <div class="how-step-badge">
+            <div class="step-circle">1</div>
+            <div>
+              <div class="step-badge-title">Le client scanne</div>
+              <div class="step-badge-sub">QR code sur chevalet ou addition. 45 secondes.</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div style="background:rgba(173,216,229,.08);border:1.5px solid rgba(173,216,229,.35);border-radius:1rem;padding:1.4rem">
-        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#ADD8E5;font-weight:700;margin-bottom:1rem">✓ Avec Avistars</div>
-        <div style="display:flex;flex-direction:column;gap:.7rem;font-size:.82rem;color:#D1D5DB;line-height:1.45">
-          <span><strong style="color:#fff">8-12 avis 5★</strong> par semaine en croisière</span>
-          <span>Insatisfaits captés <strong style="color:#fff">en privé</strong>, jamais sur Google</span>
-          <span><strong style="color:#fff">Alerté en temps réel</strong> avant toute publication</span>
-          <span>Note <strong style="color:#fff">en progression constante</strong></span>
-          <span><strong style="color:#fff">ROI mesuré</strong> dès le 1er mois</span>
+      <div class="steps-list">
+        <div class="step-item fade d1">
+          <div class="step-circle">2</div>
+          <div>
+            <div class="step-title">Filtrage intelligent</div>
+            <p class="step-desc"><strong>Client satisfait ?</strong> → Direction Google Maps directement.<br><strong>Client insatisfait ?</strong> → Formulaire privé envoyé uniquement à vous. Jamais publié.</p>
+          </div>
+        </div>
+        <div class="step-item fade d2">
+          <div class="step-circle">3</div>
+          <div>
+            <div class="step-title">Vous intervenez en privé</div>
+            <p class="step-desc">Vous recevez chaque retour négatif par email en temps réel. Vous recontactez, vous résolvez. <strong>Jamais de crise publique.</strong></p>
+          </div>
+        </div>
+        <div class="step-item fade d3">
+          <div class="step-circle">4</div>
+          <div>
+            <div class="step-title">Votre réputation explose</div>
+            <p class="step-desc"><strong>8 à 12 avis 5★ par semaine</strong> en moyenne. Votre note monte. De nouveaux clients arrivent. Le cycle s'accélère.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 4 piliers -->
-    <div class="fade d2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:.875rem;margin-bottom:2rem">
-      <div style="background:#132039;border:1px solid rgba(173,216,229,.12);border-radius:.875rem;padding:1.1rem;display:flex;align-items:flex-start;gap:.75rem">
-        <span style="font-size:1.4rem;flex-shrink:0;line-height:1">⚡</span>
-        <div><div style="font-weight:700;color:#fff;font-size:.88rem;margin-bottom:.2rem">Setup en 72h</div><div style="font-size:.76rem;color:#6B7280;line-height:1.4">Zéro compétence technique</div></div>
+    <!-- Row 2 -->
+    <div class="how-grid">
+      <div class="fade d1" style="order:2">
+        <div class="recap-box">
+          <h3>Ce que vous recevez chaque semaine</h3>
+          <div class="recap-item"><span>📊</span><span>Récapitulatif: nombre de scans, avis positifs, retours privés</span></div>
+          <div class="recap-item"><span>🔴</span><span>Chaque retour négatif en temps réel par email</span></div>
+          <div class="recap-item"><span>📈</span><span>Évolution de votre note Google semaine par semaine</span></div>
+          <div class="recap-item"><span>💡</span><span>Suggestions d'amélioration issues des retours clients</span></div>
+          <div class="recap-divider">
+            <p class="recap-quote">"On s'occupe de tout, vous cuisinez."</p>
+          </div>
+        </div>
       </div>
-      <div style="background:#132039;border:1px solid rgba(173,216,229,.12);border-radius:.875rem;padding:1.1rem;display:flex;align-items:flex-start;gap:.75rem">
-        <span style="font-size:1.4rem;flex-shrink:0;line-height:1">🎯</span>
-        <div><div style="font-weight:700;color:#fff;font-size:.88rem;margin-bottom:.2rem">Filtrage intelligent</div><div style="font-size:.76rem;color:#6B7280;line-height:1.4">Satisfaits → Google · Insatisfaits → vous</div></div>
-      </div>
-      <div style="background:#132039;border:1px solid rgba(173,216,229,.12);border-radius:.875rem;padding:1.1rem;display:flex;align-items:flex-start;gap:.75rem">
-        <span style="font-size:1.4rem;flex-shrink:0;line-height:1">📊</span>
-        <div><div style="font-weight:700;color:#fff;font-size:.88rem;margin-bottom:.2rem">ROI en 2-3 mois</div><div style="font-size:.76rem;color:#6B7280;line-height:1.4">Mesurable, chiffré, transparent</div></div>
-      </div>
-      <div style="background:#132039;border:1px solid rgba(173,216,229,.12);border-radius:.875rem;padding:1.1rem;display:flex;align-items:flex-start;gap:.75rem">
-        <span style="font-size:1.4rem;flex-shrink:0;line-height:1">🛡</span>
-        <div><div style="font-weight:700;color:#fff;font-size:.88rem;margin-bottom:.2rem">Garanti 30 jours</div><div style="font-size:.76rem;color:#6B7280;line-height:1.4">0 résultat = remboursement intégral</div></div>
+      <div class="fade" style="order:1">
+        <div class="lifestyle-wrap">
+          <picture><source srcset="images/step2-qr.webp" type="image/webp" /><img src="images/step2-qr.jpg" width="800" height="450" loading="lazy" alt="Client scannant le QR code Avistars" /></picture>
+          <div class="lifestyle-badge">✓ 45 secondes</div>
+        </div>
       </div>
     </div>
-
-    <div class="fade d3" style="text-align:center">
-      <button class="btn-gold" onclick="window.location.href='/#plan-6mois'">Choisir Avistars →</button>
-    </div>
-
   </div>
 </section>
 
+<!-- RESULTS -->
 
-
-
-<!-- ARRONDISSEMENTS PARIS -->
-<section class="light" style="padding:4rem 2rem">
+<section id="results" class="light">
   <div class="container-md">
-    <div class="fade"><p class="section-eyebrow">Couverture complète</p></div>
-    <div class="fade d1"><h2 class="section-h2 dark">Présent dans les 20 arrondissements de Paris</h2></div>
-    <p class="section-sub gray-dark" style="margin-bottom:2rem">AviStars accompagne les restaurants dans toute la capitale. Quel que soit votre arrondissement, votre concurrence locale est probablement déjà cliente.</p>
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem">
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">1<sup>er</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">2<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">3<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">4<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">5<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">6<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">7<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">8<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">9<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">10<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">11<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">12<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">13<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">14<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">15<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">16<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">17<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">18<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">19<sup>e</sup></div>
-      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">20<sup>e</sup></div>
+    <div class="fade"><p class="section-eyebrow">Résultats avis Google restaurant</p></div>
+    <div class="fade d1"><h2 class="section-h2 dark">Pendant que vous lisez ça,<br>vos concurrents accumulent des 5★.</h2></div>
+    <div class="results-cards" style="margin-top:2.5rem">
+      <div class="result-card fade"><div class="result-val">+300%</div><div class="result-label">d'avis en plus</div><div class="result-sub">Moyenne sur 30 jours</div></div>
+      <div class="result-card fade d1"><div class="result-val">8-12</div><div class="result-label">avis 5★/semaine</div><div class="result-sub">En régime de croisière</div></div>
+      <div class="result-card fade d2"><div class="result-val">2-3 mois</div><div class="result-label">pour le ROI</div><div class="result-sub">Payback moyen constaté</div></div>
     </div>
   </div>
 </section>
 
+<!-- SOCIAL PROOF -->
 
-<!-- ZERO RISK -->
-<section style="background:#060606;padding:5rem 2rem">
-  <div class="container-md">
-    <div class="fade" style="text-align:center">
-      <p class="section-eyebrow">Garantie résultats avis Google</p>
-      <h2 class="section-h2 light-text">Zéro résultat en 30 jours ?<br><span style="color:#ADD8E5">Remboursement intégral. On prend le risque.</span></h2>
-      <p class="section-sub gray-light">Nous sommes tellement confiants dans notre système que c'est nous qui prenons le risque financier.</p>
-    </div>
-    <div class="risk-grid">
-      <div class="risk-card fade">
-        <div class="risk-icon">🛡️</div>
-        <h3>Garantie 30 jours</h3>
-        <p>Aucun résultat en 30 jours ? On vous rembourse le premier mois intégralement. Sans question, sans condition.</p>
-      </div>
-      <div class="risk-card fade d1">
-        <div class="risk-icon">📊</div>
-        <h3>Résultats transparents</h3>
-        <p>Rapport d'impact mensuel : nombre d'avis, évolution de la note, retours interceptés. Tout est chiffré, tout est visible.</p>
-      </div>
-      <div class="risk-card fade d2">
-        <div class="risk-icon">🔓</div>
-        <h3>Vos avis vous appartiennent</h3>
-        <p>Les avis Google collectés sont sur votre fiche pour toujours. Même si vous résiliez demain, vous les gardez.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CALCULATEUR ROI -->
 <section id="calculateur">
   <div class="container">
     <div style="text-align:center;margin-bottom:3rem" class="fade">
@@ -1018,6 +903,133 @@ header.scrolled .lang-btn.active{color:#fff}
 </section>
 
 <!-- FAQ -->
+
+<section style="background:#1B2B4B;padding:4rem 2rem">
+  <div class="container-md">
+
+    <div class="fade" style="text-align:center;margin-bottom:2.5rem">
+      <p class="section-eyebrow">Gestion réputation restaurant Paris</p>
+      <h2 class="section-h2 light-text">Un avis 1★ coûte des milliers d'euros.<br><span style="color:#ADD8E5">AviStars les intercepte avant publication.</span></h2>
+    </div>
+
+    <!-- VS -->
+    <div class="fade d1" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem">
+      <div style="background:rgba(230,57,70,.05);border:1px solid rgba(230,57,70,.18);border-radius:1rem;padding:1.4rem">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#E63946;font-weight:700;margin-bottom:1rem">✗ Sans Avistars</div>
+        <div style="display:flex;flex-direction:column;gap:.7rem;font-size:.82rem;color:#6B7280;line-height:1.45">
+          <span>2 avis Google par mois en moyenne</span>
+          <span>Les clients insatisfaits vont directement sur Google</span>
+          <span>Vous l'apprenez trop tard</span>
+          <span>Note stagnante ou en baisse</span>
+          <span>Clients perdus sans comprendre pourquoi</span>
+        </div>
+      </div>
+      <div style="background:rgba(173,216,229,.08);border:1.5px solid rgba(173,216,229,.35);border-radius:1rem;padding:1.4rem">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#ADD8E5;font-weight:700;margin-bottom:1rem">✓ Avec Avistars</div>
+        <div style="display:flex;flex-direction:column;gap:.7rem;font-size:.82rem;color:#D1D5DB;line-height:1.45">
+          <span><strong style="color:#fff">8-12 avis 5★</strong> par semaine en croisière</span>
+          <span>Insatisfaits captés <strong style="color:#fff">en privé</strong>, jamais sur Google</span>
+          <span><strong style="color:#fff">Alerté en temps réel</strong> avant toute publication</span>
+          <span>Note <strong style="color:#fff">en progression constante</strong></span>
+          <span><strong style="color:#fff">ROI mesuré</strong> dès le 1er mois</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 piliers -->
+    <div class="fade d2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:.875rem;margin-bottom:2rem">
+      <div style="background:#132039;border:1px solid rgba(173,216,229,.12);border-radius:.875rem;padding:1.1rem;display:flex;align-items:flex-start;gap:.75rem">
+        <span style="font-size:1.4rem;flex-shrink:0;line-height:1">⚡</span>
+        <div><div style="font-weight:700;color:#fff;font-size:.88rem;margin-bottom:.2rem">Setup en 72h</div><div style="font-size:.76rem;color:#6B7280;line-height:1.4">Zéro compétence technique</div></div>
+      </div>
+      <div style="background:#132039;border:1px solid rgba(173,216,229,.12);border-radius:.875rem;padding:1.1rem;display:flex;align-items:flex-start;gap:.75rem">
+        <span style="font-size:1.4rem;flex-shrink:0;line-height:1">🎯</span>
+        <div><div style="font-weight:700;color:#fff;font-size:.88rem;margin-bottom:.2rem">Filtrage intelligent</div><div style="font-size:.76rem;color:#6B7280;line-height:1.4">Satisfaits → Google · Insatisfaits → vous</div></div>
+      </div>
+      <div style="background:#132039;border:1px solid rgba(173,216,229,.12);border-radius:.875rem;padding:1.1rem;display:flex;align-items:flex-start;gap:.75rem">
+        <span style="font-size:1.4rem;flex-shrink:0;line-height:1">📊</span>
+        <div><div style="font-weight:700;color:#fff;font-size:.88rem;margin-bottom:.2rem">ROI en 2-3 mois</div><div style="font-size:.76rem;color:#6B7280;line-height:1.4">Mesurable, chiffré, transparent</div></div>
+      </div>
+      <div style="background:#132039;border:1px solid rgba(173,216,229,.12);border-radius:.875rem;padding:1.1rem;display:flex;align-items:flex-start;gap:.75rem">
+        <span style="font-size:1.4rem;flex-shrink:0;line-height:1">🛡</span>
+        <div><div style="font-weight:700;color:#fff;font-size:.88rem;margin-bottom:.2rem">Garanti 30 jours</div><div style="font-size:.76rem;color:#6B7280;line-height:1.4">0 résultat = remboursement intégral</div></div>
+      </div>
+    </div>
+
+    <div class="fade d3" style="text-align:center">
+      <button class="btn-gold" onclick="window.location.href='/#plan-6mois'">Choisir Avistars →</button>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<!-- ARRONDISSEMENTS PARIS -->
+
+<section class="light" style="padding:4rem 2rem">
+  <div class="container-md">
+    <div class="fade"><p class="section-eyebrow">Couverture complète</p></div>
+    <div class="fade d1"><h2 class="section-h2 dark">Présent dans les 20 arrondissements de Paris</h2></div>
+    <p class="section-sub gray-dark" style="margin-bottom:2rem">AviStars accompagne les restaurants dans toute la capitale. Quel que soit votre arrondissement, votre concurrence locale est probablement déjà cliente.</p>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem">
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">1<sup>er</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">2<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">3<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">4<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">5<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">6<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">7<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">8<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">9<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">10<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">11<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">12<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">13<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">14<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">15<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">16<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">17<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">18<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">19<sup>e</sup></div>
+      <div style="background:#EAF6FA;border-radius:.75rem;padding:.75rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1B2B4B">20<sup>e</sup></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ZERO RISK -->
+
+<section style="background:#060606;padding:5rem 2rem">
+  <div class="container-md">
+    <div class="fade" style="text-align:center">
+      <p class="section-eyebrow">Garantie résultats avis Google</p>
+      <h2 class="section-h2 light-text">Zéro résultat en 30 jours ?<br><span style="color:#ADD8E5">Remboursement intégral. On prend le risque.</span></h2>
+      <p class="section-sub gray-light">Nous sommes tellement confiants dans notre système que c'est nous qui prenons le risque financier.</p>
+    </div>
+    <div class="risk-grid">
+      <div class="risk-card fade">
+        <div class="risk-icon">🛡️</div>
+        <h3>Garantie 30 jours</h3>
+        <p>Aucun résultat en 30 jours ? On vous rembourse le premier mois intégralement. Sans question, sans condition.</p>
+      </div>
+      <div class="risk-card fade d1">
+        <div class="risk-icon">📊</div>
+        <h3>Résultats transparents</h3>
+        <p>Rapport d'impact mensuel : nombre d'avis, évolution de la note, retours interceptés. Tout est chiffré, tout est visible.</p>
+      </div>
+      <div class="risk-card fade d2">
+        <div class="risk-icon">🔓</div>
+        <h3>Vos avis vous appartiennent</h3>
+        <p>Les avis Google collectés sont sur votre fiche pour toujours. Même si vous résiliez demain, vous les gardez.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATEUR ROI -->
+
 <section id="faq">
   <div class="container-md">
     <div class="fade" style="text-align:center;margin-bottom:3rem">
@@ -1035,6 +1047,7 @@ header.scrolled .lang-btn.active{color:#fff}
 </section>
 
 <!-- CTA -->
+
 <section id="cta" style="padding:7rem 2rem">
   <div class="cta-bg">
     <picture><source srcset="images/hero-bg.webp" type="image/webp" /><img src="images/hero-bg.jpg" width="1400" height="900" fetchpriority="high" alt="Rejoindre Avistars" /></picture>
