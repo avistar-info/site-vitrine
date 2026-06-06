@@ -1674,6 +1674,14 @@ document.addEventListener('DOMContentLoaded', () => { if (_lang==='en') setTimeo
       <p style="font-size:.9rem;color:#6B7280;" id="em-sub">Laissez votre email pour recevoir votre confirmation et accéder au paiement.</p>
     </div>
     <input id="em-email" type="email" placeholder="votre@restaurant.fr" style="width:100%;padding:.875rem 1rem;border:1.5px solid #E5E7EB;border-radius:.75rem;font-size:1rem;margin-bottom:.75rem;outline:none;font-family:inherit;" />
+    <input id="em-nom" type="text" placeholder="Nom de votre restaurant" style="width:100%;padding:.875rem 1rem;border:1.5px solid #E5E7EB;border-radius:.75rem;font-size:1rem;margin-bottom:.75rem;outline:none;font-family:inherit;" />
+    <select id="em-note" style="width:100%;padding:.875rem 1rem;border:1.5px solid #E5E7EB;border-radius:.75rem;font-size:1rem;margin-bottom:.75rem;outline:none;font-family:inherit;background:#fff;color:#374151;">
+      <option value="">Votre note Google actuelle</option>
+      <option value="moins-35">Moins de 3,5 ★</option>
+      <option value="35-40">3,5 — 4,0 ★</option>
+      <option value="40-45">4,0 — 4,5 ★</option>
+      <option value="plus-45">Plus de 4,5 ★</option>
+    </select>
     <button id="em-submit" onclick="proceedToStripe()" style="width:100%;background:#1B2B4B;color:#fff;padding:1rem;border:none;border-radius:.75rem;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;">
       Accéder au paiement →
     </button>
@@ -1717,6 +1725,9 @@ function proceedToStripe() {
   document.getElementById('em-email').style.borderColor = '#34A853';
   document.getElementById('em-submit').textContent = '⏳ Redirection...';
 
+  const nom = document.getElementById('em-nom').value.trim();
+  const note = document.getElementById('em-note').value;
+
   // 1. Déterminer le plan depuis l'URL Stripe
   const planMap = {
     '14AcN5': '1 Mois — 249€',
@@ -1729,44 +1740,43 @@ function proceedToStripe() {
     if (_stripeUrl.includes(key)) { plan = val; break; }
   }
 
-  // 2. Envoyer email + plan au webhook n8n → Google Sheet Prospects
+  // 2. Ouvrir Stripe IMMÉDIATEMENT (doit être dans le contexte du clic utilisateur)
+  const stripeUrl = new URL(_stripeUrl);
+  stripeUrl.searchParams.set('prefilled_email', email);
+  window.open(stripeUrl.toString(), '_blank');
+  closeEmailModal();
+
+  // 3. Tracking en arrière-plan (ne bloque pas la redirection)
   fetch('https://nicolasanquetin.app.n8n.cloud/webhook/avistars-lead-stripe', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       email: email,
+      nom: nom,
+      note: note,
       plan: plan,
       source: 'stripe_modal',
       lang: typeof _lang !== 'undefined' ? _lang : 'fr',
       url: window.location.href,
       timestamp: new Date().toISOString()
     })
-  }).catch(() => {}); // silencieux si erreur
+  }).catch(() => {});
 
-  // 2b. Tracking clic paiement → Google Sheet tracking clics site vitrine
   fetch(N8N_WEBHOOK, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       type: 'clic_paiement',
       email: email,
+      nom: nom,
+      note: note,
       plan: plan,
       page: window.location.href,
       referrer: document.referrer || '',
       device: /iPhone|iPad|Android|Mobi/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
       timestamp: new Date().toISOString()
     })
-  }).catch(() => {}); // silencieux si erreur
-
-  // 3. Pré-remplir Stripe avec l'email et ouvrir
-  const stripeUrl = new URL(_stripeUrl);
-  stripeUrl.searchParams.set('prefilled_email', email);
-  setTimeout(() => {
-    window.open(stripeUrl.toString(), '_blank');
-    closeEmailModal();
-    document.getElementById('em-submit').textContent = 
-      typeof _lang !== 'undefined' && _lang === 'en' ? 'Proceed to payment →' : 'Accéder au paiement →';
-  }, 400);
+  }).catch(() => {});
 }
 
 // Fermer sur clic overlay
@@ -1791,4 +1801,5 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 </body>
 </html>
+
 
