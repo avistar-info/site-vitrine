@@ -1213,12 +1213,12 @@ function submitForm(e) {
     note_actuelle: (document.getElementById('noteInput') || {}).value || '',
     timestamp: new Date().toISOString(),
     page: window.location.href,
+    location: _VILLE,
     device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
   }), keepalive: true}).then(function() {
     var form = document.getElementById('contactForm'), ok = document.getElementById('successMsg');
     if (form) form.style.display = 'none';
     if (ok) ok.style.display = 'block';
-    _tr('🔥 Lead Formulaire' + _VILLE_SUFFIX, email);
     setTimeout(function() {
       if (form) form.style.display = '';
       if (ok) ok.style.display = 'none';
