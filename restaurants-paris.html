@@ -950,7 +950,7 @@ header.scrolled .lang-btn.active{color:#fff}
 <!-- CALCULATEUR ROI -->
 <section id="calculateur">
   <div class="container">
-    <div style="text-align:center;margin-bottom:1rem" class="fade">
+    <div style="text-align:center;margin-bottom:3rem" class="fade">
       <div class="calc-eyebrow">🧮 Calculateur ROI</div>
       <h2 class="section-h2 light-text">Combien d'avis 5★ allez-vous recevoir ?<br><span style="color:#ADD8E5">Calculez en 30 secondes.</span></h2>
       <p class="section-sub gray-light">Ajustez selon votre restaurant — résultats en temps réel.</p>
@@ -1002,15 +1002,15 @@ header.scrolled .lang-btn.active{color:#fff}
           </div>
         </div>
         <div class="calc-cta-block">
-          <p class="calc-cta-intro">Recevez votre analyse et démarrez :</p>
+          <p class="calc-cta-intro">Recevez votre analyse et choisissez votre plan :</p>
           <form id="calcForm" onsubmit="submitCalc(event)">
             <div class="calc-form-row">
               <input type="email" class="calc-email-in" id="calc-email" placeholder="votre@restaurant.fr" required autocomplete="email">
-              <button type="submit" class="calc-send-btn" id="calc-send-btn">Démarrer l'essai →</button>
+              <button type="submit" class="calc-send-btn" id="calc-send-btn">Voir les plans →</button>
             </div>
           </form>
-          <div class="calc-success" id="calc-success">✓ Email reçu ! Votre essai s'ouvre...</div>
-          <div class="calc-trust-sm">✓ Sans engagement · ✓ 29,99€ déduits du plan ensuite · ✓ Résultats en 7 jours</div>
+          <div class="calc-success" id="calc-success">✓ Email reçu ! Choisissez votre plan ↓</div>
+          <div class="calc-trust-sm">✓ Sans engagement · ✓ Garantie 30 jours · ✓ Résultats en 7 jours</div>
         </div>
       </div>
     </div>
@@ -1474,7 +1474,8 @@ function submitCalc(e) {
   setTimeout(function() {
     document.getElementById('calc-success').style.display = 'block';
     document.getElementById('calcForm').style.display = 'none';
-    window.open('https://buy.stripe.com/14AcN57CQ1GlgtHdyO9Zm09?prefilled_email=' + encodeURIComponent(email), '_blank');
+    // Redirect to main site pricing so user can choose any plan
+    window.location.href = 'https://avistars.fr/#pricing?email=' + encodeURIComponent(email);
   }, 500);
 }
 
