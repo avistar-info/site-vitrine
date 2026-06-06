@@ -7,17 +7,32 @@
 <meta name="description" content="Vos avis Google restaurant Paris montent automatiquement. AviStars intercepte les insatisfaits avant publication. 170+ restaurants. Garantie 30 jours."/>
 <meta name="keywords" content="avis google restaurant paris, augmenter avis google restaurant paris, gestion avis google restaurant paris, réputation restaurant paris, note google restaurant paris"/>
 <meta name="robots" content="index, follow"/>
+<meta name="theme-color" content="#1B2B4B"/>
 <link rel="canonical" href="https://avistars.fr/restaurants-paris"/>
+<link rel="alternate" hreflang="fr-FR" href="https://avistars.fr/restaurants-paris"/>
+<link rel="alternate" hreflang="en" href="https://avistars.fr/restaurants-paris"/>
+<link rel="alternate" hreflang="x-default" href="https://avistars.fr/restaurants-paris"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Avis Google Restaurant Paris — +300% 5★ | AviStars"/>
+<meta name="twitter:description" content="AviStars intercepte vos clients insatisfaits avant Google. 170+ restaurants parisiens. Setup en 72h."/>
+<meta name="twitter:image" content="https://avistars.fr/images/hero-bg.jpg"/>
 <meta property="og:title" content="Avis Google Restaurant Paris — +300% d'avis 5★ | AviStars"/>
 <meta property="og:description" content="Votre note Google monte automatiquement. 170+ restaurants parisiens font déjà confiance à AviStars."/>
 <meta property="og:url" content="https://avistars.fr/restaurants-paris"/>
 <meta property="og:image" content="https://avistars.fr/images/hero-bg.jpg"/>
 <meta property="og:image:type" content="image/jpeg"/>
-<meta property="og:image:width" content="1400"/>
-<meta property="og:image:height" content="900"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preload" as="image" href="images/hero-bg.webp" fetchpriority="high"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Outfit:wght@400;500;600;700&display=swap"/>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231B2B4B'/%3E%3Cpolygon points='16,2 18.4,9 26,9 20,13.5 22.4,20.5 16,16 9.6,20.5 12,13.5 6,9 13.6,9' fill='%23ADD8E5'/%3E%3C/svg%3E"/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WK8JTW04WF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WK8JTW04WF');</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Avistars","description":"AviStars automatise la gestion des avis Google pour les restaurants parisiens. +300% d'avis 5 étoiles en 30 jours.","url":"https://avistars.fr","telephone":"+33646723697","email":"contact@avistars.fr","address":{"@type":"PostalAddress","addressLocality":"Paris","addressRegion":"Ile-de-France","postalCode":"75000","addressCountry":"FR"},"areaServed":{"@type":"City","name":"Paris"},"priceRange":"€€","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","bestRating":"5","worstRating":"1","reviewCount":"170"}}
+</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Service","name":"AviStars — Avis Google Restaurant Paris","provider":{"@type":"Organization","name":"AviStars","url":"https://avistars.fr"},"areaServed":{"@type":"City","name":"Paris","addressCountry":"FR"},"description":"AviStars automatise la gestion des avis Google pour les restaurants parisiens. +300% d'avis 5\u2605 en 30 jours. 170+ restaurants à Paris.","serviceType":"Gestion de réputation Google restaurant"}
 </script>
@@ -533,7 +548,7 @@ header.scrolled .lang-btn.active{color:#fff}
       </div>
       <h1 class="hero-h1 fade d1" aria-label="Gestion des avis Google pour restaurants parisiens — Augmentez vos avis 5 étoiles avec Avistars">
         <span id="h1-rotate">Vous cuisinez</span><br>
-        <span class="gold">Mais qui protège votre réputation Google</span>
+        <span class="gold">Mais qui protège votre réputation Google ?</span>
       </h1>
       <p class="hero-p fade d2">
         Pendant que vous soutenez l'équipe, vos clients mécontents publient sur Google. <strong>Vos prochains clients ont déjà vu la 1★.</strong> AviStars intercepte avant la publication.
@@ -542,6 +557,12 @@ header.scrolled .lang-btn.active{color:#fff}
       <div class="hero-btns fade d3">
         <button class="btn-gold" onclick="window.location.href='/#plan-6mois'">Démarrer aujourd'hui <span>→</span></button>
         <button class="btn-outline-white" onclick="navTo('how')">Voir comment ça marche <span>↓</span></button>
+      </div>
+      <div class="hero-urgency fade d3" style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:rgba(255,255,255,.8);margin-bottom:.75rem">
+        <span style="display:inline-flex;align-items:center;gap:.375rem;background:rgba(76,175,130,.18);border:1px solid rgba(76,175,130,.4);border-radius:999px;padding:.3rem .75rem">
+          <span style="width:7px;height:7px;border-radius:50%;background:#4CAF82;animation:pulse 1.8s ease-in-out infinite;display:inline-block"></span>
+          🔥 <strong style="color:#fff">4 restaurants parisiens</strong> ont rejoint AviStars cette semaine
+        </span>
       </div>
       <div class="hero-trust fade d4">
         <span>✓ Sans engagement</span>
@@ -1247,17 +1268,19 @@ document.addEventListener('click', function(e) {
 
 (function() {
   var shown = false;
+  var isMob = /iPhone|iPad|Android|Mobi/i.test(navigator.userAgent);
   function showExit() {
     if (shown) return; shown = true;
     var p = document.getElementById('exit-popup');
     if (p) { p.style.display = 'flex'; _tr('🚪 Exit Intent' + _VILLE_SUFFIX); }
   }
-  document.addEventListener('mouseleave', function(e) { if (e.clientY < 5) showExit(); });
+  if (!isMob) document.addEventListener('mouseleave', function(e) { if (e.clientY < 5) showExit(); });
+  if (isMob) document.addEventListener('visibilitychange', function() { if (document.visibilityState === 'hidden') showExit(); });
   var t = null;
   window.addEventListener('scroll', function() {
     clearTimeout(t);
     var pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-    if (pct >= 25) t = setTimeout(showExit, 60000);
+    if (pct >= (isMob ? 65 : 50)) t = setTimeout(showExit, isMob ? 10000 : 60000);
   }, {passive: true});
 })();
 
@@ -1287,6 +1310,24 @@ function submitForm(e) {
   }).catch(function() { if (btn) { btn.textContent = 'Réessayer'; btn.disabled = false; } });
 }
 
+</script>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta" id="stickyCta" aria-label="Être contacté par Avistars">
+  <div class="sticky-cta-text">
+    <strong>Setup en 72h · Garanti 30j</strong>
+    <span>Moins de 7€/jour</span>
+  </div>
+  <button class="sticky-cta-btn" onclick="navTo('cta')">Être contacté →</button>
+</div>
+<script>
+(function(){
+  var s = document.getElementById('stickyCta');
+  if(!s) return;
+  var cta = document.getElementById('cta');
+  window.addEventListener('scroll', function(){ s.style.display = window.scrollY > 400 ? '' : 'none'; }, {passive:true});
+  if(cta){ var obs = new IntersectionObserver(function(es){ es.forEach(function(e){ s.style.display = e.isIntersecting ? 'none' : ''; }); },{threshold:0.1}); obs.observe(cta); }
+})();
 </script>
 
 <!-- EXIT INTENT POPUP -->
