@@ -18,6 +18,7 @@
 <meta name="author" content="Avistars" />
 <link rel="canonical" href="https://avistars.fr/" />
 <link rel="alternate" hreflang="fr-FR" href="https://avistars.fr/" />
+<link rel="alternate" hreflang="en" href="https://avistars.fr/" />
 <link rel="alternate" hreflang="x-default" href="https://avistars.fr/" />
 <meta name="google-site-verification" content="_riHssD6JYmAWnuKsHPJfztC6RASpMns50XERQ7LObo" />
 <meta name="theme-color" content="#1B2B4B" />
@@ -545,6 +546,12 @@ header.scrolled .lang-btn.active{color:#fff}
       <div class="hero-btns fade d3">
         <button class="btn-gold" onclick="navTo('plan-6mois')">Démarrer aujourd'hui <span>→</span></button>
         <button class="btn-outline-white" onclick="navTo('how')">Voir comment ça marche <span>↓</span></button>
+      </div>
+      <div class="hero-urgency fade d3" style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:rgba(255,255,255,.8);margin-bottom:.75rem">
+        <span style="display:inline-flex;align-items:center;gap:.375rem;background:rgba(76,175,130,.18);border:1px solid rgba(76,175,130,.4);border-radius:999px;padding:.3rem .75rem">
+          <span style="width:7px;height:7px;border-radius:50%;background:#4CAF82;animation:pulse 1.8s ease-in-out infinite;display:inline-block"></span>
+          🔥 <strong style="color:#fff">4 restaurants parisiens</strong> ont rejoint AviStars cette semaine
+        </span>
       </div>
       <div class="hero-trust fade d4">
         <span>✓ Sans engagement</span>
@@ -1279,17 +1286,19 @@ document.addEventListener('click', function(e) {
 
 (function() {
   var shown = false;
+  var isMob = /iPhone|iPad|Android|Mobi/i.test(navigator.userAgent);
   function showExit() {
     if (shown) return; shown = true;
     var p = document.getElementById('exit-popup');
     if (p) { p.style.display = 'flex'; _tr('🚪 Exit Intent' + _VILLE_SUFFIX); }
   }
-  document.addEventListener('mouseleave', function(e) { if (e.clientY < 5) showExit(); });
+  if (!isMob) document.addEventListener('mouseleave', function(e) { if (e.clientY < 5) showExit(); });
+  if (isMob) document.addEventListener('visibilitychange', function() { if (document.visibilityState === 'hidden') showExit(); });
   var t = null;
   window.addEventListener('scroll', function() {
     clearTimeout(t);
     var pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-    if (pct >= 50) t = setTimeout(showExit, 60000);
+    if (pct >= (isMob ? 65 : 50)) t = setTimeout(showExit, isMob ? 10000 : 60000);
   }, {passive: true});
 })();
 
@@ -1557,27 +1566,22 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// Exit intent — desktop: mouse leaves top of window; mobile: 60s inactivity
+// Exit intent — desktop: mouseleave; mobile: visibilitychange + scroll 65% + 10s
 (function(){
   let shown = false;
+  const isMob = /iPhone|iPad|Android|Mobi/i.test(navigator.userAgent);
   function showExitPopup(){
-    if(shown) return;
-    shown = true;
+    if(shown) return; shown = true;
     const p = document.getElementById('exit-popup');
-    if(p){ p.style.display = 'flex'; track('exit_intent'); }
+    if(p){ p.style.display = 'flex'; _tr('🚪 Exit Intent'); }
   }
-  // Desktop
-  document.addEventListener('mouseleave', e => {
-    if(e.clientY < 5) showExitPopup();
-  });
-  // Mobile: show after 60s of no scroll + user has scrolled 50%+
-  let mobileTimer = null;
+  if(!isMob) document.addEventListener('mouseleave', e => { if(e.clientY < 5) showExitPopup(); });
+  if(isMob) document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'hidden') showExitPopup(); });
+  let t = null;
   window.addEventListener('scroll', ()=>{
-    clearTimeout(mobileTimer);
+    clearTimeout(t);
     const pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-    if(pct >= 50){
-      mobileTimer = setTimeout(showExitPopup, 60000);
-    }
+    if(pct >= (isMob ? 65 : 50)) t = setTimeout(showExitPopup, isMob ? 10000 : 60000);
   }, {passive:true});
 })();
 </script>
