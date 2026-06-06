@@ -1272,6 +1272,7 @@ document.addEventListener('click', function(e) {
   if (!el) return;
   var href = el.href || '', txt = (el.textContent || '').trim().slice(0, 50);
   if (href.includes('wa.me')) { _tr('📱 Clic WhatsApp' + _VILLE_SUFFIX); }
+  else if (el.classList.contains('btn-cal') || href.includes('calendar.app.google')) { _tr('📅 Clic Calendly' + _VILLE_SUFFIX); }
   else if (el.classList.contains('btn-gold') || el.classList.contains('nav-cta') || el.classList.contains('sticky-cta-btn')) { _tr('🟡 CTA Principal' + _VILLE_SUFFIX, txt); }
   else if (el.classList.contains('faq-btn')) { _tr('❓ Clic FAQ' + _VILLE_SUFFIX, txt); }
 });
