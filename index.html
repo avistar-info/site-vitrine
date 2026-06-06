@@ -1658,7 +1658,13 @@ function applyLang(lang) {
   }
 }
 
-function setLang(lang) { applyLang(lang); _setH1Phrase(lang); }
+function setLang(lang) {
+  applyLang(lang);
+  if (window.__h1) {
+    var el = document.getElementById('h1-rotate');
+    if (el) el.textContent = (lang === 'en' ? window.__h1.en : window.__h1.fr)[window.__h1.idx];
+  }
+}
 document.addEventListener('DOMContentLoaded', () => { if (_lang==='en') setTimeout(()=>applyLang('en'), 80); });
 </script>
 
@@ -1779,30 +1785,15 @@ document.getElementById('email-modal').addEventListener('click', function(e) {
 </script>
 
 <script>
-var _h1Phrases = {
-  fr: [
-    "Vous validez la livraison de demain",
-    "Vous soutenez l’équipe en salle",
-    "Vous gérez le coup de feu du soir",
-    "Vous formez le nouveau serveur",
-    "Vous rectifiez une assiette avant l’envoi",
-    "Vous signez les bons de commande"
-  ],
-  en: [
-    "You’re confirming tomorrow’s delivery",
-    "You’re supporting the front of house",
-    "You’re managing the dinner rush",
-    "You’re training the new waiter",
-    "You’re fixing a dish before service",
-    "You’re signing purchase orders"
-  ]
-};
-var _h1Idx = Math.floor(Math.random() * 6);
-function _setH1Phrase(lang) {
+(function() {
+  var fr = ["Vous validez la livraison de demain","Vous soutenez l’équipe en salle","Vous gérez le coup de feu du soir","Vous formez le nouveau serveur","Vous rectifiez une assiette avant l’envoi","Vous signez les bons de commande"];
+  var en = ["You’re confirming tomorrow’s delivery","You’re supporting the front of house","You’re managing the dinner rush","You’re training the new waiter","You’re fixing a dish before service","You’re signing purchase orders"];
+  var idx = Math.floor(Math.random() * 6);
+  var lang = localStorage.getItem(‘avistars_lang’) || ‘fr’;
   var el = document.getElementById(‘h1-rotate’);
-  if (el) el.textContent = _h1Phrases[lang === ‘en’ ? ‘en’ : ‘fr’][_h1Idx];
-}
-_setH1Phrase(_lang);
+  if (el) el.textContent = (lang === ‘en’ ? en : fr)[idx];
+  window.__h1 = {idx: idx, fr: fr, en: en};
+})();
 </script>
 </body>
 </html>
