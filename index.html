@@ -364,7 +364,7 @@ footer{background:#1B2B4B;border-top:1px solid rgba(255,255,255,.06);padding:2.5
 
 
 /* ── CALCULATEUR ROI ─────────────────────────────────────────────────── */
-#calculateur{background:linear-gradient(160deg,#060606 0%,#0D1E35 60%,#060606 100%);padding:6rem 0}
+#calculateur{background:linear-gradient(160deg,#060606 0%,#0D1E35 60%,#060606 100%);padding:6rem 2rem}
 .calc-eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#ADD8E5;margin-bottom:1rem}
 .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin:3rem 0 0}
 @media(max-width:900px){.calc-grid{grid-template-columns:1fr;gap:2rem}}
@@ -382,7 +382,7 @@ footer{background:#1B2B4B;border-top:1px solid rgba(255,255,255,.06);padding:2.5
 .calc-results-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(173,216,229,.15);border-radius:1.5rem;padding:2rem;position:sticky;top:90px}
 @media(max-width:900px){.calc-results-wrap{position:static}}
 .calc-results-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
-@media(max-width:420px){.calc-results-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.calc-results-grid{grid-template-columns:1fr}}
 .calc-result-item{text-align:center;padding:1.25rem .75rem;background:rgba(173,216,229,.05);border-radius:1rem;border:1px solid rgba(173,216,229,.1);transition:all .3s}
 .calc-result-item.highlight{background:rgba(173,216,229,.1);border-color:rgba(173,216,229,.3)}
 .calc-result-num{font-family:'Montserrat',sans-serif;font-size:1.75rem;font-weight:900;color:#ADD8E5;line-height:1.1;transition:all .25s}
@@ -520,7 +520,7 @@ header.scrolled .lang-btn.active{color:#fff}
 .sp-dot{width:8px;height:8px;border-radius:50%;background:rgba(173,216,229,.2);border:none;cursor:pointer;padding:0;transition:all .2s}
 .sp-dot.active{background:#ADD8E5;width:24px;border-radius:4px}
 @media(max-width:768px){.sp-card{flex:0 0 82vw;min-width:82vw;height:380px}}
-@media(max-width:900px){.calc-results-wrap{order:-1}}
+@media(max-width:900px){.calc-results-wrap{order:-1}}@media(max-width:768px){#calculateur{padding:3rem 1.25rem}}
 .calc-slider::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:rgba(173,216,229,.2)}
 .calc-swipe-hint{text-align:center;font-size:.75rem;color:#6B7280;margin-top:.75rem;display:none}
 @media(max-width:768px){.calc-swipe-hint{display:block}}
@@ -1978,5 +1978,6 @@ document.getElementById('email-modal').addEventListener('click', function(e) {
 </script>
 </body>
 </html>
+
 
 
