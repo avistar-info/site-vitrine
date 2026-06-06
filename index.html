@@ -1514,9 +1514,8 @@ function submitCalc(e) {
     document.getElementById('calc-success').style.display = 'block';
     document.getElementById('calcForm').style.display = 'none';
     btn.disabled = false;
-    // Scroll to pricing so user can choose any plan (essai, 1 mois, 6 mois, 1 an)
-    var pricing = document.getElementById('pricing');
-    if (pricing) { var top = pricing.getBoundingClientRect().top + window.scrollY - 80; window.scrollTo({top: top, behavior: 'smooth'}); }
+    var plan6 = document.getElementById('plan-6mois');
+    if (plan6) { var top = plan6.getBoundingClientRect().top + window.scrollY - 100; window.scrollTo({top: top, behavior: 'smooth'}); }
   }, 500);
 }
 
