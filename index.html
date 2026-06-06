@@ -1802,7 +1802,7 @@ function _setH1Phrase(lang) {
   var el = document.getElementById(‘h1-rotate’);
   if (el) el.textContent = _h1Phrases[lang === ‘en’ ? ‘en’ : ‘fr’][_h1Idx];
 }
-document.addEventListener(‘DOMContentLoaded’, function() { _setH1Phrase(_lang); });
+_setH1Phrase(_lang);
 </script>
 </body>
 </html>
