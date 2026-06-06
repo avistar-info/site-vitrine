@@ -1304,12 +1304,12 @@ function submitForm(e) {
     note_actuelle: (document.getElementById('noteInput') || {}).value || '',
     timestamp: new Date().toISOString(),
     page: window.location.href,
+    location: _VILLE,
     device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
   }), keepalive: true}).then(function() {
     var form = document.getElementById('contactForm'), ok = document.getElementById('successMsg');
     if (form) form.style.display = 'none';
     if (ok) ok.style.display = 'block';
-    _tr('🔥 Lead Formulaire' + _VILLE_SUFFIX, email);
     setTimeout(function() {
       if (form) form.style.display = '';
       if (ok) ok.style.display = 'none';
@@ -1738,7 +1738,24 @@ function proceedToStripe() {
   window.open(stripeUrl.toString(), '_blank');
   closeEmailModal();
 
-  // 3. Lead stripe en arrière-plan
+  // 3. Écrire email + plan dans le sheet de tracking
+  fetch(_WH, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      type: 'clic_paiement',
+      email: email,
+      plan: plan,
+      page: _PAGE,
+      location: _VILLE,
+      device: window.innerWidth < 768 ? 'Mobile' : 'Desktop',
+      source: document.referrer || 'Lien direct',
+      timestamp: new Date().toISOString()
+    }),
+    keepalive: true
+  }).catch(() => {});
+
+  // 4. Lead stripe (webhook séparé)
   fetch('https://nicolasanquetin.app.n8n.cloud/webhook/avistars-lead-stripe', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
