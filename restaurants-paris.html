@@ -1154,27 +1154,6 @@ function _tr(type, label) {
 
 _tr('👁 Vue de page' + _VILLE_SUFFIX);
 
-var _seen = new Set();
-var _sMap = {
-  'how':          '📖 Section — Comment ça marche',
-  'results':      '📊 Section — Résultats',
-  'plan-6mois':   '💰 Section — Tarifs',
-  'faq':          '❓ Section — FAQ',
-  'social-proof': '💬 Section — Témoignages',
-  'social_proof': '💬 Section — Témoignages'
-};
-var _sObs = new IntersectionObserver(function(es) {
-  es.forEach(function(e) {
-    var id = e.target.id;
-    if (e.isIntersecting && !_seen.has(id) && _sMap[id]) {
-      _seen.add(id);
-      _tr(_sMap[id] + _VILLE_SUFFIX);
-    }
-  });
-}, {threshold: 0.3});
-document.querySelectorAll('[id]').forEach(function(el) {
-  if (_sMap[el.id]) _sObs.observe(el);
-});
 
 document.addEventListener('click', function(e) {
   var el = e.target.closest('a, button');
