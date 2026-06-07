@@ -1,7 +1,7 @@
 {
-  "name": "AviStars — Avis Google Restaurant Paris",
+  "name": "AviStars — Avis Google Restaurant",
   "short_name": "AviStars",
-  "description": "Gestion automatisée des avis Google pour restaurants parisiens. +300% d'avis 5★ en 30 jours.",
+  "description": "Gestion automatisée des avis Google pour restaurants. +300% d'avis 5★ en 30 jours.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F4F3F0",
@@ -10,9 +10,15 @@
   "lang": "fr-FR",
   "icons": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%231B2B4B'/%3E%3Cpolygon points='310,48 360,192 512,192 392,280 440,424 310,336 180,424 228,280 108,192 260,192' fill='rgba(173,216,229,0.4)'/%3E%3Cpolygon points='256,32 306,176 458,176 338,264 386,408 256,320 126,408 174,264 54,176 206,176' fill='%23ADD8E5'/%3E%3C/svg%3E",
+      "src": "https://avistars.fr/images/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://avistars.fr/images/logo-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
