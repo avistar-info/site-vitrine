@@ -187,7 +187,7 @@ section{padding:6rem 2rem}
 .result-card{background:#fff;border-radius:1.25rem;padding:2rem;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.07)}
 .result-val{font-family:'Montserrat',sans-serif;font-size:2.2rem;font-weight:700;color:#1B2B4B;margin-bottom:.25rem}
 .result-label{font-weight:600;color:#1B2B4B;margin-bottom:.25rem}
-.result-sub{font-size:.875rem;color:#9CA3AF}
+.result-sub{font-size:.875rem;color:#4B5563}
 .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
 .compare-box{border-radius:1.25rem;padding:1.75rem}
 .compare-box.bad{background:rgba(230,57,70,.05);border:1px solid rgba(230,57,70,.15)}
@@ -214,7 +214,7 @@ section{padding:6rem 2rem}
 .plan-old-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
 .plan-old{text-decoration:line-through;font-size:.875rem;color:#4B5563}
 .plan-pct{background:rgba(76,175,130,.2);color:#4CAF82;font-size:.75rem;font-weight:700;padding:.125rem .5rem;border-radius:999px}
-.plan-sub{font-size:.875rem;color:#6B7280;margin-bottom:2rem}
+.plan-sub{font-size:.875rem;color:#9CA3AF;margin-bottom:2rem}
 .plan-features{list-style:none;display:flex;flex-direction:column;gap:.75rem;flex:1;margin-bottom:2rem}
 .plan-features li{font-size:.875rem;color:#D1D5DB;display:flex;align-items:center;gap:.625rem}
 .plan-features li::before{content:'✓';color:#4CAF82;flex-shrink:0}
@@ -329,7 +329,7 @@ section{padding:6rem 2rem}
 .essai-banner p{font-size:.9rem;color:#9CA3AF;line-height:1.6;margin-bottom:1.25rem;max-width:480px;margin-left:auto;margin-right:auto}
 .essai-price{font-family:'Montserrat',sans-serif;font-size:2.5rem;font-weight:700;color:#4CAF82;margin-bottom:.25rem}
 .essai-price span{font-size:1rem;color:#9CA3AF}
-.essai-sub{font-size:.8rem;color:#6B7280;margin-bottom:1.25rem}
+.essai-sub{font-size:.8rem;color:#9CA3AF;margin-bottom:1.25rem}
 .essai-deduit{font-size:.78rem;font-weight:700;color:#fff;background:#4CAF82;border:1px solid rgba(76,175,130,.4);border-radius:.5rem;padding:.3rem .75rem;display:inline-block;margin-bottom:1.25rem}
 .btn-essai{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 2rem;border-radius:.75rem;font-weight:700;font-size:1rem;background:#4CAF82;color:#fff;border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:transform .2s,box-shadow .2s}
 .btn-essai:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(76,175,130,.4)}
@@ -351,10 +351,10 @@ section{padding:6rem 2rem}
 footer{background:#1B2B4B;border-top:1px solid rgba(255,255,255,.06);padding:2.5rem 2rem 1.5rem}
 .footer-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:1.75rem}
 .footer-logo{font-family:'Montserrat',sans-serif;font-size:1.5rem;font-weight:700;color:#ADD8E5;margin-bottom:1rem}
-.footer-desc{font-size:.875rem;color:#6B7280;line-height:1.6;margin-bottom:1rem}
+.footer-desc{font-size:.875rem;color:#9CA3AF;line-height:1.6;margin-bottom:1rem}
 .footer-wa{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:#25D366}
-.footer-col-title{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6B7280;margin-bottom:.75rem}
-.footer-col a{font-size:.875rem;color:#6B7280;display:block;margin-bottom:.4rem;transition:color .2s}
+.footer-col-title{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:.75rem}
+.footer-col a{font-size:.875rem;color:#9CA3AF;display:block;padding:.4rem 0;margin-bottom:.15rem;line-height:1.4;transition:color .2s}
 .footer-col a:hover{color:#D1D5DB}
 .footer-address div{font-size:.875rem;color:#6B7280;margin-bottom:.4rem;font-style:normal}
 .footer-address a{color:#6B7280;transition:color .2s}
@@ -567,6 +567,8 @@ header.scrolled .lang-btn.active{color:#fff}
     <button class="nav-mobile-cta" onclick="navTo('plan-6mois');toggleMenu()">Commencer →</button>
   </div>
 </header>
+
+<main>
 
 <!-- HERO -->
 <section id="hero">
@@ -841,14 +843,14 @@ header.scrolled .lang-btn.active{color:#fff}
             <span>Couverts par service</span>
             <span class="calc-val-display" id="c-couv-val">150</span>
           </div>
-          <input type="range" class="calc-slider" id="c-couv" min="30" max="400" value="150" oninput="updateCalc()">
+          <input type="range" class="calc-slider" id="c-couv" min="30" max="400" value="150" oninput="updateCalc()" aria-label="Nombre de couverts par service">
         </div>
         <div class="calc-input-group">
           <div class="calc-label">
             <span>Services par semaine</span>
             <span class="calc-val-display" id="c-serv-val">6</span>
           </div>
-          <input type="range" class="calc-slider" id="c-serv" min="3" max="21" value="6" oninput="updateCalc()">
+          <input type="range" class="calc-slider" id="c-serv" min="3" max="21" value="6" oninput="updateCalc()" aria-label="Nombre de services par semaine">
         </div>
         <div class="calc-input-group">
           <div class="calc-label"><span>Votre note Google actuelle</span></div>
@@ -891,7 +893,7 @@ header.scrolled .lang-btn.active{color:#fff}
           <p class="calc-cta-intro" data-i18n-key="calc_cta_intro">Recevez votre analyse et choisissez votre plan :</p>
           <form id="calcForm" onsubmit="submitCalc(event)">
             <div class="calc-form-row">
-              <input type="email" class="calc-email-in" id="calc-email" placeholder="votre@restaurant.fr" required autocomplete="email" data-i18n-placeholder="calc_email_ph">
+              <input type="email" class="calc-email-in" id="calc-email" placeholder="votre@restaurant.fr" required autocomplete="email" data-i18n-placeholder="calc_email_ph" aria-label="Adresse email pour recevoir votre simulation de revenus">
               <button type="submit" class="calc-send-btn" id="calc-send-btn" data-i18n-key="calc_btn">Voir les plans →</button>
             </div>
           </form>
@@ -1124,11 +1126,11 @@ header.scrolled .lang-btn.active{color:#fff}
       <div class="contact-form-wrap">
         <form id="contactForm" onsubmit="submitForm(event)" style="display:flex;flex-direction:column;gap:.75rem">
           <div class="contact-row">
-            <input type="text" id="restaurantInput" class="contact-input" placeholder="Nom de votre restaurant" autocomplete="organization" style="flex:1" />
+            <input type="text" id="restaurantInput" class="contact-input" placeholder="Nom de votre restaurant" autocomplete="organization" style="flex:1" aria-label="Nom de votre restaurant" />
           </div>
           <div class="contact-row">
-            <input type="email" id="emailInput" class="contact-input" placeholder="votre@restaurant.fr" required autocomplete="email" style="flex:1" />
-            <select id="noteInput" class="contact-input" style="flex:0 0 auto;min-width:0;max-width:160px;cursor:pointer;-webkit-appearance:auto">
+            <input type="email" id="emailInput" class="contact-input" placeholder="votre@restaurant.fr" required autocomplete="email" style="flex:1" aria-label="Adresse email" />
+            <select id="noteInput" class="contact-input" style="flex:0 0 auto;min-width:0;max-width:160px;cursor:pointer;-webkit-appearance:auto" aria-label="Note Google actuelle de votre établissement">
               <option value="">Note Google actuelle</option>
               <option value="moins-35">Moins de 3.5★</option>
               <option value="35-40">3.5★ – 4.0★</option>
@@ -1159,6 +1161,8 @@ header.scrolled .lang-btn.active{color:#fff}
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -1875,7 +1879,7 @@ document.addEventListener('DOMContentLoaded', () => { if (_lang==='en') setTimeo
       <h3 style="font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:700;color:#1B2B4B;margin-bottom:.5rem;" id="em-title">Encore une étape</h3>
       <p style="font-size:.9rem;color:#6B7280;" id="em-sub">Laissez votre email pour recevoir votre confirmation et accéder au paiement.</p>
     </div>
-    <input id="em-email" type="email" placeholder="votre@restaurant.fr" style="width:100%;padding:.875rem 1rem;border:1.5px solid #E5E7EB;border-radius:.75rem;font-size:1rem;margin-bottom:.75rem;outline:none;font-family:inherit;" />
+    <input id="em-email" type="email" placeholder="votre@restaurant.fr" style="width:100%;padding:.875rem 1rem;border:1.5px solid #E5E7EB;border-radius:.75rem;font-size:1rem;margin-bottom:.75rem;outline:none;font-family:inherit;" aria-label="Adresse email" />
     <button id="em-submit" onclick="proceedToStripe()" style="width:100%;background:#1B2B4B;color:#fff;padding:1rem;border:none;border-radius:.75rem;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;">
       Accéder au paiement →
     </button>
