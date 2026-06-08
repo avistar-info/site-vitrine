@@ -1524,7 +1524,7 @@ function submitCalc(e) {
 <!-- EXIT INTENT POPUP -->
 <div id="exit-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:10000;align-items:center;justify-content:center;padding:1.25rem">
   <div style="background:#0D1E35;border:1px solid rgba(173,216,229,.3);border-radius:1.25rem;max-width:420px;width:100%;padding:2rem 1.75rem;position:relative;text-align:center">
-    <button onclick="document.getElementById('exit-popup').style.display='none'" style="position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:#6B7280;font-size:1.5rem;cursor:pointer;line-height:1">✕</button>
+    <button aria-label="Fermer la fenêtre" onclick="document.getElementById('exit-popup').style.display='none'" style="position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:#6B7280;font-size:1.5rem;cursor:pointer;line-height:1">✕</button>
     <div style="font-size:2rem;margin-bottom:.75rem">⚡</div>
     <h2 style="font-family:'Montserrat',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:.75rem">Avant de partir…</h2>
     <p style="font-size:.9rem;color:#9CA3AF;line-height:1.6;margin-bottom:1.25rem">Ce soir, un client mécontent va peut-être poster une 1★ sur votre Google. <strong style="color:#fff">Et vous ne le saurez pas avant demain matin.</strong></p>
