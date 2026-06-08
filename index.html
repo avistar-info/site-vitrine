@@ -559,7 +559,7 @@ header.scrolled .lang-btn.active{color:#fff}
       <button onclick="navTo('plan-6mois')" data-i18n="nav_pricing">Tarifs</button>
       <button onclick="navTo('faq')" data-i18n="nav_faq">FAQ</button>
     </nav>
-    <div class="lang-switcher"><button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button><span style="color:rgba(255,255,255,.2);margin:0 2px;">|</span><button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button></div><button class="nav-cta" id="nav-cta-btn" onclick="navTo('plan-6mois')" data-i18n="nav_cta">Commencer →</button>
+    <div class="lang-switcher"><button class="lang-btn active" id="btn-fr" onclick="setLang('fr')" aria-label="Afficher le site en français">FR</button><span style="color:rgba(255,255,255,.2);margin:0 2px;">|</span><button class="lang-btn" id="btn-en" onclick="setLang('en')" aria-label="Display website in English">EN</button></div><button class="nav-cta" id="nav-cta-btn" onclick="navTo('plan-6mois')" data-i18n="nav_cta">Commencer →</button>
     <button class="nav-mobile-btn" onclick="toggleMenu()" aria-label="Menu">
       <span id="mb1"></span><span id="mb2"></span><span id="mb3"></span>
     </button>
@@ -1543,7 +1543,7 @@ function submitCalc(e) {
 <!-- EXIT INTENT POPUP -->
 <div id="exit-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:10000;align-items:center;justify-content:center;padding:1.25rem">
   <div style="background:#0D1E35;border:1px solid rgba(173,216,229,.3);border-radius:1.25rem;max-width:420px;width:100%;padding:2rem 1.75rem;position:relative;text-align:center">
-    <button onclick="document.getElementById('exit-popup').style.display='none'" style="position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:#6B7280;font-size:1.5rem;cursor:pointer;line-height:1">✕</button>
+    <button aria-label="Fermer la fenêtre" onclick="document.getElementById('exit-popup').style.display='none'" style="position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:#6B7280;font-size:1.5rem;cursor:pointer;line-height:1">✕</button>
     <div style="font-size:2rem;margin-bottom:.75rem">⚡</div>
     <h2 style="font-family:'Montserrat',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:.75rem">Avant de partir…</h2>
     <p style="font-size:.9rem;color:#9CA3AF;line-height:1.6;margin-bottom:1.25rem">Ce soir, un client mécontent va peut-être poster une 1★ sur votre Google. <strong style="color:#fff">Et vous ne le saurez pas avant demain matin.</strong></p>
@@ -1555,7 +1555,7 @@ function submitCalc(e) {
 <!-- MODAL : Setup -->
 <div class="modal-overlay" id="modal-setup" onclick="handleOverlayClick(event,'modal-setup')">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-setup')">✕</button>
+    <button class="modal-close" onclick="closeModal('modal-setup')" aria-label="Fermer la fenêtre">✕</button>
     <button class="modal-back" onclick="closeModal('modal-setup')">← Retour</button>
     <h2 style="font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:700;color:#fff;margin:0 0 .5rem">Le setup, étape par étape</h2>
     <p style="font-size:.875rem;color:#6B7280;margin-bottom:2rem">Voici exactement ce qui se passe après votre commande, sans surprise.</p>
@@ -1880,7 +1880,7 @@ document.addEventListener('DOMContentLoaded', () => { if (_lang==='en') setTimeo
 <!-- EMAIL CAPTURE MODAL avant Stripe -->
 <div id="email-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,10,10,.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1.25rem;">
   <div style="background:#fff;border-radius:20px;padding:2rem 1.75rem;max-width:420px;width:100%;position:relative;">
-    <button onclick="closeEmailModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#9CA3AF;">✕</button>
+    <button aria-label="Fermer la fenêtre" onclick="closeEmailModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#9CA3AF;">✕</button>
     <div style="text-align:center;margin-bottom:1.5rem;">
       <div style="font-size:2rem;margin-bottom:.5rem;">🎯</div>
       <h3 style="font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:700;color:#1B2B4B;margin-bottom:.5rem;" id="em-title">Encore une étape</h3>
