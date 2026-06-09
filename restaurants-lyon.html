@@ -24,7 +24,6 @@
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preload" as="image" href="images/hero-bg.webp" fetchpriority="high"/>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Outfit:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Outfit:wght@400;500;600;700&display=swap"/></noscript>
 <link rel="icon" type="image/x-icon" href="https://avistars.fr/favicon.ico" />
@@ -1334,7 +1333,7 @@ function toggleMenu(){
 (function(){
   var notifBar = document.querySelector('.notif-bar');
   var navbar = document.getElementById('navbar');
-  var notifH = notifBar ? notifBar.offsetHeight : 36;
+  var notifH = 36; // hardcoded: avoids forced layout
   window.addEventListener('scroll', function(){
     var y = window.scrollY;
     if(y > notifH){
