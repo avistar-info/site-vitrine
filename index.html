@@ -578,7 +578,7 @@ header.scrolled .lang-btn.active{color:#fff}
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg">
-    <picture><source srcset="images/hero-bg.webp" type="image/webp" /><img src="images/hero-bg.jpg" width="1400" height="900" fetchpriority="high" alt="Brasserie parisienne élégante — gestion avis Google restaurant" /></picture>
+    <picture><source srcset="images/hero-bg.webp" type="image/webp" /><img src="images/hero-bg.jpg" width="1400" height="900" alt="Brasserie parisienne élégante — gestion avis Google restaurant" /></picture>
     <div class="hero-overlay-r"></div>
     <div class="hero-overlay-b"></div>
   </div>
@@ -1114,7 +1114,7 @@ header.scrolled .lang-btn.active{color:#fff}
 <!-- CTA -->
 <section id="cta" style="padding:7rem 2rem">
   <div class="cta-bg">
-    <picture><source srcset="images/hero-bg.webp" type="image/webp" /><img src="images/hero-bg.jpg" width="1400" height="900" fetchpriority="high" alt="Rejoignez 170+ restaurants parisiens qui augmentent leurs avis Google avec AviStars" /></picture>
+    <picture><source srcset="images/hero-bg.webp" type="image/webp" /><img src="images/hero-bg.jpg" width="1400" height="900" alt="Rejoignez 170+ restaurants parisiens qui augmentent leurs avis Google avec AviStars" /></picture>
     <div class="cta-overlay"></div>
   </div>
   <div class="cta-inner">
@@ -1595,7 +1595,7 @@ function submitCalc(e) {
 <!-- MODAL : Mentions légales -->
 
 <script>
-setTimeout(function(){
+window.addEventListener('load',function(){
 // Social proof toast
 (function(){
   const toastsFr = [
@@ -1795,7 +1795,7 @@ document.addEventListener('keydown', e => {
     if(pct >= (isMob ? 65 : 50)) t = setTimeout(showExitPopup, isMob ? 10000 : 60000);
   }, {passive:true});
 })();
-},100);
+});
 </script>
 <!-- STICKY MOBILE CTA -->
 <div class="sticky-cta" id="stickyCta" aria-label="Commencer avec Avistars">
@@ -1877,7 +1877,7 @@ function applyLang(lang) {
 
 function setLang(lang) { applyLang(lang); }
 if(typeof _lang!=='undefined'&&_lang==='en')applyLang('en');
-},0);
+},2500);
 </script>
 
 
