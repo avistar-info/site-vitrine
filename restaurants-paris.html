@@ -1099,6 +1099,7 @@ setTimeout(function(){document.querySelectorAll('.fade:not(.visible)').forEach(f
 function _ac(el){var t=parseFloat(el.dataset.target),s=el.dataset.suffix||'',d=parseInt(el.dataset.dec||0),dur=1800,t0=performance.now();(function r(n){var p=Math.min((n-t0)/dur,1),v=t*(1-Math.pow(1-p,3));el.textContent=(d?v.toFixed(d):Math.floor(v).toLocaleString('fr-FR'))+s;if(p<1)requestAnimationFrame(r);})(t0);}
 var _co=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){_ac(e.target);_co.unobserve(e.target);}});},{threshold:.3});
 document.querySelectorAll('.counter').forEach(function(el){_co.observe(el);});
+};if('requestIdleCallback'in window)requestIdleCallback(r,{timeout:600});else setTimeout(r,0);})();
 
 // navTo → scroll local ou redirect main site
 function navTo(id){var el=document.getElementById(id);if(el){var s=window.scrollY,t=el.getBoundingClientRect().top+s-80,d=t-s,dur=Math.min(1200,Math.max(600,Math.abs(d)*.6)),t0=null;function ease(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;}(function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);window.scrollTo(0,s+d*ease(p));if(p<1)requestAnimationFrame(step);})(t0);}else{window.location.href='/#'+id;}}
@@ -1424,7 +1425,7 @@ function submitCalc(e) {
     // Redirect to main site pricing so user can choose any plan
     window.location.href = 'https://avistars.fr/#pricing?email=' + encodeURIComponent(email);
   }, 500);
-}};if('requestIdleCallback'in window)requestIdleCallback(r,{timeout:600});else setTimeout(r,0);})();
+}
 </script>
 
 <!-- STICKY MOBILE CTA -->
