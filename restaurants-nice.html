@@ -519,7 +519,7 @@ transform:translateY(0);transition:transform .35s ease
         Gestion avis Google restaurant · 170+ établissements clients
       </div>
       <h1 class="hero-h1" aria-label="Gestion des avis Google pour restaurants à Nice — Augmentez vos avis 5 étoiles avec Avistars">
-        <span id="h1-rotate">Vous cuisinez</span><br>
+        <span id="h1-rotate">Vous cuisinez</span><script>(function(){var p=["Vous cuisinez","Vous gérez le service","Vous formez votre équipe","Vous êtes en plein coup de feu","Vous vérifiez les stocks","Vous accueillez les clients"];document.getElementById('h1-rotate').textContent=p[Math.floor(Math.random()*p.length)];})();</script><br>
         <span class="gold">Mais qui protège votre réputation Google ?</span>
       </h1>
       <p class="hero-p">
@@ -1458,16 +1458,7 @@ function submitCalc(e) {
 </div>
 
 <script>
-setTimeout(function(){var phrases = [
-    "Vous cuisinez",
-    "Vous gérez le service",
-    "Vous formez votre équipe",
-    "Vous êtes en plein coup de feu",
-    "Vous vérifiez les stocks",
-    "Vous accueillez les clients"
-  ];
-  var el = document.getElementById('h1-rotate');
-  if(el) el.textContent = phrases[Math.floor(Math.random()*phrases.length)];}, 2000);
+/* rotation inline synchrone (instantané, sans flicker) */
 </script>
 </body>
 </html>
