@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Qui sommes-nous — AviStars | L'histoire de deux étudiants</title>
+<meta name="description" content="L'histoire d'AviStars : deux étudiants passionnés d'IA qui ont décidé de protéger la réputation Google des restaurateurs. Découvrez notre parcours, notre équipe et notre conviction." />
+<link rel="canonical" href="https://avistars.fr/qui-sommes-nous" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Qui sommes-nous — AviStars" />
+<meta property="og:description" content="L'histoire de deux étudiants qui ont décidé de ne pas attendre la permission de changer les choses." />
+<meta property="og:url" content="https://avistars.fr/qui-sommes-nous" />
+<meta property="og:image" content="https://avistars.fr/images/og-cover.png" />
+<link rel="icon" type="image/x-icon" href="https://avistars.fr/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://avistars.fr/images/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://avistars.fr/images/logo-192.png" />
+<link rel="apple-touch-icon" href="https://avistars.fr/images/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --navy:#1B2B4B; --navy-mid:#2F4A7A; --ciel:#ADD8E5; --ciel-clair:#EAF6FA;
+  --fond:#F4F3F0; --succes:#4CAF82; --gris:#9CA3AF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--fond);color:var(--navy);font-family:'Outfit',system-ui,sans-serif;line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:920px;margin:0 auto;padding:0 1.5rem}
+
+/* NAV */
+header.nav{position:sticky;top:0;z-index:50;background:rgba(27,43,75,.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(173,216,229,.12)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.nav-logo{display:block}
+.nav-cta{background:var(--ciel);color:var(--navy);font-family:'Outfit',sans-serif;font-weight:700;font-size:.85rem;padding:.6rem 1.1rem;border-radius:.6rem;white-space:nowrap;transition:transform .15s,box-shadow .15s}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(173,216,229,.35)}
+.nav-back{color:var(--ciel);font-size:.85rem;font-weight:600}
+.nav-back:hover{color:#fff}
+.nav-right{display:flex;align-items:center;gap:1.25rem}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,#0d1b33 0%,var(--navy) 60%,var(--navy-mid) 130%);color:#fff;text-align:center;padding:5.5rem 1.5rem 5rem;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(173,216,229,.14),transparent 60%);pointer-events:none}
+.hero .eyebrow{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ciel);font-weight:700;margin-bottom:1.25rem}
+.hero h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2rem,5.5vw,3.4rem);line-height:1.12;max-width:780px;margin:0 auto 1.5rem}
+.hero h1 .accent{color:var(--ciel)}
+.hero p{font-size:clamp(1rem,2.2vw,1.2rem);color:#cdd6e4;max-width:560px;margin:0 auto}
+
+/* STORY */
+.story{padding:4.5rem 0}
+.chapter{margin-bottom:3.75rem}
+.chapter:last-child{margin-bottom:0}
+.chapter .tag{display:inline-block;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-mid);background:var(--ciel-clair);padding:.4rem .85rem;border-radius:2rem;margin-bottom:1rem}
+.chapter h2{font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(1.5rem,3.5vw,2rem);color:var(--navy);line-height:1.2;margin-bottom:1.1rem}
+.chapter p{font-size:1.075rem;color:#41506b;margin-bottom:1.1rem}
+.chapter p:last-child{margin-bottom:0}
+.chapter strong{color:var(--navy);font-weight:600}
+
+.pullquote{border-left:4px solid var(--ciel);background:linear-gradient(90deg,var(--ciel-clair),transparent);padding:1.6rem 1.8rem;border-radius:0 .8rem .8rem 0;margin:3rem 0;font-family:'Montserrat',sans-serif;font-style:italic;font-size:clamp(1.15rem,2.5vw,1.4rem);color:var(--navy);line-height:1.4}
+
+/* TEAM */
+.team{background:#fff;padding:4.5rem 0;border-top:1px solid #eceae5}
+.team-head{text-align:center;max-width:620px;margin:0 auto 3rem}
+.team-head .tag{display:inline-block;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-mid);background:var(--ciel-clair);padding:.4rem .85rem;border-radius:2rem;margin-bottom:1rem}
+.team-head h2{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.6rem,4vw,2.3rem);color:var(--navy);margin-bottom:.75rem}
+.team-head p{color:#5a6a82;font-size:1.05rem}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:840px;margin:0 auto}
+.member{background:var(--fond);border:1px solid #ecebe6;border-radius:1.1rem;padding:1.6rem 1.25rem;text-align:center;transition:transform .2s,box-shadow .2s}
+.member:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(27,43,75,.10)}
+.member .photo{width:130px;height:130px;border-radius:50%;object-fit:cover;margin:0 auto 1.1rem;display:block;border:3px solid var(--ciel);background:#fff}
+.member .initials{width:130px;height:130px;border-radius:50%;margin:0 auto 1.1rem;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:900;font-size:2.6rem;color:var(--navy);background:var(--ciel);border:3px solid var(--navy-mid)}
+.member h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.2rem;color:var(--navy);margin-bottom:.2rem}
+.member .role{font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--navy-mid);margin-bottom:.7rem}
+.member .bio{font-size:.92rem;color:#5a6a82}
+
+/* CLOSING CTA */
+.closing{background:linear-gradient(160deg,var(--navy),var(--navy-mid));color:#fff;text-align:center;padding:5rem 1.5rem}
+.closing h2{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.7rem,4vw,2.6rem);max-width:720px;margin:0 auto 1rem;line-height:1.18}
+.closing h2 .accent{color:var(--ciel)}
+.closing p{color:#cdd6e4;max-width:560px;margin:0 auto 2rem;font-size:1.08rem}
+.btn-row{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--ciel);color:var(--navy);font-weight:700;padding:.95rem 1.9rem;border-radius:.7rem;font-size:1rem;transition:transform .15s,box-shadow .15s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(173,216,229,.4)}
+.btn-ghost{border:1.5px solid rgba(255,255,255,.35);color:#fff;font-weight:600;padding:.95rem 1.9rem;border-radius:.7rem;font-size:1rem;transition:background .2s,border-color .2s}
+.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:#fff}
+
+/* FOOTER */
+footer{background:var(--navy);color:var(--gris);padding:2.75rem 1.5rem 1.75rem}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1.5rem}
+.footer-desc{font-size:.85rem;max-width:340px;margin:.9rem 0;line-height:1.55}
+.footer-links{display:flex;gap:2.5rem;flex-wrap:wrap}
+.footer-col-title{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);margin-bottom:.7rem}
+.footer-col a{display:block;font-size:.85rem;color:#aeb6c2;padding:.28rem 0;transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{max-width:1100px;margin:1.75rem auto 0;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.07);font-size:.75rem;color:#566173;text-align:center}
+
+@media(max-width:680px){
+  .team-grid{grid-template-columns:1fr;max-width:320px}
+  .nav-back{display:none}
+  .hero{padding:4rem 1.25rem 3.5rem}
+  .story{padding:3rem 0}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Accueil AviStars">
+      <svg width="130" height="34" viewBox="-5 0 130 34" fill="none" style="display:block">
+        <polygon points="10,.5 12.8,8.5 21,8.5 14.8,12.5 17.6,20.5 10,16 2.4,20.5 5.2,12.5 -1,8.5 7.2,8.5" fill="rgba(173,216,229,0.4)"/>
+        <polygon points="7,3 9.8,11 18,11 11.8,15 14.6,23 7,18.5 -.6,23 2.2,15 -4,11 4.2,11" fill="#ADD8E5"/>
+        <text x="23" y="23" font-family="Montserrat,sans-serif" font-size="21" letter-spacing="-.3">
+          <tspan font-weight="400" fill="#fff">Avi</tspan><tspan font-weight="900" fill="#fff">STARS</tspan>
+        </text>
+      </svg>
+    </a>
+    <div class="nav-right">
+      <a href="/" class="nav-back">← Retour au site</a>
+      <a href="/#plan-6mois" class="nav-cta">Commencer →</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">Notre histoire</div>
+  <h1>Et si un seul mauvais avis suffisait à <span class="accent">tout faire basculer&nbsp;?</span></h1>
+  <p>Voici notre histoire. Celle de deux étudiants qui ont décidé de ne pas attendre la permission de changer les choses.</p>
+</section>
+
+<!-- STORY -->
+<section class="story">
+  <div class="wrap">
+
+    <div class="chapter">
+      <span class="tag">Chapitre 1 — L'étincelle</span>
+      <h2>Tout a commencé par une évidence qu'on ne pouvait plus ignorer</h2>
+      <p>Je me souviens du jour où Nicolas m'a présenté son idée. Pas de grandes théories, pas de slides soignés. Juste une constatation simple, presque évidente&nbsp;: les avis Google sont devenus le premier réflexe d'un client avant de choisir un établissement — avant le bouche-à-oreille, avant la devanture, avant même d'avoir franchi la porte. Et pourtant, <strong>personne ne protège vraiment ce que ces avis disent d'un établissement.</strong></p>
+      <p>En quelques minutes, j'ai été convaincu. Pas uniquement parce que l'opportunité était réelle, mais parce qu'elle touchait à quelque chose qui nous passionne profondément tous les deux&nbsp;: l'intelligence artificielle, et ce qu'elle peut transformer concrètement dans la vie des gens. On s'est regardés. On n'a pas eu besoin d'en dire plus. On allait construire ça.</p>
+    </div>
+
+    <div class="chapter">
+      <span class="tag">Chapitre 2 — La construction</span>
+      <h2>On a tout appris. Par nous-mêmes. Depuis zéro.</h2>
+      <p>Nous n'avions pas de budget, pas de mentor à l'époque, pas de formation spécialisée. Ce qu'on avait, c'était du temps, une connexion internet, et une obstination que rien ne pouvait entamer. On a passé des nuits entières à regarder des tutoriels, à apprendre à coder, à comprendre comment faire de l'IA notre alliée. On testait. On cassait. On recommençait.</p>
+      <p>On ne parlait que de ça. On ne vivait que pour ça. Les week-ends, les soirées, les moments où d'autres décrochent — on continuait. Parce qu'on savait qu'on tenait quelque chose. Et puis un jour, quelque chose a fonctionné. Vraiment fonctionné. <strong>Ce jour-là, AviStars est né.</strong></p>
+    </div>
+
+    <blockquote class="pullquote">« On était deux étudiants sans filet. Mais on avait une certitude que peu de gens ont la chance de ressentir&nbsp;: on savait qu'on résolvait un vrai problème. »</blockquote>
+
+    <div class="chapter">
+      <span class="tag">Chapitre 3 — Le terrain</span>
+      <h2>On a compris ce que vous vivez vraiment</h2>
+      <p>Quand nous sommes allés sur le terrain pour la première fois, nous pensions que notre solution parlerait d'elle-même. Nous avions tort. Le terrain, ça ne s'apprend pas dans les livres. Les premiers prospects sont sceptiques, les portes ne s'ouvrent pas toujours au premier coup. Il faut apprendre à vendre, à convaincre, à gagner la confiance avant même de parler de la solution.</p>
+      <p>Mais ces rencontres nous apprennent quelque chose d'essentiel. Elles nous font comprendre ce que vivent vraiment ceux qu'on cherche à aider. Derrière chaque établissement, il y a un patron qui se lève tôt, qui travaille tard, qui donne tout — et qui peut voir des mois d'efforts vaciller à cause d'une étoile en moins sur sa fiche Google. <strong>Parce que vous méritez d'être jugé sur ce que vous faites réellement — pas sur ce qu'un seul avis dit de vous.</strong></p>
+    </div>
+
+    <div class="chapter">
+      <span class="tag">Chapitre 4 — La solution</span>
+      <h2>Ce que personne d'autre ne fait — et ce qu'on a construit pour vous</h2>
+      <p>AviStars ne se contente pas d'améliorer votre note Google. Nous intervenons là où tout se joue&nbsp;: <strong>avant qu'un mauvais avis n'atteigne internet.</strong> Notre technologie — innovante et encore inédite sur le marché — détecte les signaux d'insatisfaction avant qu'ils ne deviennent publics. Nous prenons en charge ces clients insatisfaits, gérons leur expérience, et transformons ce qui aurait pu être une catastrophe en une véritable opportunité de fidélisation.</p>
+      <p>Nous assurons également un suivi continu de votre réputation en ligne — pour que vous puissiez vous concentrer sur ce que vous faites de mieux&nbsp;: accueillir, servir, et faire vivre une expérience. Le résultat&nbsp;? Une réputation qui reflète enfin la vraie qualité de votre travail. Et un chiffre d'affaires qui suit.</p>
+    </div>
+
+    <div class="chapter">
+      <span class="tag">Chapitre 5 — L'équipe</span>
+      <h2>Trois personnes. Une conviction commune.</h2>
+      <p>Les premiers contrats arrivent. La confiance s'installe. Et c'est dans cette dynamique qu'entre Thierno. Mentor avant d'être associé, il voit en AviStars ce que nous voyions depuis le début — mais il apporte ce que l'enthousiasme seul ne peut pas donner&nbsp;: la rigueur, la méthode, et la vision pour faire grandir une ambition durablement. Avec lui, nous découvrons de nouveaux horizons. Nous structurons ce que nous avions bâti à l'instinct.</p>
+      <p>Aujourd'hui, nous sommes trois. Et nous avançons avec la même faim qu'au premier soir — celui où Nicolas m'a présenté une idée simple, et où tout a commencé. <strong>Sauf qu'on sait maintenant exactement où on va.</strong></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team">
+  <div class="wrap">
+    <div class="team-head">
+      <span class="tag">L'équipe</span>
+      <h2>Les visages derrière AviStars</h2>
+      <p>Deux fondateurs, un mentor. La même obsession&nbsp;: protéger votre réputation comme si c'était la nôtre.</p>
+    </div>
+    <div class="team-grid">
+      <div class="member">
+        <img class="photo" src="/images/equipe-nicolas.png" alt="Nicolas, co-fondateur d'AviStars" width="130" height="130" loading="lazy" />
+        <h3>Nicolas</h3>
+        <div class="role">Co-fondateur</div>
+        <p class="bio">L'idée de départ. Produit, IA et vision technique.</p>
+      </div>
+      <div class="member">
+        <img class="photo" src="/images/equipe-corentin.png" alt="Corentin, co-fondateur d'AviStars" width="130" height="130" loading="lazy" />
+        <h3>Corentin</h3>
+        <div class="role">Co-fondateur</div>
+        <p class="bio">La construction et le terrain. Relation client et croissance.</p>
+      </div>
+      <div class="member">
+        <div class="initials">T</div>
+        <h3>Thierno</h3>
+        <div class="role">Mentor &amp; associé</div>
+        <p class="bio">La rigueur, la méthode et la vision pour grandir durablement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <h2>Votre réputation, c'est votre <span class="accent">premier commercial.</span></h2>
+  <p>Ne laissez plus jamais un seul mauvais avis décider à votre place. Nous sommes là pour protéger ce que vous avez mis des années à construire.</p>
+  <div class="btn-row">
+    <a href="/#plan-6mois" class="btn-primary">Découvrir AviStars →</a>
+    <a href="https://wa.me/33646723697" class="btn-ghost">📱 Parlez-nous sur WhatsApp</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <svg width="130" height="34" viewBox="-5 0 130 34" fill="none" style="display:block">
+        <polygon points="10,.5 12.8,8.5 21,8.5 14.8,12.5 17.6,20.5 10,16 2.4,20.5 5.2,12.5 -1,8.5 7.2,8.5" fill="rgba(173,216,229,0.4)"/>
+        <polygon points="7,3 9.8,11 18,11 11.8,15 14.6,23 7,18.5 -.6,23 2.2,15 -4,11 4.2,11" fill="#ADD8E5"/>
+        <text x="23" y="23" font-family="Montserrat,sans-serif" font-size="21" letter-spacing="-.3">
+          <tspan font-weight="400" fill="#fff">Avi</tspan><tspan font-weight="900" fill="#fff">STARS</tspan>
+        </text>
+      </svg>
+      <p class="footer-desc">La solution de gestion d'avis Google pour restaurants. On s'occupe de tout, vous cuisinez. 170+ restaurants font confiance à AviStars.</p>
+      <a href="https://wa.me/33646723697" style="color:#ADD8E5;font-size:.85rem;font-weight:600">📱 +33 6 46 72 36 97</a>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <div class="footer-col-title">Navigation</div>
+        <a href="/">Accueil</a>
+        <a href="/qui-sommes-nous">Qui sommes-nous</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#plan-6mois">Tarifs</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <a href="mailto:contact@avistars.fr">contact@avistars.fr</a>
+        <a href="tel:+33646723697">+33 6 46 72 36 97</a>
+        <span style="font-size:.85rem;color:#aeb6c2">📍 Paris, Île-de-France</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2025 AviStars™ · Zéro censure · Filtrage intelligent · Résultats garantis</div>
+</footer>
+
+</body>
+</html>
