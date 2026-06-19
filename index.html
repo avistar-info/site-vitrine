@@ -692,16 +692,16 @@ header.scrolled .lang-btn.active{color:#fff}
 .av-fc-stars{font-size:.95rem;letter-spacing:1px;color:#FBBC04}
 .av-fc-off{color:rgba(255,255,255,.25)}
 /* Cercle vertueux */
-.av-fly{position:relative;width:270px;height:270px;margin:0 auto}
-.av-fly .fly-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;background:radial-gradient(circle at 50% 32%,#1B2B4B,#0E1A30);border:2px solid rgba(173,216,229,.35);box-shadow:0 0 36px rgba(173,216,229,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.5rem}
+.av-fly{position:relative;width:min(460px,100%);height:300px;margin:0 auto}
+.av-fly .fly-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;background:radial-gradient(circle at 50% 32%,#1B2B4B,#0E1A30);border:2px solid rgba(173,216,229,.35);box-shadow:0 0 36px rgba(173,216,229,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.5rem;z-index:2}
 .av-fly .fly-core svg{width:32px;height:32px;animation:flySpin 9s linear infinite}
 @keyframes flySpin{to{transform:rotate(360deg)}}
 .av-fly .fly-core span{color:#ADD8E5;font-weight:800;font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;margin-top:.25rem;line-height:1.2}
-.av-fly .fly-node{position:absolute;width:116px;transform:translate(-50%,-50%);background:#1B2B4B;border:1px solid rgba(173,216,229,.22);border-radius:.7rem;padding:.5rem .5rem;text-align:center}
+.av-fly .fly-node{position:absolute;width:128px;transform:translate(-50%,-50%);background:#1B2B4B;border:1px solid rgba(173,216,229,.22);border-radius:.7rem;padding:.55rem .55rem;text-align:center}
 .av-fly .fly-node b{display:block;color:#FBBC04;font-size:.8rem;line-height:1}
 .av-fly .fly-node small{color:#fff;font-size:.68rem;font-weight:600;line-height:1.25;display:block;margin-top:.15rem}
-.av-fly .n-top{top:5%;left:50%}.av-fly .n-right{top:50%;left:90%}.av-fly .n-bot{top:95%;left:50%}.av-fly .n-left{top:50%;left:10%}
-@media(max-width:560px){.av-fly{transform:scale(.9)}}
+.av-fly .n-top{top:11%;left:50%}.av-fly .n-right{top:50%;left:84%}.av-fly .n-bot{top:89%;left:50%}.av-fly .n-left{top:50%;left:16%}
+@media(max-width:520px){.av-fly{width:300px;height:330px}.av-fly .fly-node{width:118px}.av-fly .n-right{left:78%}.av-fly .n-left{left:22%}}
 /* Conformité */
 .av-conf{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;max-width:780px;margin:2.5rem auto 0}
 .av-conf-item{display:flex;gap:.7rem;align-items:flex-start;background:#132039;border:1px solid rgba(173,216,229,.14);border-radius:.875rem;padding:1.1rem}
@@ -710,9 +710,10 @@ header.scrolled .lang-btn.active{color:#fff}
 .av-conf-item span{color:#9CA3AF;font-size:.78rem;line-height:1.45}
 @media(max-width:600px){.av-conf{grid-template-columns:1fr}}
 /* Plateformes compatibles */
-.av-plat{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.75rem;max-width:840px;margin:0 auto}
-.av-plat-item{display:flex;align-items:center;gap:.6rem;background:#fff;border:1px solid rgba(27,43,75,.1);border-radius:.75rem;padding:.85rem 1rem;font-size:.9rem;font-weight:600;color:#1B2B4B}
-.av-plat-item span{color:#34A853;font-weight:800;flex:0 0 auto}
+.av-plat{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:.6rem;max-width:760px;margin:0 auto}
+.av-plat-item{display:flex;align-items:center;gap:.55rem;background:#fff;border:1px solid rgba(27,43,75,.08);border-radius:.7rem;padding:.7rem .9rem;font-size:.85rem;font-weight:600;color:#1B2B4B;box-shadow:0 2px 10px rgba(27,43,75,.05);transition:transform .15s,box-shadow .15s}
+.av-plat-item:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(27,43,75,.1)}
+.av-plat-item>span{color:#34A853;font-weight:800;flex:0 0 auto;font-size:.9rem}
 .av-plat-item strong{color:#1a73e8;font-weight:700}
 /* Toggle facturation mensuel/annuel */
 .bill-toggle{display:inline-flex;gap:.25rem;background:#132039;border:1px solid rgba(173,216,229,.22);border-radius:999px;padding:.3rem}
@@ -1023,12 +1024,12 @@ header.scrolled .lang-btn.active{color:#fff}
 
 
 <!-- AU-DELÀ DE GOOGLE : plateformes compatibles -->
-<section class="light">
+<section class="light" style="padding-top:4rem;padding-bottom:4rem">
   <div class="container">
-    <div class="fade" style="text-align:center;margin-bottom:2.5rem">
+    <div class="fade" style="text-align:center;margin-bottom:2.25rem">
       <p class="section-eyebrow">Compatible avec toutes les plateformes d'avis</p>
-      <h2 class="section-h2">Au-delà de Google.</h2>
-      <p class="section-sub">Google reste votre priorité n°1 — c'est là que se jouent vos réservations. Mais on peut aussi orienter vos clients satisfaits vers les plateformes qui comptent pour votre établissement.</p>
+      <h2 class="section-h2 dark" style="font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:.5rem">Au-delà de Google.</h2>
+      <p class="section-sub gray-dark" style="font-size:1rem;margin-bottom:0">Google reste votre priorité n°1. Mais on peut aussi guider vos clients satisfaits vers les autres plateformes qui comptent pour vous.</p>
     </div>
     <div class="av-plat fade">
       <div class="av-plat-item"><span>✓</span>Google <strong>(principal)</strong></div>
@@ -1124,7 +1125,7 @@ header.scrolled .lang-btn.active{color:#fff}
         <a href="https://calendar.app.google/hchodXwU2y3PhpeW8" target="_blank" class="plan-btn outline">Parler à un expert →</a>
       </div>
     </div>
-    <p class="pricing-note fade"><a href="#" onclick="openEmailModal('https://buy.stripe.com/cNi9AT3mA5WBdhvbqG9Zm0e','Plan');return false;" target="_blank" style="color:#ADD8E5;text-decoration:underline">+ QR code supplémentaire — 19,99€</a> · Sans engagement · Résiliation à tout moment</p>
+    <p class="pricing-note fade">QR codes supplémentaires disponibles à 19,99€/unité, en option lors de la commande · Sans engagement · Résiliation à tout moment</p>
     <div class="guarantee-band fade">
       <div class="guarantee-icon">🛡️</div>
       <div>
@@ -2003,7 +2004,9 @@ Object.assign(FR_EN, {
 "Résiliable à tout moment":"Cancel anytime",
 "On est tellement sûrs de nos résultats qu'on ne vous enferme pas : les formules au mois sont sans engagement, résiliables quand vous voulez.":"We're so confident in our results that we don't lock you in: the monthly plans have no commitment and can be cancelled whenever you want.",
 "+ QR code supplémentaire — 19,99€":"+ Extra QR code — €19.99",
-"· Sans engagement · Résiliation à tout moment":"· No commitment · Cancel anytime"
+"· Sans engagement · Résiliation à tout moment":"· No commitment · Cancel anytime",
+"Google reste votre priorité n°1. Mais on peut aussi guider vos clients satisfaits vers les autres plateformes qui comptent pour vous.":"Google stays your #1 priority. But we can also guide your happy customers to the other platforms that matter to you.",
+"QR codes supplémentaires disponibles à 19,99€/unité, en option lors de la commande · Sans engagement · Résiliation à tout moment":"Extra QR codes available at €19.99/unit, optional at checkout · No commitment · Cancel anytime"
 });
 const I18N = {"legal_privacy": "Privacy Policy", "legal_cgv": "Terms & Conditions", "legal_mentions": "Legal Notice", "modal_back": "← Back to home", "sticky_setup": "Setup in 72h · 30-day guarantee", "sticky_price": "Less than €2/day", "sticky_cta": "Get started →", "sp_title": "170+ restaurants stopped losing customers in silence.", "sp_sub": "Their rating before. Their rating after. In under 30 days.", "sp1_sub": "from 3.8 to 4.6★ in 6 weeks", "sp1_q": "\"We had unfair reviews dragging us down for months. In 6 weeks we were at 4.6. My regulars are sending their friends now.\"", "sp2_sub": "5★ reviews received in 30 days", "sp2_q": "\"I didn't have time to deal with this. Now when a customer is unhappy, I know before they post. It really changes everything.\"", "sp3_sub": "more positive reviews from month 1", "sp3_q": "\"Across 3 locations it was impossible to track everything. Now it's all centralized and every site is climbing. First month I tripled my positive reviews.\"", "sp4_sub": "maintained for 4 months", "sp4_q": "\"Very touristy area, customers are demanding. Since AviStars, unhappy ones write to us privately. My rating has held at 4.7 for 4 months despite peak season.\"", "sp5_sub": "from 3.6 to 4.7★ in 3 months", "sp5_q": "\"I was skeptical. In 3 months I went from 3.6 to 4.7. Summer was the best season in 5 years — people book by checking Google first.\"", "sp6_sub": "five-star reviews received each week", "sp6_q": "\"I was worried it would be complicated. We put the QR on the bill, that's it. Now I get 8 to 10 new 5★ reviews every week without doing a thing.\""};
 let _lang = localStorage.getItem('avistars_lang') || 'fr';
