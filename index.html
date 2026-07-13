@@ -2063,12 +2063,12 @@ function setLang(lang) { applyLang(lang); }
 if(typeof _lang!=='undefined'&&_lang==='en'){if('requestIdleCallback'in window)requestIdleCallback(function(){applyLang('en');},{timeout:600});else setTimeout(function(){applyLang('en');},0);}
 
 /* ── Toggle facturation Étoile / Constellation (mensuel / annuel) ── */
-/* Montants réels des Payment Links Stripe (mode Test, LOT ARG-1) — le site
-   n'affiche jamais un prix différent de ce qui sera réellement facturé. */
-var ETOILE_MONTH='https://buy.stripe.com/test_14A7sLaP2gBf3GV2Ua9Zm0d';
-var ETOILE_YEAR='https://buy.stripe.com/test_cNi9AT3mA5WBdhvbqG9Zm0e';
-var CONST_MONTH='https://buy.stripe.com/test_4gM6oH9KY4Sx2CRdyO9Zm0f';
-var CONST_YEAR='https://buy.stripe.com/test_3cI00j2iw0Ch91f0M29Zm0g';
+/* Montants réels des Payment Links Stripe (mode LIVE, LOT LIVE-1, 2026-07) —
+   le site n'affiche jamais un prix différent de ce qui sera réellement facturé. */
+var ETOILE_MONTH='https://buy.stripe.com/4gM6oH9KY4Sx2CRdyO9Zm0f';
+var ETOILE_YEAR='https://buy.stripe.com/3cI00j2iw0Ch91f0M29Zm0g';
+var CONST_MONTH='https://buy.stripe.com/6oUfZh3mA84J6T72Ua9Zm0h';
+var CONST_YEAR='https://buy.stripe.com/28E5kD8GU84Jdhv9iy9Zm0i';
 window._billing='year';
 window.setBilling=function(m){
   var year=(m!=='month'); window._billing=year?'year':'month';
