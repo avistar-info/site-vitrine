@@ -1,15 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
 import { SITE, PLANS } from "../config/site";
+import { FEATURES } from "../content/features";
 
-const features = [
-  { t: "Collecte d'avis Google conforme", d: "Chaque client est invité à laisser un avis public. Aucun filtre sur la note, jamais." },
-  { t: "Réponse automatique aux avis", d: "Des réponses rédigées par l'IA, à votre ton, validées en un clic." },
-  { t: "Avis multi-plateformes", d: "Google, TripAdvisor et les plateformes de votre secteur, au même endroit." },
-  { t: "Analyse des retours", d: "Ce qui revient dans vos avis, résumé en tendances actionnables." },
-  { t: "Centralisation des réservations", d: "Vos réservations regroupées, sans jongler entre les outils." },
-  { t: "SMS et fidélisation", d: "Relances et campagnes pour faire revenir vos clients. QR codes et supports fournis." },
-];
+// Maillage : les cartes de la home pointent vers les pages fonctionnalités
+// dédiées (source unique content/features.ts).
+const features = FEATURES.map((f) => ({ slug: f.slug, t: f.navLabel, d: f.benefits[0].d }));
 
 const faq = [
   {
@@ -39,6 +35,15 @@ const faqLd = {
     acceptedAnswer: { "@type": "Answer", text: f.a },
   })),
 };
+
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE.brand,
+  url: SITE.url,
+  inLanguage: "fr-FR",
+  publisher: { "@type": "Organization", name: SITE.brand },
+};
 ---
 
 <Base
@@ -46,6 +51,7 @@ const faqLd = {
   description="Collecte d'avis Google 100 % conforme, réponses IA, réservation et fidélisation pour tous les commerces locaux. Prix transparents, essai gratuit."
   path="/"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(websiteLd)} is:inline />
   <script type="application/ld+json" set:html={JSON.stringify(faqLd)} is:inline />
 
   {/* HERO */}
@@ -86,10 +92,11 @@ const faqLd = {
       <h2>Tout pour votre réputation locale, au même endroit</h2>
       <div class="grid-3">
         {features.map((f) => (
-          <div class="card">
+          <a class="card feature-card" href={`/${f.slug}`}>
             <h3>{f.t}</h3>
             <p>{f.d}</p>
-          </div>
+            <span class="feature-more">Découvrir</span>
+          </a>
         ))}
       </div>
     </div>
@@ -197,6 +204,11 @@ const faqLd = {
 
   .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2rem; }
   @media (max-width: 860px) { .grid-3 { grid-template-columns: 1fr; } }
+  .feature-card { display: flex; flex-direction: column; color: inherit; transition: transform .15s ease, box-shadow .15s ease; }
+  .feature-card:hover { text-decoration: none; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(21,35,63,.1); }
+  .feature-card h3 { color: var(--ink); }
+  .feature-more { margin-top: auto; padding-top: .75rem; color: var(--brass); font-weight: 700; font-size: .9rem; }
+  .feature-more::after { content: " \2192"; }
 
   .conformite { background: #fff; }
   .conformite-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 2.5rem; align-items: center; }

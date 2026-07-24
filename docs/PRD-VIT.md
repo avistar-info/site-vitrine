@@ -128,14 +128,23 @@ Le tunnel commercial. 1 URL = 1 intention, slugs FR propres.
 ### VIT-3 : SEO / GEO / AEO technique
 La couche de visibilité, traitée comme un livrable, pas un vernis.
 
-- [ ] Schema.org : `Organization`, `SoftwareApplication` + `Offer` (prix réels),
-      `FAQPage` par page fonctionnalité, `Article` sur le blog, `BreadcrumbList`.
-      Validé (Rich Results Test).
-- [ ] Blocs Q&A courts et citables par les IA sur chaque page (question → réponse
-      factuelle en 2-3 phrases, langage naturel).
-- [ ] `sitemap.xml` régénéré sur `www.mystela.fr`, sans hreflang bidon.
-- [ ] Maillage interne : accueil ↔ fonctionnalités ↔ segments ↔ articles.
-- [ ] Contenu 100 % visible sans JavaScript (vérifié JS désactivé).
+- [x] Schema.org : `Organization`, `WebSite`, `SoftwareApplication` + `Offer`
+      (prix réels), `FAQPage` + `BreadcrumbList` par page. `Article` reste pour
+      VIT-4 (blog). Validation structurelle automatisée (`check:schema`, 63 blocs) ;
+      Rich Results Test officiel = étape manuelle sur le preview.
+- [x] Blocs Q&A courts et citables sur chaque page (home, fonctionnalités,
+      segments, tarifs), alignés sur le schema `FAQPage`.
+- [x] `sitemap.xml` sur `www.mystela.fr`, sans hreflang bidon, avec priorités par
+      intention (home 1.0, tarifs 0.9, fonctionnalités 0.8, segments 0.7) + lastmod.
+- [x] Maillage interne : nav (dropdowns Fonctionnalités + Pour qui), cartes de la
+      home liées aux pages, liens croisés en pied de page fonctionnalités/segments.
+      Articles reliés au VIT-4.
+- [x] Contenu 100 % visible sans JavaScript (nav en `<details>`, toggle prix CSS,
+      0 script externe). Vérifié.
+- [x] Harmonisation des ancres de nav vers les pages dédiées (Fonctionnalités et
+      Pour qui = menus de pages ; Tarifs = `/tarifs`).
+- [x] Nouveau garde-fou `check:schema` (JSON-LD parsé + champs minimaux) ajouté au
+      gate, après `check:links`.
 
 ### VIT-4 : Contenu (blog, villes, piliers GEO, comparatif, migration 301)
 Le capital éditorial et la reprise SEO.
@@ -217,4 +226,6 @@ VIT-1 est minimale mais complète (promesse, prix, CTA, conformité, Q&A).
 | 24/07/2026 | VIT-1 | Fondations Astro livrées sur `lot-vit-1` : purge Avistars/gating, canonique www.mystela.fr, 2 verifications Google conservées, schema.org (Organization/SoftwareApplication/Offer/FAQPage), Consent Mode v2 + bannière (clés à renseigner), robots + llms.txt, home minimale, 404, sitemap, garde-fous lint:copy + check:brand, charte + URL-map. Build vert, contenu sans JS vérifié. Snapshot `legacy-avistars` créé. |
 | 24/07/2026 | VIT-1 | Validé superviseur (Lighthouse local 94/95/100/100). Mergé en local dans `main` (non poussé, en attente du réglage preset Astro sur Vercel). |
 | 24/07/2026 | VIT-2 | Sur `lot-vit-2` : `vercel.json` (redirections www + avistars catch-all, en-têtes sécurité CSP/HSTS/etc.), analytics bundlé compatible CSP, `npm audit` dans le gate. 6 pages fonctionnalités + `/tarifs` + 6 pages segments (`/pour/*`), mockups fidèles (libellés réels de l'app), schema FAQPage + BreadcrumbList par page, maillage interne (nav + footer), OG 1200x630. 15 pages, gate vert, contenu sans JS, 0 script externe. |
-| 24/07/2026 | VIT-2 | Validé superviseur (Lighthouse tarifs 99/95/100/100). 2 corrections : (1) BLOQUANT `cleanUrls:true` + `trailingSlash:false` dans `vercel.json` (build format "file" + liens sans extension = 404 sans cleanUrls) + nouveau test de gate `check:links` (chaque href interne servable, canonicals sans extension). (2) Vraies pages légales `/mentions-legales`, `/cgv`, `/politique-confidentialite` (entité Nicolas Anquetin / VGN Company, marque Stela, hébergeur Vercel, contact@mystela.fr), en noindex + hors sitemap ; la confidentialité inclut la section API Google Business Profile (données lues, but, stockage, jamais revendues/pub, conformité Google API Services User Data Policy + Limited Use) pour la future validation OAuth. 18 pages, gate complet vert (lint:copy + check:brand + audit + build + check:links). En attente : validation finale puis merge + push (domaines redirect avistars.fr ajoutés par Nicolas en fin de projet, acté). |
+| 24/07/2026 | VIT-2 | Validé superviseur (Lighthouse tarifs 99/95/100/100). 2 corrections : (1) BLOQUANT `cleanUrls:true` + `trailingSlash:false` dans `vercel.json` (build format "file" + liens sans extension = 404 sans cleanUrls) + nouveau test de gate `check:links` (chaque href interne servable, canonicals sans extension). (2) Vraies pages légales `/mentions-legales`, `/cgv`, `/politique-confidentialite` (entité Nicolas Anquetin / VGN Company, marque Stela, hébergeur Vercel, contact@mystela.fr), en noindex + hors sitemap ; la confidentialité inclut la section API Google Business Profile (données lues, but, stockage, jamais revendues/pub, conformité Google API Services User Data Policy + Limited Use) pour la future validation OAuth. 18 pages, gate complet vert (lint:copy + check:brand + audit + build + check:links). |
+| 24/07/2026 | VIT-2 | Validé. Mergé `lot-vit-2` → `main` et **poussé** (déploiement Vercel de Stela sur www.mystela.fr, fin de l'ancien site Avistars en prod). Domaines redirect avistars.fr ajoutés par Nicolas en fin de projet (acté). |
+| 24/07/2026 | VIT-3 | Sur `lot-vit-3` : schema `WebSite` ajouté + garde-fou `check:schema` (63 blocs JSON-LD validés) ; sitemap avec priorités par intention + lastmod ; maillage interne (nav en dropdowns `<details>` sans JS vers les pages dédiées, cartes home liées aux fonctionnalités, liens croisés) ; harmonisation des ancres de nav ; Q&A citables confirmés ; no-JS vérifié. Gate complet vert (lint:copy + check:brand + audit + build 18 pages + check:links 737 + check:schema 63). **Point d'arrêt : en attente de validation avant merge.** |
