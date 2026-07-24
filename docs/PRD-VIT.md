@@ -1,0 +1,190 @@
+# PRD-VIT.md : Refonte totale du site vitrine Stela
+
+> Lot VIT-0, produit le 24/07/2026. Repo `avistar-info/site-vitrine`.
+> Basé sur `AUDIT-VIT.md`. Tout le travail se fait sur branche ; la production
+> (`www.mystela.fr`) ne bouge qu'après validation superviseur et merge.
+> Règle de rédaction du site : phrases complètes, français correct, **jamais de
+> tiret cadratin** ; marque « Stela » (un seul L) partout.
+
+## Vision
+
+Construire le meilleur site de sa catégorie en France : moteur de croissance
+Google **clé-en-main et 100 % conforme** pour les commerces locaux. Trois
+maîtres-mots : simplicité, cohérence, hiérarchie visuelle. Pensé dès la
+première ligne pour la performance commerciale (pub + organique) et la
+visibilité SEO/GEO/AEO (moteurs classiques ET moteurs IA). La conformité EST le
+différenciant : elle se raconte, elle ne s'excuse pas.
+
+## Positionnement (à décliner sur tout le site)
+
+- Promesse : « Le moteur de croissance Google clé-en-main et 100 % conforme des
+  commerces locaux. »
+- Différenciants vs Dokaa (factuels, sourcés, zéro dénigrement) : prix
+  transparents + essai gratuit self-serve (eux : démo obligatoire, prix cachés) ;
+  100 % conforme aux règles Google (eux : roue cadeau non conforme) ;
+  multi-secteurs (eux : mono-restauration) ; contenu GEO pionnier (eux : zéro) ;
+  contenu complet sans JavaScript (eux : page blanche sans JS).
+- Interdits absolus (hérités de la V1 Avistars, cf. AUDIT §2) : aucun review
+  gating, aucune « interception » d'insatisfaits, aucun claim de volume
+  (« +300 % »), aucune garantie chiffrée non tenue.
+
+---
+
+## Décisions d'architecture (proposées, à valider au démarrage VIT-1)
+
+### Framework : **Astro** (recommandé)
+
+Justification vs Next :
+- **Zéro JS par défaut** : Astro génère du HTML statique ; le contenu est
+  intégralement lisible sans JavaScript (mandat non négociable du lot, et
+  contre-exemple direct de Dokaa). Next (React) embarque un runtime JS même pour
+  du contenu statique.
+- **Islands d'hydratation** : le motion design (révélations au scroll, mockups
+  animés, morph) s'ajoute en îlots ciblés (`client:visible`), en progressive
+  enhancement strict, sans alourdir le reste.
+- **Content collections + MDX** : idéal pour le blog (14 articles migrés + piliers
+  GEO + calendrier éditorial), avec schema typé et génération de sitemap.
+- **Lighthouse ≥ 95 « gratuit »** : sortie statique légère, parfaite pour le SEO
+  et la pub.
+- **Séparation des responsabilités** : la vitrine (marketing/contenu) reste
+  distincte de l'app Next (`app.mystela.fr`, produit). Pas de couplage.
+
+Alternative Next.js rejetée : plus lourde pour un site de contenu, runtime React
+inutile ici, pas d'avantage décisif puisque la vitrine ne partage pas d'état avec
+l'app. (À reconsidérer seulement si un besoin fort de composants React partagés
+avec l'app émerge.)
+
+### Hébergement et domaine
+- Cible : **Vercel** (cohérence avec l'app, domaines custom + SSL auto + 301
+  natifs). Domaine canonique **unique** : `https://www.mystela.fr`.
+- Redirections : `mystela.fr` → `www.mystela.fr`, `http` → `https`, et
+  `avistars.fr` → `www.mystela.fr` (301, cf. VIT-4).
+
+### Tracking (proposition, à valider VIT-1)
+- **PostHog** (déjà dans la stack de l'app) : analytics produit unifiée
+  vitrine ↔ app, hébergement EU possible, respect RGPD, bannière cookies
+  minimale. Retrait total de l'ancien GA `G-WK8JTW04WF` et des webhooks n8n.
+- Option : GA4 (nouvelle propriété `www.mystela.fr`) en complément si besoin
+  publicité (audiences Google Ads). À décider ensemble.
+
+---
+
+## Lots ordonnés
+
+Chaque lot finit par le **GATE commun** (voir plus bas). Cases à cocher =
+critères d'acceptation vérifiables.
+
+### VIT-1 : Fondations (framework, migration, purge, canonique, tracking)
+Socle technique et propreté. Aucune régression d'URL.
+
+- [ ] Framework Astro initialisé (build vert, sortie statique).
+- [ ] `README.md` documenté : build, dev, deploy, charte, règles de conformité.
+- [ ] Charte importée depuis `stella-app/docs/design/stela/` (couleurs, logo
+      laiton `#B08A3E`, Plus Jakarta Sans, favicons) ; tokens centralisés.
+- [ ] `lint:copy` en place (0 tiret cadratin) + script de contrôle marque
+      (`Stella`/`Avistars`/`avistars.fr` = 0 en surface visible).
+- [ ] Canonique unique `https://www.mystela.fr` sur toutes les pages.
+- [ ] Purge conformité : 0 occurrence de review gating (interception, filtrage,
+      insatisfait routé en privé) dans tout le repo.
+- [ ] Purge Avistars : marque, domaine, email `contact@avistars.fr`, 4 liens
+      `buy.stripe.com`, GA `G-WK8JTW04WF`, n8n.
+- [ ] Tracking propre installé (PostHog validé) + bannière cookies conforme.
+- [ ] `google038f47dee570e8dc.html` conservé (ou propriété `www.mystela.fr`
+      re-vérifiée dans Search Console).
+- [ ] `robots.txt` + `llms.txt` (présentation Stela, offres, prix réels,
+      différenciants, FAQ) publiés et valides.
+- [ ] Table de correspondance des URL (ancienne → nouvelle) figée, base des 301.
+
+### VIT-2 : Pages cœur (accueil, fonctionnalités, tarifs, segments)
+Le tunnel commercial. 1 URL = 1 intention, slugs FR propres.
+
+- [ ] **Accueil** : promesse claire, preuve sociale à chaque section, CTA unique
+      répété (« Essayer gratuitement »), emplacement vidéo produit incarnée,
+      mockups fidèles au vrai produit (dashboard, page d'avis, réponse auto).
+- [ ] **6 pages fonctionnalités** (1 slug = 1 mot-clé) : collecte d'avis Google ·
+      réponse automatique aux avis · avis multi-plateformes · analyse des retours ·
+      centralisation des réservations · SMS et fidélisation.
+- [ ] **Page tarifs** 100 % transparente : Étoile 49 €/mois, Constellation
+      89 €/mois, annuel = 2 mois offerts, essai gratuit, sans engagement. Prix =
+      source de vérité stella-app (cf. AUDIT §6). CTA → `app.mystela.fr`.
+- [ ] **Pages segments** : indépendants · multi-établissements · par secteur
+      (restaurant, coiffeur, institut, garage, extensible).
+- [ ] Aucun Payment Link statique : le CTA mène à l'inscription self-serve.
+- [ ] Mockups produit fidèles à l'app réelle (règle 6 : vraies sections, vrais
+      libellés), jamais inventés.
+
+### VIT-3 : SEO / GEO / AEO technique
+La couche de visibilité, traitée comme un livrable, pas un vernis.
+
+- [ ] Schema.org : `Organization`, `SoftwareApplication` + `Offer` (prix réels),
+      `FAQPage` par page fonctionnalité, `Article` sur le blog, `BreadcrumbList`.
+      Validé (Rich Results Test).
+- [ ] Blocs Q&A courts et citables par les IA sur chaque page (question → réponse
+      factuelle en 2-3 phrases, langage naturel).
+- [ ] `sitemap.xml` régénéré sur `www.mystela.fr`, sans hreflang bidon.
+- [ ] Maillage interne : accueil ↔ fonctionnalités ↔ segments ↔ articles.
+- [ ] Contenu 100 % visible sans JavaScript (vérifié JS désactivé).
+
+### VIT-4 : Contenu (blog, villes, piliers GEO, comparatif, migration 301)
+Le capital éditorial et la reprise SEO.
+
+- [ ] Migration des 14 articles existants, **réécrits sans discours de gating**,
+      re-brandés Stela.
+- [ ] 9 pages villes améliorées (différenciées, pas des clones ; données locales
+      réelles) ou consolidées si thin content.
+- [ ] **3 piliers GEO** (terrain neuf en FR) : être recommandé par
+      ChatGPT / Gemini / Perplexity quand on est un commerce local.
+- [ ] **Page comparative « Stela vs Dokaa »** : factuelle, sourcée (règles Google
+      pour la conformité), zéro dénigrement.
+- [ ] **Calendrier éditorial 12 semaines** (actu Google Business Profile + cluster
+      GEO) livré en `docs/`.
+- [ ] **301 `avistars.fr` → `www.mystela.fr`** (page à page) + Change of Address
+      Search Console. Toutes les anciennes URL indexées redirigées (0 orpheline).
+
+### VIT-5 : Polish (motion, mockups animés, success stories, a11y, page présence)
+Finition haut de gamme.
+
+- [ ] Motion design final : morph transitions, révélations au scroll,
+      micro-interactions, mockups animés. Progressive enhancement strict,
+      `prefers-reduced-motion` respecté, 0 impact Lighthouse (perf ≥ 95).
+- [ ] Success stories : template avec un chiffre réel en titre (rempli quand des
+      cas clients instrumentés sont disponibles).
+- [ ] Accessibilité (contraste, navigation clavier, focus visibles, alt).
+- [ ] Page « présence sur 20+ plateformes » en **noindex** (publiée quand la
+      gestion de présence sort ; angle « visible aussi dans ChatGPT via Bing »).
+
+---
+
+## GATE commun (fin de CHAQUE lot, avant merge)
+
+- [ ] Build vert.
+- [ ] `lint:copy` : 0 tiret cadratin.
+- [ ] Grep de contrôle : `Stella` / `Avistars` / `avistars.fr` = 0 en surface
+      visible (le codename interne « Stella » reste interdit à l'affichage).
+- [ ] Lighthouse ≥ 95 (perf, SEO, best practices, a11y) sur les pages du lot.
+- [ ] Contenu vérifié lisible **sans JavaScript**.
+- [ ] Aucun discours de review gating réintroduit.
+- [ ] Validation superviseur explicite avant merge sur `main` / mise en prod.
+
+---
+
+## Décisions ouvertes (à trancher avant VIT-1/VIT-2)
+
+1. **CTA d'inscription** : URL exacte (proposé `https://app.mystela.fr`).
+2. **Payment Link** : confirmer parcours 100 % via l'app (aucun `buy.stripe.com`
+   sur la vitrine). Cf. AUDIT §6.
+3. **Supports physiques** (chevalet / flyers, `lib/support/pricing.ts`) et
+   **offre annuelle** : affichés sur la vitrine tarifs ou non ?
+4. **Tracking** : PostHog seul, ou PostHog + GA4 pour la pub ?
+5. **Framework** : valider Astro.
+6. **URLs blog** : garder le suffixe `.html` (301 minimal) ou passer en slugs
+   propres (301 de chaque `.html`) ?
+7. **Charte or** : figer `#B08A3E` (étoile/logo) vs `#C8992E` (or mat accent).
+
+---
+
+## Journal (daté, à compléter à chaque lot)
+
+| Date | Lot | Événement |
+|---|---|---|
+| 24/07/2026 | VIT-0 | Audit + PRD produits sur branche `lot-vit-0`. En attente de validation superviseur. |
