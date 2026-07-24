@@ -1,5 +1,7 @@
 ---
 import { SITE } from "../config/site";
+import { FEATURES } from "../content/features";
+import { SEGMENTS } from "../content/segments";
 import Logo from "./Logo.astro";
 const year = new Date().getFullYear();
 ---
@@ -10,15 +12,18 @@ const year = new Date().getFullYear();
       <p class="footer-tagline">{SITE.tagline}</p>
       <p class="footer-pos">{SITE.positioning}</p>
     </div>
-    <nav class="footer-col" aria-label="Produit">
-      <h3>Produit</h3>
-      <a href="/#fonctionnalites">Fonctionnalités</a>
-      <a href="/#tarifs">Tarifs</a>
-      <a href="/#conformite">Conformité Google</a>
-      <a href={SITE.appUrl}>Essayer gratuitement</a>
+    <nav class="footer-col" aria-label="Fonctionnalités">
+      <h3>Fonctionnalités</h3>
+      {FEATURES.map((f) => <a href={`/${f.slug}`}>{f.navLabel}</a>)}
     </nav>
-    <nav class="footer-col" aria-label="Légal et contact">
-      <h3>Contact</h3>
+    <nav class="footer-col" aria-label="Secteurs et profils">
+      <h3>Pour qui</h3>
+      {SEGMENTS.map((s) => <a href={`/pour/${s.slug}`}>{s.navLabel}</a>)}
+    </nav>
+    <nav class="footer-col" aria-label="Produit et contact">
+      <h3>Stela</h3>
+      <a href="/tarifs">Tarifs</a>
+      <a href={SITE.appUrl}>Essayer gratuitement</a>
       <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
       <a href="/mentions-legales">Mentions légales</a>
       <a href="/politique-confidentialite">Confidentialité</a>
@@ -31,7 +36,8 @@ const year = new Date().getFullYear();
 </footer>
 <style>
   .footer { background: var(--ink); color: #cdd5e4; margin-top: 2rem; }
-  .footer-inner { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 2.5rem; padding-block: 3.5rem 2rem; }
+  .footer-inner { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2rem; padding-block: 3.5rem 2rem; }
+  @media (max-width: 960px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
   .footer-tagline { color: #F7F4EF; font-weight: 600; margin: .9rem 0 .4rem; }
   .footer-pos { color: #9fb0cc; font-size: .95rem; max-width: 34ch; }
   .footer-col h3 { color: #F7F4EF; font-size: .95rem; margin-bottom: .9rem; }

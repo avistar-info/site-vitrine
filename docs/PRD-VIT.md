@@ -106,17 +106,24 @@ Le tunnel commercial. 1 URL = 1 intention, slugs FR propres.
 - [ ] **Accueil** : promesse claire, preuve sociale à chaque section, CTA unique
       répété (« Essayer gratuitement »), emplacement vidéo produit incarnée,
       mockups fidèles au vrai produit (dashboard, page d'avis, réponse auto).
-- [ ] **6 pages fonctionnalités** (1 slug = 1 mot-clé) : collecte d'avis Google ·
-      réponse automatique aux avis · avis multi-plateformes · analyse des retours ·
-      centralisation des réservations · SMS et fidélisation.
-- [ ] **Page tarifs** 100 % transparente : Étoile 49 €/mois, Constellation
-      89 €/mois, annuel = 2 mois offerts, essai gratuit, sans engagement. Prix =
-      source de vérité stella-app (cf. AUDIT §6). CTA → `app.mystela.fr`.
-- [ ] **Pages segments** : indépendants · multi-établissements · par secteur
-      (restaurant, coiffeur, institut, garage, extensible).
-- [ ] Aucun Payment Link statique : le CTA mène à l'inscription self-serve.
-- [ ] Mockups produit fidèles à l'app réelle (règle 6 : vraies sections, vrais
-      libellés), jamais inventés.
+- [x] **6 pages fonctionnalités** (1 slug = 1 mot-clé) : `/collecte-avis-google`,
+      `/reponse-automatique-avis`, `/avis-multi-plateformes`, `/analyse-des-avis`,
+      `/centralisation-reservations`, `/sms-fidelisation`.
+- [x] **Page tarifs** (`/tarifs`) 100 % transparente : Étoile 49 €/mois,
+      Constellation 89 €/mois, toggle annuel = 2 mois offerts, essai gratuit,
+      sans engagement. CTA → `app.mystela.fr`.
+- [x] **Pages segments** (`/pour/*`) : indépendants, multi-établissements,
+      restaurant, coiffeur, institut, garage (extensible via `content/segments.ts`).
+- [x] Aucun Payment Link statique : CTA vers l'inscription self-serve.
+- [x] Mockups produit fidèles à l'app réelle : composant `AppMockup` avec les
+      libellés EXACTS de `stella-app/config/moduleLabels.ts` (espaces + modules).
+- [x] Sécurité (exigence supervisée) : `vercel.json` (CSP stricte, HSTS,
+      X-Frame-Options/frame-ancestors, Referrer-Policy, Permissions-Policy),
+      analytics bundlé compatible CSP, `npm audit` dans le gate, 0 vulnérabilité.
+- [x] Redirections `vercel.json` : `mystela.fr` → www, `avistars.fr/*` → www
+      (catch-all provisoire, remplacé par le mapping page à page au VIT-4).
+- [~] **Vraie image OG 1200x630** : PNG généré (`og-default.png`) + source SVG.
+      Rendu texte via `sips` non vérifié visuellement ; export propre à confirmer.
 
 ### VIT-3 : SEO / GEO / AEO technique
 La couche de visibilité, traitée comme un livrable, pas un vernis.
@@ -207,4 +214,6 @@ VIT-1 est minimale mais complète (promesse, prix, CTA, conformité, Q&A).
 |---|---|---|
 | 24/07/2026 | VIT-0 | Audit + PRD produits sur branche `lot-vit-0`. Validés. |
 | 24/07/2026 | VIT-0 | 7 décisions tranchées (voir ci-dessus). |
-| 24/07/2026 | VIT-1 | Fondations Astro livrées sur `lot-vit-1` : purge Avistars/gating, canonique www.mystela.fr, 2 verifications Google conservées, schema.org (Organization/SoftwareApplication/Offer/FAQPage), Consent Mode v2 + bannière (clés à renseigner), robots + llms.txt, home minimale, 404, sitemap, garde-fous lint:copy + check:brand, charte + URL-map. Build vert, contenu sans JS vérifié. Snapshot `legacy-avistars` créé. En attente : validation + Lighthouse + config Vercel (preset Astro) avant merge/déploiement. |
+| 24/07/2026 | VIT-1 | Fondations Astro livrées sur `lot-vit-1` : purge Avistars/gating, canonique www.mystela.fr, 2 verifications Google conservées, schema.org (Organization/SoftwareApplication/Offer/FAQPage), Consent Mode v2 + bannière (clés à renseigner), robots + llms.txt, home minimale, 404, sitemap, garde-fous lint:copy + check:brand, charte + URL-map. Build vert, contenu sans JS vérifié. Snapshot `legacy-avistars` créé. |
+| 24/07/2026 | VIT-1 | Validé superviseur (Lighthouse local 94/95/100/100). Mergé en local dans `main` (non poussé, en attente du réglage preset Astro sur Vercel). |
+| 24/07/2026 | VIT-2 | Sur `lot-vit-2` : `vercel.json` (redirections www + avistars catch-all, en-têtes sécurité CSP/HSTS/etc.), analytics bundlé compatible CSP, `npm audit` dans le gate. 6 pages fonctionnalités + `/tarifs` + 6 pages segments (`/pour/*`), mockups fidèles (libellés réels de l'app), schema FAQPage + BreadcrumbList par page, maillage interne (nav + footer), OG 1200x630. 15 pages, gate vert, contenu sans JS, 0 script externe. En attente : validation + check sécurité superviseur avant merge. |

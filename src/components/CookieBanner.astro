@@ -1,59 +1,78 @@
 ---
 import { ANALYTICS } from "../config/site";
+// Config passée au script client via un bloc de données JSON (non exécutable,
+// conforme à une CSP script-src stricte sans 'unsafe-inline'). Le script de
+// consentement ci-dessous est bundlé par Astro (fichier externe servi en 'self').
+const cfg = JSON.stringify({ gaId: ANALYTICS.ga4Id, phKey: ANALYTICS.posthogKey, phHost: ANALYTICS.posthogHost });
 ---
+<script type="application/json" id="stela-analytics" set:html={cfg} />
+
 {/* Bannière de consentement minimale. Progressive enhancement : le contenu du
     site fonctionne sans JavaScript ; la mesure d'audience (GA4 + PostHog) ne se
     charge QU'APRÈS acceptation explicite (Google Consent Mode v2). */}
 <div id="cookie-banner" class="cookie-banner" hidden>
-  <p>
-    Nous utilisons des mesures d'audience pour améliorer le site. Vous pouvez les accepter ou les refuser.
-  </p>
+  <p>Nous utilisons des mesures d'audience pour améliorer le site. Vous pouvez les accepter ou les refuser.</p>
   <div class="cookie-actions">
     <button type="button" data-consent="denied" class="btn btn-ghost">Refuser</button>
     <button type="button" data-consent="granted" class="btn btn-primary">Accepter</button>
   </div>
 </div>
 
-<script is:inline define:vars={{ posthogKey: ANALYTICS.posthogKey, posthogHost: ANALYTICS.posthogHost }}>
-  (function () {
-    var KEY = "stela-consent";
-    var banner = document.getElementById("cookie-banner");
-    if (!banner) return;
+<script>
+  // Bundlé par Astro (servi en 'self' depuis /_astro/) : compatible CSP stricte.
+  const KEY = "stela-consent";
+  const cfgEl = document.getElementById("stela-analytics");
+  const cfg = cfgEl ? JSON.parse(cfgEl.textContent || "{}") : {};
+  const banner = document.getElementById("cookie-banner");
 
-    function loadTrackers() {
-      if (window.__gaId && !window.__gaLoaded) {
-        window.__gaLoaded = true;
-        if (window.gtag) window.gtag("consent", "update", { analytics_storage: "granted" });
-        var s = document.createElement("script");
-        s.async = true;
-        s.src = "https://www.googletagmanager.com/gtag/js?id=" + window.__gaId;
-        document.head.appendChild(s);
-        window.gtag("js", new Date());
-        window.gtag("config", window.__gaId, { anonymize_ip: true });
-      }
-      // PostHog : chargé seulement si une clé est fournie.
-      if (posthogKey && !window.__phLoaded) {
-        window.__phLoaded = true;
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once unregister identify".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        window.posthog.init(posthogKey, { api_host: posthogHost });
-      }
+  // Google Consent Mode v2 : défaut « denied » avant tout chargement.
+  (window as any).dataLayer = (window as any).dataLayer || [];
+  function gtag(...args: unknown[]) { (window as any).dataLayer.push(args); }
+  gtag("consent", "default", {
+    ad_storage: "denied", analytics_storage: "denied",
+    ad_user_data: "denied", ad_personalization: "denied",
+  });
+
+  let gaLoaded = false, phLoaded = false;
+  function loadTrackers() {
+    if (cfg.gaId && !gaLoaded) {
+      gaLoaded = true;
+      gtag("consent", "update", { analytics_storage: "granted" });
+      const s = document.createElement("script");
+      s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + cfg.gaId;
+      document.head.appendChild(s);
+      gtag("js", new Date());
+      gtag("config", cfg.gaId, { anonymize_ip: true });
     }
+    if (cfg.phKey && !phLoaded) {
+      phLoaded = true;
+      const p = document.createElement("script");
+      p.async = true; p.src = cfg.phHost + "/static/array.js";
+      p.addEventListener("load", () => {
+        const ph = (window as any).posthog;
+        if (ph && ph.init) ph.init(cfg.phKey, { api_host: cfg.phHost });
+      });
+      document.head.appendChild(p);
+    }
+  }
 
-    var choice = null;
-    try { choice = localStorage.getItem(KEY); } catch (e) {}
-    if (choice === "granted") { loadTrackers(); return; }
-    if (choice === "denied") { return; }
-
-    banner.hidden = false;
-    banner.addEventListener("click", function (ev) {
-      var t = ev.target;
-      if (!t || !t.dataset || !t.dataset.consent) return;
-      var val = t.dataset.consent;
-      try { localStorage.setItem(KEY, val); } catch (e) {}
-      banner.hidden = true;
-      if (val === "granted") loadTrackers();
-    });
-  })();
+  if (banner) {
+    let choice: string | null = null;
+    try { choice = localStorage.getItem(KEY); } catch {}
+    if (choice === "granted") {
+      loadTrackers();
+    } else if (choice !== "denied") {
+      banner.hidden = false;
+      banner.addEventListener("click", (ev) => {
+        const t = ev.target as HTMLElement;
+        const val = t?.dataset?.consent;
+        if (!val) return;
+        try { localStorage.setItem(KEY, val); } catch {}
+        banner.hidden = true;
+        if (val === "granted") loadTrackers();
+      });
+    }
+  }
 </script>
 
 <style>

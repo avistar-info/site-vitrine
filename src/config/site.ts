@@ -84,6 +84,6 @@ export const PLANS = [
 
 export const NAV_LINKS = [
   { href: "/#fonctionnalites", label: "Fonctionnalités" },
-  { href: "/#tarifs", label: "Tarifs" },
+  { href: "/tarifs", label: "Tarifs" },
   { href: "/#conformite", label: "Conformité" },
 ] as const;

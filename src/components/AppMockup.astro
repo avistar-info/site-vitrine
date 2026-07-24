@@ -1,0 +1,70 @@
+---
+// Mockup fidèle de l'app stella-app (règle VIT : reproduire le vrai produit).
+// Structure de navigation et libellés EXACTS de config/moduleLabels.ts.
+interface Props {
+  active: string; // libellé du module mis en avant
+  heading: string;
+  rows: { label: string; value: string }[];
+}
+const { active, heading, rows } = Astro.props;
+
+const SPACES = [
+  { label: "Aujourd'hui", modules: ["Aujourd'hui"] },
+  { label: "Ma réputation", modules: ["Avis publics", "Retours privés", "Points à améliorer"] },
+  { label: "Mes clients", modules: ["Fiches clients", "Réservations", "Messages après visite", "Campagnes"] },
+  { label: "Mon rayonnement", modules: ["Ma page d'avis", "Équipe & QR", "Recommandé par les IA", "Mes concurrents", "Mes résultats"] },
+];
+---
+<div class="mk" role="img" aria-label={`Aperçu de l'application Stela, module ${active}`}>
+  <div class="mk-bar">
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="mk-url">app.mystela.fr</span>
+  </div>
+  <div class="mk-body">
+    <aside class="mk-side">
+      <div class="mk-brand"><span class="mk-star">✳</span> Stela</div>
+      {SPACES.map((s) => (
+        <div class="mk-space">
+          <p class="mk-space-label">{s.label}</p>
+          {s.modules.map((m) => (
+            <p class={`mk-mod${m === active ? " mk-mod-active" : ""}`}>{m}</p>
+          ))}
+        </div>
+      ))}
+    </aside>
+    <div class="mk-main">
+      <p class="mk-h">{heading}</p>
+      <div class="mk-rows">
+        {rows.map((r) => (
+          <div class="mk-row">
+            <span class="mk-row-l">{r.label}</span>
+            <span class="mk-row-v">{r.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .mk { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: var(--shadow); }
+  .mk-bar { display: flex; align-items: center; gap: 6px; padding: 10px 12px; background: #f3eee6; border-bottom: 1px solid var(--border); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: #d9d0c2; }
+  .mk-url { margin-left: 10px; font-size: .78rem; color: var(--text-muted); background: #fff; border: 1px solid var(--border);
+    border-radius: 999px; padding: 2px 12px; }
+  .mk-body { display: grid; grid-template-columns: 190px 1fr; min-height: 320px; }
+  .mk-side { background: var(--ink); color: #cdd5e4; padding: 14px 10px; }
+  .mk-brand { color: #fff; font-weight: 800; margin-bottom: 12px; padding-left: 6px; }
+  .mk-star { color: var(--brass); }
+  .mk-space { margin-bottom: 10px; }
+  .mk-space-label { text-transform: uppercase; letter-spacing: .08em; font-size: .6rem; color: #7f90ad; margin: 0 0 4px; padding-left: 6px; }
+  .mk-mod { font-size: .8rem; padding: 5px 6px; border-radius: 7px; margin: 0; color: #cdd5e4; }
+  .mk-mod-active { background: var(--brass); color: #fff; font-weight: 700; }
+  .mk-main { padding: 18px; background: #fbf9f5; }
+  .mk-h { font-weight: 800; color: var(--ink); font-size: 1.1rem; margin: 0 0 14px; }
+  .mk-rows { display: flex; flex-direction: column; gap: 8px; }
+  .mk-row { display: flex; justify-content: space-between; gap: 10px; background: #fff; border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 14px; font-size: .85rem; }
+  .mk-row-l { color: var(--text); font-weight: 600; }
+  .mk-row-v { color: var(--text-muted); text-align: right; }
+  @media (max-width: 560px) { .mk-body { grid-template-columns: 1fr; } .mk-side { display: none; } }
+</style>
