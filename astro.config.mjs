@@ -9,5 +9,10 @@ export default defineConfig({
   site: "https://www.mystela.fr",
   trailingSlash: "never",
   build: { format: "file" },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Pages légales en noindex : hors sitemap.
+      filter: (page) => !/\/(mentions-legales|cgv|politique-confidentialite)\/?$/.test(page),
+    }),
+  ],
 });

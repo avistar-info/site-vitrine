@@ -1,0 +1,28 @@
+---
+import Base from "./Base.astro";
+interface Props { title: string; description: string; path: string; heading: string; updated: string; }
+const { title, description, path, heading, updated } = Astro.props;
+---
+<Base title={title} description={description} path={path} noindex={true}>
+  <section class="legal">
+    <div class="container">
+      <header class="legal-head">
+        <h1>{heading}</h1>
+        <p class="legal-date">Dernière mise à jour : {updated}</p>
+      </header>
+      <div class="legal-body">
+        <slot />
+      </div>
+    </div>
+  </section>
+</Base>
+<style is:global>
+  .legal .container { max-width: 760px; }
+  .legal-head { padding-bottom: 1.25rem; border-bottom: 2px solid var(--border); margin-bottom: 2rem; }
+  .legal-date { text-transform: uppercase; letter-spacing: .05em; font-size: .78rem; color: var(--text-muted); margin: 0; }
+  .legal-body h2 { font-size: 1.15rem; margin: 2rem 0 .6rem; }
+  .legal-body h3 { font-size: 1rem; margin: 1.25rem 0 .4rem; }
+  .legal-body p, .legal-body li { color: var(--text-secondary); line-height: 1.8; }
+  .legal-body ul { padding-left: 1.4rem; margin-bottom: 1rem; }
+  .legal-body a { font-weight: 600; text-decoration: underline; }
+</style>

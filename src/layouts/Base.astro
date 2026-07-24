@@ -11,9 +11,11 @@ interface Props {
   /** Chemin canonique, ex. "/" ou "/tarifs". */
   path?: string;
   ogImage?: string;
+  /** Pages légales : exclues de l'indexation. */
+  noindex?: boolean;
 }
 
-const { title, description, path = "/", ogImage = "/images/og-default.png" } = Astro.props;
+const { title, description, path = "/", ogImage = "/images/og-default.png", noindex = false } = Astro.props;
 const canonical = new URL(path, SITE.url).href;
 const ogImageAbs = new URL(ogImage, SITE.url).href;
 
@@ -48,6 +50,7 @@ const appLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonical} />
     <meta name="google-site-verification" content={SITE.googleSiteVerification} />
 

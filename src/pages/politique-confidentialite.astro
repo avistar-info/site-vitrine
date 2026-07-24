@@ -1,0 +1,78 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { SITE } from "../config/site";
+---
+<Legal
+  title="Politique de confidentialité | Stela"
+  description="Comment Stela collecte, utilise et protège vos données, y compris les données issues de l'API Google Business Profile."
+  path="/politique-confidentialite"
+  heading="Politique de confidentialité"
+  updated="juillet 2026"
+>
+  <p>
+    La présente politique explique quelles données Stela traite, dans quel but, comment elles
+    sont protégées et quels sont vos droits. Le responsable de traitement est l'éditeur du site
+    (voir <a href="/mentions-legales">mentions légales</a>), joignable à
+    <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+  </p>
+
+  <h2>1. Données que nous traitons</h2>
+  <ul>
+    <li>Données de compte : nom, adresse électronique, établissement, identifiants de connexion.</li>
+    <li>Données d'établissement : informations de la fiche, avis reçus, statistiques de visibilité.</li>
+    <li>Données clients de l'établissement : coordonnées fournies par le professionnel pour la collecte d'avis et la fidélisation, dans le respect du consentement des personnes concernées.</li>
+    <li>Données techniques : mesures d'audience, uniquement après votre consentement (voir section 6).</li>
+  </ul>
+
+  <h2>2. Données issues de l'API Google Business Profile</h2>
+  <p>
+    Lorsque vous connectez votre fiche Google, Stela accède à certaines données via l'API Google
+    Business Profile, avec votre autorisation explicite (OAuth). Précisément :
+  </p>
+  <ul>
+    <li><strong>Ce qui est lu</strong> : les informations de votre fiche d'établissement, les avis reçus et vos réponses, ainsi que les statistiques de visibilité associées.</li>
+    <li><strong>Dans quel but</strong> : afficher vos avis dans votre tableau de bord, vous aider à y répondre, et suivre l'évolution de votre réputation. Uniquement pour vous rendre ce service.</li>
+    <li><strong>Stockage et protection</strong> : ces données sont stockées de façon sécurisée, chiffrées en transit et au repos, avec un accès strictement limité au fonctionnement du service.</li>
+    <li><strong>Ce que nous ne faisons jamais</strong> : nous ne revendons pas ces données, nous ne les utilisons pas à des fins publicitaires, et nous ne les transférons à aucun tiers en dehors de ce qui est nécessaire au service.</li>
+  </ul>
+  <p>
+    L'usage par Stela des informations reçues des API Google respecte la
+    <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>,
+    y compris ses exigences d'usage limité (« Limited Use »). Vous pouvez révoquer l'accès à tout
+    moment depuis votre compte Google ou en nous contactant.
+  </p>
+
+  <h2>3. Base légale et finalités</h2>
+  <p>
+    Nous traitons vos données pour exécuter le contrat (fourniture du service), respecter nos
+    obligations légales, et sur la base de votre consentement pour la mesure d'audience. Nous ne
+    poursuivons aucune finalité incompatible avec celles annoncées ici.
+  </p>
+
+  <h2>4. Durée de conservation</h2>
+  <p>
+    Vos données sont conservées le temps de la relation contractuelle, puis pendant les durées
+    légales applicables. Au-delà, elles sont supprimées ou anonymisées.
+  </p>
+
+  <h2>5. Sous-traitants</h2>
+  <p>
+    Nous faisons appel à des prestataires strictement nécessaires au service (hébergement,
+    paiement, envoi de messages, mesure d'audience). Chacun agit selon nos instructions et dans
+    le respect du RGPD.
+  </p>
+
+  <h2>6. Mesure d'audience et cookies</h2>
+  <p>
+    La mesure d'audience n'est activée qu'après votre consentement, via une bannière dédiée. En
+    l'absence de consentement, aucun traceur de mesure n'est chargé. Vous pouvez modifier votre
+    choix à tout moment.
+  </p>
+
+  <h2>7. Vos droits</h2>
+  <p>
+    Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition
+    et de portabilité. Pour les exercer, écrivez à <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+    Vous pouvez également introduire une réclamation auprès de la CNIL.
+  </p>
+</Legal>
