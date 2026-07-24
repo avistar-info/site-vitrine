@@ -1,0 +1,15 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../config/site";
+---
+<Base title="Page introuvable | Stela" description="Cette page n'existe pas ou a été déplacée." path="/404">
+  <section>
+    <div class="container" style="text-align:center; max-width:640px;">
+      <p class="eyebrow">Erreur 404</p>
+      <h1>Cette page est introuvable</h1>
+      <p class="lead">La page que vous cherchez a peut-être été déplacée. Revenez à l'accueil pour continuer.</p>
+      <p style="margin-top:1.5rem;"><a class="btn btn-primary" href="/">Retour à l'accueil</a>
+      <a class="btn btn-ghost" href={SITE.appUrl} style="margin-left:.5rem;">Essayer gratuitement</a></p>
+    </div>
+  </section>
+</Base>

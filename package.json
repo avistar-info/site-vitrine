@@ -1,0 +1,20 @@
+{
+  "name": "stela-site-vitrine",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site vitrine Stela (www.mystela.fr) — Astro, statique, SEO/GEO first.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "npm run lint:copy && npm run check:brand && astro build",
+    "lint:copy": "node scripts/check-copy.mjs",
+    "check:brand": "node scripts/check-brand.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.0",
+    "@fontsource/plus-jakarta-sans": "^5.2.10",
+    "astro": "^7.1.3"
+  }
+}

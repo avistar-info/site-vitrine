@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Assistants IA / moteurs génératifs (GEO/AEO) : explicitement autorisés.
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.mystela.fr/sitemap-index.xml

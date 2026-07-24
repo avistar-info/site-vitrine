@@ -1,0 +1,15 @@
+---
+// Logo Stela : glyphe étoile laiton (#B08A3E, intouchable) + mot-marque encre.
+interface Props { textColor?: string; size?: number; }
+const { textColor = "#15233F", size = 26 } = Astro.props;
+---
+<span class="logo" style={`--logo-size:${size}px`}>
+  <svg viewBox="0 0 100 100" fill="none" width={size} height={size} aria-hidden="true" focusable="false">
+    <path d="M50 4 L53.8 43.42 L89.84 27 L57.6 50 L89.84 73 L53.8 56.58 L50 96 L46.2 56.58 L10.16 73 L42.4 50 L10.16 27 L46.2 43.42Z" fill="#B08A3E" />
+  </svg>
+  <span class="logo-word" style={`color:${textColor}`}>Stela</span>
+</span>
+<style>
+  .logo { display: inline-flex; align-items: center; gap: .5rem; }
+  .logo-word { font-weight: 800; font-size: calc(var(--logo-size) * .82); letter-spacing: -.02em; }
+</style>

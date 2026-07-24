@@ -77,23 +77,28 @@ critères d'acceptation vérifiables.
 ### VIT-1 : Fondations (framework, migration, purge, canonique, tracking)
 Socle technique et propreté. Aucune régression d'URL.
 
-- [ ] Framework Astro initialisé (build vert, sortie statique).
-- [ ] `README.md` documenté : build, dev, deploy, charte, règles de conformité.
-- [ ] Charte importée depuis `stella-app/docs/design/stela/` (couleurs, logo
+- [x] Framework Astro initialisé (build vert, sortie statique).
+- [x] `README.md` documenté : build, dev, deploy, charte, règles de conformité.
+- [x] Charte importée depuis `stella-app/docs/design/stela/` (couleurs, logo
       laiton `#B08A3E`, Plus Jakarta Sans, favicons) ; tokens centralisés.
-- [ ] `lint:copy` en place (0 tiret cadratin) + script de contrôle marque
-      (`Stella`/`Avistars`/`avistars.fr` = 0 en surface visible).
-- [ ] Canonique unique `https://www.mystela.fr` sur toutes les pages.
-- [ ] Purge conformité : 0 occurrence de review gating (interception, filtrage,
-      insatisfait routé en privé) dans tout le repo.
-- [ ] Purge Avistars : marque, domaine, email `contact@avistars.fr`, 4 liens
-      `buy.stripe.com`, GA `G-WK8JTW04WF`, n8n.
-- [ ] Tracking propre installé (PostHog validé) + bannière cookies conforme.
-- [ ] `google038f47dee570e8dc.html` conservé (ou propriété `www.mystela.fr`
-      re-vérifiée dans Search Console).
-- [ ] `robots.txt` + `llms.txt` (présentation Stela, offres, prix réels,
-      différenciants, FAQ) publiés et valides.
-- [ ] Table de correspondance des URL (ancienne → nouvelle) figée, base des 301.
+- [x] `lint:copy` en place (0 tiret cadratin) + script de contrôle marque
+      (codename double L / `Avistars` / `avistars.fr` = 0 en surface visible).
+- [x] Canonique unique `https://www.mystela.fr` sur toutes les pages.
+- [x] Purge conformité : 0 review gating sur le site déployé (ancien contenu
+      isolé dans `legacy/`, non déployé, supprimé au VIT-4).
+- [x] Purge Avistars : marque, domaine, email, liens `buy.stripe.com`, GA
+      `G-WK8JTW04WF`, n8n retirés du site (déplacés dans `legacy/`).
+- [~] Tracking : mécanisme PostHog + GA4 + Consent Mode v2 + bannière en place.
+      **Reste à faire** : renseigner les identifiants (`ANALYTICS`) une fois les
+      propriétés créées. Tant qu'ils sont vides, aucun script de mesure ne charge.
+- [x] `google038f47dee570e8dc.html` conservé (`public/`) + meta
+      `google-site-verification` conservée (décision 10).
+- [x] `robots.txt` (+ bots IA) + `llms.txt` (présentation Stela, offres, prix,
+      FAQ) publiés.
+- [x] Table de correspondance des URL figée (`docs/URL-MAP.md`), base des 301.
+- [ ] **Déploiement** : configurer le projet Vercel `site-vitrine` en preset
+      Astro (build `astro build`, output `dist`), Lighthouse >= 95, puis merge
+      `lot-vit-1` -> `main` après validation superviseur.
 
 ### VIT-2 : Pages cœur (accueil, fonctionnalités, tarifs, segments)
 Le tunnel commercial. 1 URL = 1 intention, slugs FR propres.
@@ -168,18 +173,31 @@ Finition haut de gamme.
 
 ---
 
-## Décisions ouvertes (à trancher avant VIT-1/VIT-2)
+## Décisions (tranchées le 24/07/2026)
 
-1. **CTA d'inscription** : URL exacte (proposé `https://app.mystela.fr`).
-2. **Payment Link** : confirmer parcours 100 % via l'app (aucun `buy.stripe.com`
-   sur la vitrine). Cf. AUDIT §6.
-3. **Supports physiques** (chevalet / flyers, `lib/support/pricing.ts`) et
-   **offre annuelle** : affichés sur la vitrine tarifs ou non ?
-4. **Tracking** : PostHog seul, ou PostHog + GA4 pour la pub ?
-5. **Framework** : valider Astro.
-6. **URLs blog** : garder le suffixe `.html` (301 minimal) ou passer en slugs
-   propres (301 de chaque `.html`) ?
-7. **Charte or** : figer `#B08A3E` (étoile/logo) vs `#C8992E` (or mat accent).
+1. **CTA d'inscription** : `https://app.mystela.fr`. NB : stella-app n'a pas de
+   route publique `/signup` (auth par `/login`, onboarding post-auth) ; on
+   deep-linke la racine de l'app. URL centralisée (`SITE.appUrl`), 1 ligne à
+   changer le jour où une route d'inscription dédiée existe.
+2. **Payment Link** : AUCUN `buy.stripe.com` sur la vitrine. Prix affichés,
+   achat 100 % dans l'app.
+3. **Offre annuelle** : OUI (toggle mensuel/annuel, « 2 mois offerts »). Supports
+   physiques : NON sur la page tarifs, simple mention « QR codes et supports
+   fournis » dans les features.
+4. **Tracking** : PostHog + GA4 (nouvelle propriété www.mystela.fr), Consent Mode
+   v2 + bannière minimale. Ancien `G-WK8JTW04WF` supprimé.
+5. **Framework** : **Astro** validé.
+6. **URLs blog** : slugs propres sans `.html`, 301 de chaque ancienne URL.
+7. **Charte or** : `#B08A3E` = étoile/logo (intouchable), `#C8992E` = accent or
+   secondaire. Documenté dans `docs/CHARTE.md`.
+
+## Priorité VIT-1 : purge d'abord, déploiement immédiat
+
+`www.mystela.fr` sert AUJOURD'HUI l'ancien site Avistars (non conforme) via
+Vercel. VIT-1 est donc prioritaire et se termine par un **déploiement réel** :
+dès que fondations + purge sont validées, on merge pour que le domaine ne serve
+plus une seule page Avistars, même si VIT-2 (pages cœur) n'est pas fini. La home
+VIT-1 est minimale mais complète (promesse, prix, CTA, conformité, Q&A).
 
 ---
 
@@ -187,4 +205,6 @@ Finition haut de gamme.
 
 | Date | Lot | Événement |
 |---|---|---|
-| 24/07/2026 | VIT-0 | Audit + PRD produits sur branche `lot-vit-0`. En attente de validation superviseur. |
+| 24/07/2026 | VIT-0 | Audit + PRD produits sur branche `lot-vit-0`. Validés. |
+| 24/07/2026 | VIT-0 | 7 décisions tranchées (voir ci-dessus). |
+| 24/07/2026 | VIT-1 | Fondations Astro livrées sur `lot-vit-1` : purge Avistars/gating, canonique www.mystela.fr, 2 verifications Google conservées, schema.org (Organization/SoftwareApplication/Offer/FAQPage), Consent Mode v2 + bannière (clés à renseigner), robots + llms.txt, home minimale, 404, sitemap, garde-fous lint:copy + check:brand, charte + URL-map. Build vert, contenu sans JS vérifié. Snapshot `legacy-avistars` créé. En attente : validation + Lighthouse + config Vercel (preset Astro) avant merge/déploiement. |

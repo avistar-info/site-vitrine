@@ -1,0 +1,92 @@
+---
+import "../styles/global.css";
+import { SITE, ANALYTICS, analyticsEnabled } from "../config/site";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import CookieBanner from "../components/CookieBanner.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Chemin canonique, ex. "/" ou "/tarifs". */
+  path?: string;
+  ogImage?: string;
+}
+
+const { title, description, path = "/", ogImage = "/images/og-default.png" } = Astro.props;
+const canonical = new URL(path, SITE.url).href;
+const ogImageAbs = new URL(ogImage, SITE.url).href;
+
+// Schema.org : Organization + SoftwareApplication (+ Offer, prix réels).
+const orgLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE.brand,
+  url: SITE.url,
+  slogan: SITE.tagline,
+  email: SITE.email,
+  logo: new URL("/images/logo-stela.svg", SITE.url).href,
+};
+const appLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: SITE.brand,
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description: SITE.positioning,
+  offers: [
+    { "@type": "Offer", name: "Étoile", price: "49", priceCurrency: "EUR", category: "mensuel" },
+    { "@type": "Offer", name: "Constellation", price: "89", priceCurrency: "EUR", category: "mensuel" },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="google-site-verification" content={SITE.googleSiteVerification} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.brand} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageAbs} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" content="#15233F" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/images/glyphe-laiton.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(appLd)} />
+
+    {/* Google Consent Mode v2 : par défaut « denied » (aucune mesure sans
+        consentement). Le chargement effectif de GA4 / PostHog est déclenché par
+        la bannière (CookieBanner) après acceptation. Injecté uniquement si une
+        clé analytics est configurée. */}
+    {analyticsEnabled() && (
+      <script is:inline define:vars={{ ga: ANALYTICS.ga4Id }}>
+        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+        gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+        window.__gaId=${JSON.stringify(ga)};`}
+      </script>
+    )}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    {analyticsEnabled() && <CookieBanner />}
+  </body>
+</html>
